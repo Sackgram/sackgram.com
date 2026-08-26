@@ -51,14 +51,36 @@ should be reviewed by counsel in your jurisdiction before launch.
 ## Files
 
 ```
-index.html     Home — what the app does, company name
-privacy.html   Privacy Policy   (required URL for both app stores)
-terms.html     Terms of Service
-support.html   Support          (required URL for both app stores)
-company.html   Legal entity and address
-style.css      All styling
-CNAME          Custom domain for GitHub Pages — do not delete
-.nojekyll      Serve files as-is, skip Jekyll processing
+index.html            Home — what the app does, company name
+privacy/index.html    Privacy Policy   -> /privacy   (required by both app stores)
+terms/index.html      Terms of Service -> /terms
+support/index.html    Support          -> /support   (required by both app stores)
+company/index.html    Legal entity and address -> /company
+style.css             All styling
+CNAME                 Custom domain for GitHub Pages — do not delete
+.nojekyll             Serve files as-is, skip Jekyll processing
+```
+
+### URLs are extensionless, on purpose
+
+Each page is a directory with an `index.html`, so the public URLs are
+`/privacy`, `/terms`, `/support`, `/company` — not `/privacy.html`. That was
+chosen before anything was submitted to the app stores, because **changing a
+Privacy Policy or Support URL after submission means resubmitting**, and
+because an extensionless URL survives a move to any other static host, while
+`.html` bakes today's implementation into an address you then have to
+redirect forever.
+
+Links between pages are **relative** (`../privacy/`), not root-absolute
+(`/privacy/`). Relative works in all three contexts this site gets viewed in:
+the real domain, the `github.io/sackgram.com/` preview before DNS is
+connected, and a local checkout. Root-absolute would break the middle one.
+
+To preview locally, serve it rather than opening files directly — `file://`
+does not resolve a bare directory to its `index.html`:
+
+```bash
+cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 ```
 
 ## Content rules used here, worth keeping

@@ -59,7 +59,54 @@ company/index.html    Legal entity and address -> /company
 style.css             All styling
 CNAME                 Custom domain for GitHub Pages — do not delete
 .nojekyll             Serve files as-is, skip Jekyll processing
+.well-known/assetlinks.json   Android Digital Asset Links — see below
 ```
+
+### `.well-known/assetlinks.json` — read this before editing it
+
+This is the file Android fetches to decide two separate things, and they are
+easy to conflate:
+
+| `relation` | What it lets the app do | Broken by |
+|---|---|---|
+| `delegate_permission/common.get_login_creds` | Use a **passkey** bound to `sackgram.com` for account recovery | A missing fingerprint → recovery fails on those builds |
+| `delegate_permission/common.handle_all_urls` | Open `https://sackgram.com/...` links **directly in the app** instead of a browser (Android App Links) | A missing fingerprint → links open in the browser |
+
+**`sha256_cert_fingerprints` is a list and must hold BOTH keys.** Under Play
+App Signing the certificate a real user's installed app carries is **Google's
+app signing key**, not the upload key you sign with locally. Listing only the
+upload key means everything works in a locally built release APK and fails for
+every single person who installs from the Play Store — the worst shape this
+failure can take, because testing does not reveal it.
+
+| Key | Fingerprint starts | What carries it |
+|---|---|---|
+| Google app signing key | `E3:82:D2:EB…` | Every Play-installed build |
+| Upload key | `C5:0F:A8:AD…` | A release APK built and installed locally |
+
+Both come from **Play Console → Test and release → Setup → App integrity →
+App signing**, in the same colon-hex form `keytool` prints.
+
+⚠ **Never add the debug keystore's fingerprint here.** The debug key is
+unprotected by design and sits on every machine that has ever built the app;
+treating it as proof of identity for this domain is not a trade worth making.
+(The app's *server* accepts a debug fingerprint in its own private allow-list
+for `flutter run` testing — a different surface, not this one.)
+
+**Serving requirements, all three of which GitHub Pages already satisfies:**
+HTTPS, `Content-Type: application/json`, and **no redirect** — Android's
+verifier does not follow one.
+
+**To check it without a device**, ask Google's own verifier what it parsed:
+
+```
+curl.exe -sS "https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://sackgram.com&relation=delegate_permission/common.handle_all_urls"
+```
+
+It answers with the statements as the verifier sees them, so a successful
+parse also proves the content type and the absence of a redirect. Note the
+`maxAge` in the response: Google caches for **about an hour**, so a change can
+take that long to show up there.
 
 ### URLs are extensionless, on purpose
 

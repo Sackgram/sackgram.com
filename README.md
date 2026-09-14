@@ -56,6 +56,7 @@ privacy/index.html    Privacy Policy   -> /privacy   (required by both app store
 terms/index.html      Terms of Service -> /terms
 support/index.html    Support          -> /support   (required by both app stores)
 company/index.html    Legal entity and address -> /company
+i/index.html          Invite landing -> /i   (see below)
 style.css             All styling
 CNAME                 Custom domain for GitHub Pages — do not delete
 .nojekyll             Serve files as-is, skip Jekyll processing
@@ -107,6 +108,60 @@ It answers with the statements as the verifier sees them, so a successful
 parse also proves the content type and the absence of a redirect. Note the
 `maxAge` in the response: Google caches for **about an hour**, so a change can
 take that long to show up there.
+
+### `i/index.html` — where a scanned Sackgram code lands
+
+A Sackgram QR code or invite link points at this domain. On a phone that has
+the app, Android's App Link verification (the `handle_all_urls` relation
+above) opens the app directly and this page is never seen. It exists for the
+other case: **a stranger who scanned a code off a printed sign or a business
+card and does not have Sackgram.** Without it that scan leads nowhere at all —
+a custom `sackgram://` scheme simply fails on a phone with no app installed,
+and does not offer the store.
+
+That makes it the first thing some people will ever read about Sackgram, so it
+is written like print: no build-progress wording, no in-app vocabulary, and
+nothing that goes stale on a card somebody is still carrying a year from now.
+
+#### ⚠ THE URL MUST BE `/i/` WITH THE CODE AFTER `#`, NOT `/i/{code}`
+
+GitHub Pages serves static files and does not rewrite paths. `/i/{code}` is
+not a file, so Pages answers it with **`404.html` and an HTTP 404** — this
+page would never be reached. `/i/` is a real directory with an `index.html`
+and answers 200.
+
+So a link has to be shaped `https://sackgram.com/i/#CODE`. Two independent
+reasons land on the same shape, which is why it is not a workaround:
+
+1. **It is the only shape this host will serve.** (The alternative would be
+   making `404.html` detect `/i/` paths and render invite content — a page
+   that returns 404 while pretending to be a real page, and one file doing two
+   unrelated jobs.)
+2. **The fragment is never sent to a server.** Everything after `#` stays in
+   the browser, so the code is absent from web server logs, from the `Referer`
+   header, and from anything the hosting provider sees — by construction, not
+   by policy. The app's `AndroidManifest.xml` already records this as the
+   reason the token belongs in the fragment.
+
+The Android intent filter matches on `pathPrefix="/i/"`, which `/i/#CODE`
+satisfies, and `Intent.getData()` keeps the fragment.
+
+⚠ **The page says out loud that we never receive the code.** Moving the code
+into the path would make that sentence false on the page a stranger reads
+first. If the link format ever changes, the sentence goes in the same change.
+
+⚠ **If the app ever emits a longer path** such as `/i/g/#CODE`, that directory
+needs its own `index.html` here first, for the same reason — otherwise it 404s.
+
+#### Only `/i/` is intercepted by the app, not the whole site
+
+`handle_all_urls` sounds broader than it behaves. It verifies the app for the
+**domain**; what the app actually opens is decided by its own intent filters,
+and there is exactly one for this site, with `pathPrefix="/i/"`. So
+`/privacy`, `/terms`, `/support` and `/company` always open in a browser, which
+is what the app stores require of those links. The app *could* claim more
+paths later by adding a filter, with no change to this site — worth knowing,
+since nothing here would show it.
 
 ### URLs are extensionless, on purpose
 

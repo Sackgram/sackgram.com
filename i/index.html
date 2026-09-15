@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>This link opens in Sackgram</title>
+    <meta name="description" content="You were given a Sackgram link. Here is what Sackgram is and how to open it.">
+    <meta name="theme-color" content="#3BC3DE">
+    <!-- Not content anyone should find by searching: this page is the far end
+         of a code somebody was handed, not a page of the site. -->
+    <meta name="robots" content="noindex">
+    <!-- The ONLY request this page makes besides itself. No scripts, no
+         analytics, no tracking pixels, no web fonts, no remote images — and
+         that is a rule for this page rather than a coincidence, because the
+         person reading it is a stranger meeting Sackgram for the first time
+         and has not agreed to anything yet. A store badge added later must be
+         a LOCAL image file for the same reason: the official badge images are
+         hosted by Google and Apple, and hotlinking one hands them this
+         visitor's IP address before they have even heard of us. -->
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../">SACK<span>GRAM</span></a>
+        <nav aria-label="Main">
+          <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../privacy/">Privacy</a></li>
+          <li><a href="../terms/">Terms</a></li>
+          <li><a href="../support/">Support</a></li>
+          <li><a href="../company/">Company</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <h1>This link opens in Sackgram</h1>
+        <p class="lede">Someone gave you a Sackgram code &mdash; on a sign, a card, or in a message.</p>
+
+        <div class="card">
+          <p>If Sackgram is installed on this phone, a Sackgram link opens the app directly and you never see this page. Seeing it means the app is not on this device yet.</p>
+        </div>
+
+        <h2>What Sackgram is</h2>
+        <p>Sackgram is a private messenger for Android and iOS, built by Sackgram Labs,&nbsp;Inc. Message content is encrypted on your device and decrypted on the other person's, and creating an account does not ask for your phone number or your email address.</p>
+        <p>There is more on the <a href="../">home page</a>, including what we do not claim.</p>
+
+        <h2>Getting the app</h2>
+        <!-- ==================================================================
+             ⚠ THE STORE BADGES GO HERE, AND THEY ARE ABSENT ON PURPOSE.
+             As of 2026-09-14 Sackgram has NO PUBLIC LISTING ON EITHER STORE:
+             the Android build has only reached Play internal testing, which a
+             stranger cannot install from, and there is no iOS build at all
+             (no Apple Team ID yet). The site's own home page says "not yet
+             publicly released", so a badge here would be a dead link on the
+             one page whose whole job is to give a stranger somewhere to go.
+
+             WHEN A LISTING EXISTS, replace the paragraph below with the
+             badges. Two rules that are not style preferences:
+               1. SELF-HOST the badge images (add them to this repo). The
+                  official badge URLs are on Google's and Apple's servers, and
+                  loading one from here hands them this visitor's IP address.
+                  See this file's <head> comment.
+               2. Put NOTHING from the incoming link into the store URL — no
+                  referrer parameter, no campaign tag, no token. See the note
+                  at the bottom of this page, which would stop being true.
+             ================================================================== -->
+        <p>Sackgram is not publicly released yet, so there is nothing to install from an app store today. When there is, the links will be on this page and on the <a href="../">home page</a>.</p>
+        <p>If you would like to be told when it is available, email <a href="mailto:info@sackgram.com">info@sackgram.com</a>.</p>
+
+        <h2>After you install it</h2>
+        <p>Scan the same code again, or open the same link again. It will open in Sackgram.</p>
+
+        <div class="card">
+          <!-- ⚠ THIS SENTENCE BINDS THE FORMAT OF EVERY LINK THAT POINTS HERE,
+               and it is the reason this page has no JavaScript.
+
+               It is true because the part of the link that identifies a code
+               is carried in the URL FRAGMENT — the part after "#" — which
+               browsers never send to a server. It is therefore absent from web
+               server logs, from the Referer header, and from anything our
+               hosting provider can see, by construction rather than by
+               policy.
+
+               It stops being true the moment a link puts that value in the
+               PATH instead (sackgram.com/i/SOMETHING). If the app is ever
+               changed to emit that shape, this sentence must be deleted in the
+               same change — otherwise the site is making a privacy claim its
+               own URLs contradict, in a place a stranger reads first.
+
+               For the same reason: never add a script here that reads
+               location.hash. This page does not need to know the code, and a
+               page that reads it is one edit away from sending it somewhere. -->
+          <p>This page does not read your code. The part of the link that identifies it stays in your browser and is never sent to us.</p>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <ul>
+          <li><a href="../privacy/">Privacy Policy</a></li>
+          <li><a href="../terms/">Terms of Service</a></li>
+          <li><a href="../support/">Support</a></li>
+          <li><a href="../company/">Company</a></li>
+        </ul>
+        <p>&copy; 2026 Sackgram Labs, Inc. All rights reserved.<br>
+        Contact: <a href="mailto:info@sackgram.com">info@sackgram.com</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

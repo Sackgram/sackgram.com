@@ -94,9 +94,12 @@ Added **2026-09-16**, deliberately and temporarily, overriding the rule that
 used to stand here. That rule is quoted below rather than deleted, because it
 is still the right default and this is an exception to it with an end date.
 
-| Key | Fingerprint starts | Added | Removed |
-|---|---|---|---|
-| Debug keystore (development machine) | `96:A5:2A:57…` | 2026-09-16 | **before the first store release** |
+| Key | Fingerprint starts | Relations | Added | Removed |
+|---|---|---|---|---|
+| Debug keystore (development machine) | `96:A5:2A:57…` | `handle_all_urls` only | 2026-09-16 | **before the first store release** |
+
+Removing it is deleting the **second statement object** in its entirety — the
+one with a single fingerprint in it. Nothing in the first statement changes.
 
 **Why it went in.** Android verifies App Links **at install time** against the
 certificate the installed build carries. A debug build (`flutter run`, or a
@@ -107,14 +110,20 @@ the app. Confirmed on a device on 2026-09-16: a card's QR decoded correctly and
 opened `/i/` in a browser. That made the one path the digital business card
 exists for untestable before release.
 
-**It also makes passkey recovery testable on a debug build for the first
-time**, because `get_login_creds` is on the same statement. The app's *server*
-has accepted this exact fingerprint in its own private allow-list
-(`WEBAUTHN_ANDROID_CERT_SHA256`) since that feature shipped, so the server
-already trusted debug builds and only this half was missing. If that is judged
-too wide, the narrower shape is a **second statement object** carrying the
-debug fingerprint with `handle_all_urls` only — App Links work, credentials
-stay on release keys.
+**It is scoped to App Links ONLY, in its own statement object.** The file now
+holds two statements: the two release keys carry both relations, and the debug
+key carries `handle_all_urls` alone. So a debug build opens
+`https://sackgram.com/…` links in the app, and **cannot** be handed a passkey
+bound to this domain.
+
+⚠ **Do not merge it back into the first statement, and do not give it
+`get_login_creds` "since the server already trusts it".** That was considered
+and rejected on 2026-09-16. The server does accept this exact fingerprint in
+its own private allow-list (`WEBAUTHN_ANDROID_CERT_SHA256`), which is a
+different surface: a private list on our own backend, versus a public
+declaration that anything signed with a widely-shared key may ask this domain
+for credentials. Widening it would buy a debug build the ability to test
+passkey recovery, and cost exactly the protection the rule below exists for.
 
 **What the original rule said, and it is still true:**
 
@@ -128,15 +137,20 @@ stay on release keys.
 generated per machine with a published password and alias, so this fingerprint
 is not a universally known key — it is the one on the development machine. If
 that file leaks, someone could build an app under the package name
-`com.sackgram.labs`, have it claim `sackgram.com` links, and ask Android for a
-passkey bound to this domain. Both require the victim to sideload it (it cannot
-overwrite a Play install — different signature) and, for the passkey, to
-perform the unlock gesture inside it. Narrow, real, and not worth carrying past
-the point where it stops paying for itself.
+`com.sackgram.labs` and have it claim `sackgram.com` links — intercepting a
+link the victim taps, and showing them whatever it likes. It requires them to
+sideload it first, which it cannot do over a Play install (different
+signature). **It does NOT reach passkeys**, because the debug statement carries
+`handle_all_urls` alone; that is the whole reason for the split above, and it
+is the difference between a link-interception risk and a credential one.
+Narrow, real, and not worth carrying past the point where it stops paying for
+itself.
 
-**Removing it is deleting one line** — the `96:A5:2A:57…` entry — and nothing
-else. Do it before the first store release; the removal is tracked in the app
-repository's `CLAUDE.md` release checklist so it cannot be lost with this file.
+**Removing it is deleting the second statement object** — the one whose only
+fingerprint is `96:A5:2A:57…` — leaving a file with one statement, exactly as
+it was before 2026-09-16. Do it before the first store release; the removal is
+tracked in the app repository's `CLAUDE.md` release checklist so it cannot be
+lost with this file.
 
 **Serving requirements, all three of which GitHub Pages already satisfies:**
 HTTPS, `Content-Type: application/json`, and **no redirect** — Android's

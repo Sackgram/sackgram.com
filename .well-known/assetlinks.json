@@ -12,5 +12,17 @@
         "C5:0F:A8:AD:CF:06:B8:96:DA:BD:C3:74:61:45:0B:B2:53:8B:F9:A6:00:F9:FE:FD:60:5E:A8:1A:FF:07:2B:63"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sackgram.labs",
+      "sha256_cert_fingerprints": [
+        "96:A5:2A:57:26:E0:75:27:C7:5A:A0:F8:A9:48:C1:23:64:46:44:60:06:D4:9E:03:62:B0:30:95:9C:1F:26:8E"
+      ]
+    }
   }
 ]

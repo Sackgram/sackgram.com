@@ -88,11 +88,69 @@ failure can take, because testing does not reveal it.
 Both come from **Play Console → Test and release → Setup → App integrity →
 App signing**, in the same colon-hex form `keytool` prints.
 
-⚠ **Never add the debug keystore's fingerprint here.** The debug key is
-unprotected by design and sits on every machine that has ever built the app;
-treating it as proof of identity for this domain is not a trade worth making.
-(The app's *server* accepts a debug fingerprint in its own private allow-list
-for `flutter run` testing — a different surface, not this one.)
+#### ⚠️ A DEBUG FINGERPRINT IS IN THIS FILE RIGHT NOW AND MUST COME OUT BEFORE RELEASE
+
+Added **2026-09-16**, deliberately and temporarily, overriding the rule that
+used to stand here. That rule is quoted below rather than deleted, because it
+is still the right default and this is an exception to it with an end date.
+
+| Key | Fingerprint starts | Relations | Added | Removed |
+|---|---|---|---|---|
+| Debug keystore (development machine) | `96:A5:2A:57…` | `handle_all_urls` only | 2026-09-16 | **before the first store release** |
+
+Removing it is deleting the **second statement object** in its entirety — the
+one with a single fingerprint in it. Nothing in the first statement changes.
+
+**Why it went in.** Android verifies App Links **at install time** against the
+certificate the installed build carries. A debug build (`flutter run`, or a
+locally installed debug APK) carries the debug key, so with only the two
+release fingerprints listed, every `https://sackgram.com/i/…` link on a
+development phone fell through to this site's landing page instead of opening
+the app. Confirmed on a device on 2026-09-16: a card's QR decoded correctly and
+opened `/i/` in a browser. That made the one path the digital business card
+exists for untestable before release.
+
+**It is scoped to App Links ONLY, in its own statement object.** The file now
+holds two statements: the two release keys carry both relations, and the debug
+key carries `handle_all_urls` alone. So a debug build opens
+`https://sackgram.com/…` links in the app, and **cannot** be handed a passkey
+bound to this domain.
+
+⚠ **Do not merge it back into the first statement, and do not give it
+`get_login_creds` "since the server already trusts it".** That was considered
+and rejected on 2026-09-16. The server does accept this exact fingerprint in
+its own private allow-list (`WEBAUTHN_ANDROID_CERT_SHA256`), which is a
+different surface: a private list on our own backend, versus a public
+declaration that anything signed with a widely-shared key may ask this domain
+for credentials. Widening it would buy a debug build the ability to test
+passkey recovery, and cost exactly the protection the rule below exists for.
+
+**What the original rule said, and it is still true:**
+
+> ⚠ **Never add the debug keystore's fingerprint here.** The debug key is
+> unprotected by design and sits on every machine that has ever built the app;
+> treating it as proof of identity for this domain is not a trade worth making.
+> (The app's *server* accepts a debug fingerprint in its own private allow-list
+> for `flutter run` testing — a different surface, not this one.)
+
+**The risk, stated precisely rather than waved at.** A debug keystore is
+generated per machine with a published password and alias, so this fingerprint
+is not a universally known key — it is the one on the development machine. If
+that file leaks, someone could build an app under the package name
+`com.sackgram.labs` and have it claim `sackgram.com` links — intercepting a
+link the victim taps, and showing them whatever it likes. It requires them to
+sideload it first, which it cannot do over a Play install (different
+signature). **It does NOT reach passkeys**, because the debug statement carries
+`handle_all_urls` alone; that is the whole reason for the split above, and it
+is the difference between a link-interception risk and a credential one.
+Narrow, real, and not worth carrying past the point where it stops paying for
+itself.
+
+**Removing it is deleting the second statement object** — the one whose only
+fingerprint is `96:A5:2A:57…` — leaving a file with one statement, exactly as
+it was before 2026-09-16. Do it before the first store release; the removal is
+tracked in the app repository's `CLAUDE.md` release checklist so it cannot be
+lost with this file.
 
 **Serving requirements, all three of which GitHub Pages already satisfies:**
 HTTPS, `Content-Type: application/json`, and **no redirect** — Android's
@@ -108,6 +166,26 @@ It answers with the statements as the verifier sees them, so a successful
 parse also proves the content type and the absence of a redirect. Note the
 `maxAge` in the response: Google caches for **about an hour**, so a change can
 take that long to show up there.
+
+**To check it on a phone** — PowerShell, one command per line (PowerShell has
+no `&&`), and `-s <serial>` is not optional when two devices are attached:
+
+```powershell
+adb -s <serial> shell pm verify-app-links --re-verify com.sackgram.labs
+adb -s <serial> shell pm get-app-links com.sackgram.labs
+```
+
+The second prints the domain and its state. **`verified` is the answer**;
+`legacy_failure` or `1024` means the verifier did not match the installed
+build's certificate against this file. The first command only asks Android to
+try again — it does not change what is in this file, so run it AFTER a change
+here has gone live, allowing for Google's own cache above.
+
+⚠ **A re-verify does not clear a user's manual choice.** If the domain was
+approved by hand (Settings → the app → Open by default → Add link) it stays
+approved regardless of what this file says, which is how a build can appear to
+work while the file is still wrong. On a phone that has been used for testing,
+clear that first or the check proves nothing.
 
 ### `i/index.html` — where a scanned Sackgram code lands
 

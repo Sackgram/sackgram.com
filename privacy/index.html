@@ -49,7 +49,7 @@
         <h3>1.2 Messages and media</h3>
         <ul>
           <li><strong>Message content is end-to-end encrypted.</strong> We store it only in encrypted form and cannot read it. The same applies to photos, videos and files you send.</li>
-          <li><strong>We do see some information around messages,</strong> and it is important to be clear about this: which accounts are in a conversation, when messages were sent, roughly how large they are, and — for file attachments — the file name and size, which are not encrypted.</li>
+          <li><strong>We do see some information around messages,</strong> and it is important to be clear about this: which accounts are in a conversation, when messages were sent, roughly how large they are, and — for file attachments — the file name and size, which are not encrypted. <strong>The file name is stored with the message record</strong>, in readable form, so that the app can show you what the attachment is called before you download it. The file itself is encrypted and is stored under a random identifier rather than under its name.</li>
         </ul>
 
         <h3>1.3 Contacts and groups</h3>
@@ -79,13 +79,15 @@
         <p>We hold call records: who called whom, when the call started and ended, and whether it was answered.</p>
         <p><strong>Call audio is not recorded, and we cannot listen to it.</strong></p>
         <p>Setting up a call requires the two devices to exchange network addresses, which include IP addresses. <strong>Those addresses reach our servers</strong> — passing them between the two devices is how a call gets connected — and they are shared with the person you are calling. We delete them once the call ends.</p>
-        <p>How the audio itself travels can vary. Where the two devices can reach each other over the network, it passes between them without going through us. Where they cannot, a call may need to be carried by a relay server, which is an ordinary part of how internet calling works. Either way, it is not recorded and we cannot listen to it.</p>
+        <p>Where a call was not answered, we record when that happened, so that the person who missed it can be shown that someone tried to reach them.</p>
+        <p>How the audio itself travels depends on the call, and there are two arrangements. In the first, the audio passes directly between the devices; where the network between them does not allow that, a <strong>relay server</strong> forwards it without being able to read it, which is an ordinary part of how internet calling works. In the second, a <strong>media server</strong> receives each person's audio and forwards it to the others — see section 3 for who operates it. In both, your device encrypts the audio before it is sent, so what passes through any server is encrypted; it is not recorded and we cannot listen to it.</p>
 
         <h3>1.5 Notifications</h3>
         <p>If you allow notifications, we store a push notification token for your device so we can tell it that a call is coming in. Notification delivery is handled by Google's push service.</p>
 
         <h3>1.6 Technical information</h3>
         <p>Our infrastructure providers receive IP addresses and connection information as an ordinary part of delivering network traffic, and may retain them in operational logs. This is normal for any internet service, and we mention it because a privacy policy that omitted it would be misleading.</p>
+        <p>We use a Google service that checks whether a request genuinely comes from the Sackgram app running on an ordinary device, so that our servers can turn away automated abuse. It examines the app and the device and returns a verdict to us; it does not tell us who you are, and we do not use it for anything else.</p>
 
         <!-- WORDING NOTE, 2026-08-26. "We do not include advertising" was
              removed from this list, and it was removed on principle rather
@@ -136,6 +138,7 @@
         <ul>
           <li><strong>Messages</strong> stay until deleted. You can delete a message you sent, set a conversation to delete messages automatically, or remove a contact — which deletes that conversation's history for both people.</li>
           <li><strong>Call network addresses</strong> are deleted when the call ends.</li>
+          <li><strong>The record that a call was not answered</strong> stays until the next unanswered call from the same person replaces it, or until the connection between you is removed.</li>
           <li><strong>Your account record and connections</strong> stay for as long as the account is in use.</li>
           <li><strong>Age and agreement records</strong> are kept for as long as we are required to be able to show that we took these steps.</li>
         </ul>

@@ -243,6 +243,7 @@ For a `call_summary` row the server additionally writes `callerUid`,
 | **판정** | **부정확** — §3 as written is a closed list, and it is missing a provider that handles call traffic for two of the three call types. |
 | **권고 문구** | Add to §3: "We use **LiveKit** (LiveKit, Inc.) to carry the audio of group calls and calls to shops. The audio is encrypted on your device before it reaches them and they cannot listen to it. They do handle the connection itself, which means they receive the network addresses of the devices on the call and which accounts are in the room." |
 | **⚠ 후속** | §7's "call audio is end-to-end encrypted and travels between the two devices" is written for a two-party call and reads as false for a group. Suggest: "travels encrypted between the devices on the call". |
+| **게시된 문안** | ⚠ **The 권고 문구 above is the record of what was recommended on the day of the audit, and is deliberately left as written. What actually shipped is different**: it names no call types at all. A processor disclosure needs the provider, its role and what it receives; which calls take that route is none of the three, and naming them dates the sentence. Settled in `e8ada52` on PR #4 — read `privacy/index.html` §3 for the live wording, not this row. |
 
 ---
 

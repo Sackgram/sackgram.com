@@ -132,6 +132,7 @@
         <h2>3. Service providers</h2>
         <p>We use Google Cloud Platform and Firebase (Google LLC) for storage, authentication and push notifications. They process data on our instructions. If you buy a subscription, the purchase is handled by Apple or Google through their app stores — we do not receive your payment card details.</p>
         <p>We use <strong>LiveKit</strong> (LiveKit,&nbsp;Inc.) for real-time voice infrastructure. Your device encrypts call audio before it is sent, so what passes through LiveKit is ciphertext and they cannot listen to it. They carry the connection, which means they receive the network addresses of the devices on a call, the identifiers of the accounts in it, and a short status string each device publishes — whether its loudspeaker is on, and whether Voice Privacy is on — which is how the other people on the call are shown those things.</p>
+        <p>We use <strong>RevenueCat</strong> (RevenueCat,&nbsp;Inc.) to keep track of whether an account holds a subscription. When you sign in, we give them the identifier of your account, so that a purchase made through the app store can be matched to it; they tell our servers which subscription that account holds and when it runs out. They do not receive your messages, your calls, or your payment card details.</p>
         <p>We do not share your information with anyone else, except where section 5 applies.</p>
 
         <h2>4. How long we keep it</h2>

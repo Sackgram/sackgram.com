@@ -26,7 +26,7 @@
     <main>
       <div class="wrap">
         <h1>Privacy Policy</h1>
-        <p class="meta">Effective August 26, 2026 &middot; Last updated August 28, 2026</p>
+        <p class="meta">Effective August 26, 2026 &middot; Last updated September 18, 2026</p>
 
         <p class="lede">This policy describes how Sackgram Labs,&nbsp;Inc. ("Sackgram", "we") handles information in the Sackgram application. We have tried to write it plainly, and to describe what actually happens rather than what sounds best.</p>
 
@@ -129,6 +129,7 @@
 
         <h2>3. Service providers</h2>
         <p>We use Google Cloud Platform and Firebase (Google LLC) for storage, authentication and push notifications. They process data on our instructions. If you buy a subscription, the purchase is handled by Apple or Google through their app stores — we do not receive your payment card details.</p>
+        <p>We use <strong>LiveKit</strong> (LiveKit, Inc.) to carry the audio of group calls and calls to a shop. Your device encrypts the audio before it is sent, so what passes through LiveKit is encrypted and they cannot listen to it. They do handle the connection itself, which means they receive the network addresses of the devices on the call, the identifiers of the accounts in the room, and a short status flag each device publishes — whether its loudspeaker is on, and whether Voice Privacy is on — which is how the other people on the call are shown those things.</p>
         <p>We do not share your information with anyone else, except where section 5 applies.</p>
 
         <h2>4. How long we keep it</h2>
@@ -184,7 +185,10 @@
 
         <h2>8. Losing your device</h2>
         <p><strong>Your conversations cannot be recovered — not by us, not by anyone.</strong> The keys that decrypt your messages exist only on your device and we hold no copy of them. This is a deliberate part of how Sackgram is built, not a limitation we are working to remove.</p>
-        <p>Recovering <em>access to your account</em> — your identity, your connections and your groups, but never the contents of your conversations — is a separate question. <strong>We do not offer account recovery today.</strong> If you lose your device, the account is gone with it. We may offer some form of it in future; if we do, this policy will say so before it becomes available.</p>
+        <p>Recovering <em>access to your account</em> — your identity and your contacts, but never the contents of your conversations — is a separate question, and the answer depends on whether you set up a passkey.</p>
+        <p><strong>If you set up a passkey</strong>, you can get back into your account on a new phone using your SACKGRAM ID and your fingerprint. Your account, your SACKGRAM ID and your contact list come back. Your conversations do not, for the reason above. Groups have to invite you again, because each member's group key is held for them on their own device.</p>
+        <p>You can also use it on the phone you already have, if you have forgotten your password.</p>
+        <p><strong>If you did not set one up, there is no way back into the account.</strong> A passkey needs Android 9 or later, or iOS 16 or later, and a Google or Apple account — so on an older phone, or without one of those accounts, this route is not available and losing the device means losing the account.</p>
         <p>Please read this before relying on Sackgram for anything you cannot afford to lose.</p>
 
         <!-- WORDING NOTE, 2026-08-26. This section was headed "Children" and

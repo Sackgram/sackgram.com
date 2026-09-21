@@ -272,7 +272,13 @@ cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
   receive IP addresses, that message *metadata* is visible to us, and that a
   lost device is unrecoverable. A policy that omitted those would be
   misleading, and misleading is the one thing that actually creates risk here.
-- **"No phone number required" is stated,** because it is true.
+- **"No phone number or email address required" is stated,** because it is true.
+  ⚠ Both halves, always. Signing up asks for neither, and saying only "phone
+  number" is an UNDERSTATEMENT — which is still an inaccuracy, because it
+  describes the product as asking for more than it does. The body copy on the
+  site already said both; the meta description, the `<h1>` and the bold lead-in
+  did not, and those are the three lines people actually quote. Fixed
+  2026-09-21. See the app repo's `docs/legal/claims-register.md` B1.
 
 ## Colours
 

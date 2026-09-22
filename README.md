@@ -265,6 +265,19 @@ cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 
 ## Content rules used here, worth keeping
 
+- **The "Why Sackgram exists" section is one statement kept in three places.**
+  It is on this page under the hero, at the top of the app's About screen, and
+  in section **J** of the app repo's `docs/legal/claims-register.md`. Editing
+  one copy without the other two does not produce a better sentence, it
+  produces three different claims — which is the thing the register exists to
+  prevent. Approved as a whole on 2026-09-22; quote it whole.
+  ⚠ Two things in it are deliberate and were argued over. It says what you
+  **say** should be seen by no one — not who you talked to, because the server
+  does see which accounts share a room (register H1), and the sentence after it
+  claims the structure delivers the belief. And it says the content **stays**
+  on our servers only as ciphertext, not that it "reaches" them that way: both
+  were true, but the two languages were then making claims of different width.
+
 - **What a feature does, never how it does it.** "End-to-end encrypted
   messages", not the key exchange or cipher.
 - **No overclaiming.** Nothing says you cannot be tracked, or that no logs

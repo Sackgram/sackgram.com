@@ -55,6 +55,27 @@ nav a[aria-current="page"] { font-weight: 600; }
 .hero h1 { margin: 0 0 0.75rem; font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.2; }
 .hero p { margin: 0; font-size: clamp(1.05rem, 3.2vw, 1.2rem); max-width: 34rem; }
 
+/* ---------- why ---------- */
+/* The declaration between the hero and the feature list. Deliberately quiet:
+   a second coloured band under the brand-filled hero would compete with it,
+   so this is the soft background the .card already uses, with the brand only
+   as the rule at the top. Body text keeps the page's own size — this section
+   is read, not scanned. */
+.why {
+  background: var(--bg-soft);
+  border-top: 3px solid var(--brand);
+  border-bottom: 1px solid var(--line);
+  padding: 2.5rem 0;
+}
+.why h2 { margin: 0 0 0.9rem; }
+.why p { max-width: 38rem; }
+.why p:last-child { margin-bottom: 0; }
+.why .why-close { font-weight: 650; }
+
+@media (max-width: 30rem) {
+  .why { padding: 2rem 0; }
+}
+
 /* ---------- content ---------- */
 main { padding: 2.75rem 0 3.5rem; }
 h2 { margin: 2.25rem 0 0.6rem; font-size: 1.3rem; line-height: 1.3; }

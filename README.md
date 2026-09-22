@@ -267,7 +267,13 @@ cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 
 - **The "Why Sackgram exists" section is one statement kept in three places.**
   It is on this page under the hero, at the top of the app's About screen, and
-  in section **J** of the app repo's `docs/legal/claims-register.md`. Editing
+  in section **J** of the app repo's `docs/legal/claims-register.md`. The site
+  carries only the English; the Korean of the same statement lives in the app
+  and in that register, and its title is **"SACKGRAM은 왜 존재하는가"** — with
+  the product name in Latin letters, never `색그램`, because Korean
+  user-facing copy was unified on SACKGRAM on 2026-09-20 and the glossary
+  marks it DO NOT TRANSLATE. Named here so that a Korean page added to this
+  site later starts from the right spelling. Editing
   one copy without the other two does not produce a better sentence, it
   produces three different claims — which is the thing the register exists to
   prevent. Approved as a whole on 2026-09-22; quote it whole.

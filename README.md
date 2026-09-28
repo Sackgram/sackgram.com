@@ -16,10 +16,9 @@ be served.
 | Governing law | State of Delaware, United States |
 | Venue | State of Delaware, United States |
 
-**The website publishes a contact mailing address (a PO Box); Google Play,
-Apple, D-U-N-S and the USPTO get the physical address each of them requires.
-The two differing is by design** (2026-09-28): the company's physical address
-is also a residence, and the site is where exposure is kept down.
+**The website publishes a contact mailing address; Google Play, Apple,
+D-U-N-S and the USPTO get the physical address each of them requires. The two
+differing is by design** (2026-09-28).
 
 ### ⚠️ Use the business address, never the registered agent's
 

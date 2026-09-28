@@ -10,21 +10,29 @@ be served.
 | Field | Value |
 |---|---|
 | Company name | Sackgram Labs, Inc. |
-| Principal place of business | PO Box 40401, North Charleston, SC 29423, United States |
+| Mailing address | PO Box 40401, North Charleston, SC 29423, United States |
 | State of incorporation | Delaware, United States |
 | Effective date on legal pages | August 26, 2026 |
 | Governing law | State of Delaware, United States |
 | Venue | State of Delaware, United States |
+
+**The website publishes a contact mailing address (a PO Box); Google Play,
+Apple, D-U-N-S and the USPTO get the physical address each of them requires.
+The two differing is by design** (2026-09-28): the company's physical address
+is also a residence, and the site is where exposure is kept down.
 
 ### ⚠️ Use the business address, never the registered agent's
 
 The Delaware registered agent address (251 Little Falls Drive, Wilmington —
 Corporation Service Company) must **not** appear anywhere on this site. Apple
 and Google both want the real place of business, and **Google explicitly
-rejects registered-agent addresses**. The company page is labelled
+rejects registered-agent addresses**. The company page was labelled
 "Principal place of business" for exactly this reason — the term "registered
 address" means the agent's Delaware address to a US reader, which is the
-opposite of what is wanted here.
+opposite of what is wanted here. ⚠ Since 2026-09-28 it is labelled "Mailing
+address" and shows the PO Box (see the note above): a PO Box is not a place of
+business, so the old label would have been false. The rule about the
+registered agent's address still stands everywhere.
 
 ### ⚠️ Venue jurisdiction needs a lawyer's decision — flagged, not settled
 

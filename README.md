@@ -10,7 +10,7 @@ be served.
 | Field | Value |
 |---|---|
 | Company name | Sackgram Labs, Inc. |
-| Principal place of business | 156 Botany Bay Blvd, North Charleston, SC 29418, United States |
+| Principal place of business | PO Box 40401, North Charleston, SC 29423, United States |
 | State of incorporation | Delaware, United States |
 | Effective date on legal pages | August 26, 2026 |
 | Governing law | State of Delaware, United States |

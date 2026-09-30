@@ -100,6 +100,23 @@ strong { font-weight: 650; }
 }
 .card p:last-child, .card ul:last-child { margin-bottom: 0; }
 
+/* The /i/ page's Open in Sackgram button (2026-09-30). Brand fill with
+   --brand-ink text, the same 7.07:1 pairing the hero uses; 48px tall so it is
+   a comfortable tap target on a phone. */
+.open-app {
+  display: inline-block;
+  min-height: 48px;
+  line-height: 48px;
+  padding: 0 1.4rem;
+  border-radius: 6px;
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+/* Its last <p> loses its margin to `.card p:last-child`; the block keeps one. */
+#open-app { margin-bottom: 1rem; }
+
 .features { list-style: none; padding: 0; }
 .features li { padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; }
 .features li::before {

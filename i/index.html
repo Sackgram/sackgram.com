@@ -9,8 +9,19 @@
     <!-- Not content anyone should find by searching: this page is the far end
          of a code somebody was handed, not a page of the site. -->
     <meta name="robots" content="noindex">
-    <!-- The ONLY request this page makes besides itself. No scripts, no
-         analytics, no tracking pixels, no web fonts, no remote images — and
+    <!-- ⚠ THIS PAGE MAKES NO REQUEST BUT ITS OWN STYLESHEET, AND SINCE
+         2026-09-30 THE CONTENT-SECURITY-POLICY BELOW ENFORCES IT RATHER THAN
+         ONLY PROMISING IT. `connect-src 'none'` refuses fetch, XHR, beacons
+         and WebSockets; `img-src 'none'` refuses a tracking pixel; the one
+         script is allowed by its SHA-256 and nothing else runs. If the script
+         is edited, its hash in `script-src` must be recomputed in the same
+         change (the browser then refuses the edited script — it fails CLOSED,
+         the button simply never appears). -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-pHNOO0I9NaHEv4uCpzKBGQCCw4YdnivrsepvhUY4i8U='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+    <meta name="referrer" content="no-referrer">
+    <!-- The ONLY request this page makes besides itself. No analytics, no
+         tracking pixels, no web fonts, no remote images, and one inline script
+         that sends nothing (see the Open in Sackgram block) — and
          that is a rule for this page rather than a coincidence, because the
          person reading it is a stranger meeting Sackgram for the first time
          and has not agreed to anything yet. A store badge added later must be
@@ -40,7 +51,28 @@
         <p class="lede">Someone gave you a Sackgram code &mdash; on a sign, a card, or in a message.</p>
 
         <div class="card">
-          <p>If Sackgram is installed on this phone, a Sackgram link opens the app directly and you never see this page. Seeing it means the app is not on this device yet.</p>
+          <!-- CHANGED 2026-09-30. It used to end "Seeing it means the app is
+               not on this device yet", which a device test proved false: a
+               link tapped in KakaoTalk opened here, in KakaoTalk's own
+               browser, on a phone that HAD the app. A messenger's in-app
+               browser loads the page itself instead of handing the link to
+               Android, so App Links never get the chance to run. -->
+          <p>If Sackgram is installed on this phone, a Sackgram link usually opens the app directly. A link opened inside a messenger's own browser can land on this page instead, even when the app is installed.</p>
+          <!-- ⚠ HIDDEN UNTIL THE SCRIPT BELOW SHOWS IT: only on Android, and
+               only when the link carries an invite this page recognises.
+               Without JavaScript, on iOS, or with no invite, nobody sees a
+               button that could not work. -->
+          <div id="open-app" hidden>
+            <p>If this page opened inside a messenger, tap <strong>Open in Sackgram</strong>.</p>
+            <p><a id="open-app-link" class="open-app" href="./">Open in Sackgram</a></p>
+          </div>
+          <!-- ADDED 2026-09-30. A plain fact a person can check against a link
+               or a code they were sent, not a promise about fraud. It must stay
+               true for every link the app issues: personal and group invites
+               and signboards are all https://sackgram.com/i/ followed by "#".
+               If the app ever issues another shape, change this line in the
+               same change. -->
+          <p>A Sackgram invite address always begins with <strong>https://sackgram.com/i/</strong>.</p>
         </div>
 
         <h2>What Sackgram is</h2>
@@ -90,10 +122,20 @@
                same change — otherwise the site is making a privacy claim its
                own URLs contradict, in a place a stranger reads first.
 
-               For the same reason: never add a script here that reads
-               location.hash. This page does not need to know the code, and a
-               page that reads it is one edit away from sending it somewhere. -->
-          <p>This page does not read your code. The part of the link that identifies it stays in your browser and is never sent to us.</p>
+               ⚠ CHANGED 2026-09-30, AND THE OLD RULE HERE WAS "never add a
+               script that reads location.hash". The Open in Sackgram button
+               needs the invite to hand it to the app, so one script now reads
+               it — and the sentence below was reworded because "This page
+               does not read your code" stopped being literally true. What it
+               promises instead is what the CSP in <head> enforces: the value
+               goes nowhere but into the button's intent: address, which
+               Android delivers only to the Sackgram app (package= pins it),
+               and, inside KakaoTalk only, into kakaotalk://web/openExternal —
+               KakaoTalk already holds the whole link, because the link came
+               through a KakaoTalk chat.
+               The script makes no request and the CSP would refuse one if it
+               tried. Keep both of those true or change the sentence. -->
+          <p>This page does not send your code to us or to anyone else. The part of the link that identifies it stays on this phone. To open the link, this page hands it only to apps on this phone: to Sackgram, or, inside KakaoTalk, back to KakaoTalk, which already has the link.</p>
         </div>
       </div>
     </main>
@@ -109,5 +151,59 @@
         Contact: <a href="mailto:info@sackgram.com">info@sackgram.com</a></p>
       </div>
     </footer>
+    <!-- The Open in Sackgram button and the KakaoTalk hand-off. ADDED
+         2026-09-30 — see the comments at #open-app and at the end of <main>.
+         It reads location.hash, writes one href, in KakaoTalk navigates once
+         to kakaotalk://web/openExternal, and makes no request (the CSP in
+         <head> would refuse one).
+         ⚠ THE KAKAOTALK HAND-OFF CARRIES THE INVITE: its url= is this page's
+         address including the fragment, handed to the KakaoTalk app on this
+         phone so it can pass the link to Android. That is a hand-over inside
+         the phone, not a request to anybody's server — but it is the one
+         place the value leaves this page other than into the button. -->
+    <script>(function () {
+  // Android only: both mechanisms below are Android's.
+  var ua = navigator.userAgent;
+  if (!/Android/i.test(ua)) return;
+  // Only the two shapes the app issues: #c/TOKEN (personal) and #g/TOKEN
+  // (group invite or signboard). A token is a Firestore document id. Anything
+  // else, including a value that could break out of the intent: syntax with a
+  // ';' or '#', gets neither the button nor the KakaoTalk hand-off.
+  var m = /^#([cg])(?:\/|%2F)([A-Za-z0-9]{1,64})$/i.exec(location.hash);
+  if (!m) return;
+  // This page's own address, rebuilt from the checked value rather than
+  // copied from location.href, so nothing else in the URL travels on.
+  var fragment = m[1].toLowerCase() + '/' + m[2];
+  var here = 'https://sackgram.com/i/#' + fragment;
+
+  // 1. The button, for every Android browser. Android rebuilds the link as
+  // https://sackgram.com/i/#FRAGMENT (Intent.parseUri splits at the LAST '#',
+  // the one before "Intent;"), and package= means only the Sackgram app can
+  // receive it. Without the app, Chrome goes to the fallback, which is this
+  // same page; with no fallback it would open the Play Store listing, which
+  // does not exist publicly yet.
+  document.getElementById('open-app-link').href =
+    'intent://sackgram.com/i/#' + fragment +
+    '#Intent;scheme=https;package=com.sackgram.labs;S.browser_fallback_url=' +
+    encodeURIComponent(here) + ';end';
+  document.getElementById('open-app').hidden = false;
+
+  // 2. KakaoTalk's in-app browser: ask KakaoTalk to hand the link to the
+  // system, where the verified App Link opens Sackgram (or, without the app,
+  // the phone's browser shows this page). ONCE per tab: the flag is set
+  // BEFORE leaving, and if it cannot be stored nothing is attempted, so a
+  // reload or Back can never bounce the page in a loop. The button above
+  // stays either way.
+  if (/KAKAOTALK/i.test(ua)) {
+    var key = 'sackgram-kakao-handoff';
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, '1');
+    } catch (e) {
+      return;
+    }
+    location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(here);
+  }
+})();</script>
   </body>
 </html>

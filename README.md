@@ -1,9 +1,17 @@
 # sackgram.com
 
 The public website for Sackgram Labs, Inc. Plain static HTML and one CSS file
-— no build step, no JavaScript, no external requests (no fonts, no analytics,
-no CDN). Open any `.html` file in a browser to preview it exactly as it will
-be served.
+— no build step, no external requests (no fonts, no analytics, no CDN). Open
+any `.html` file in a browser to preview it exactly as it will be served.
+
+⚠ **One page has JavaScript, since 2026-09-30: `i/index.html`** — one inline
+script that shows the Android *Open in Sackgram* button and, inside
+KakaoTalk's in-app browser, hands the link to KakaoTalk once so Android can
+open the app. It makes no request, and the page's Content-Security-Policy
+(`connect-src 'none'`, `script-src` pinned to that script's SHA-256) refuses
+one if it ever tried. **Editing that script means recomputing the hash in the
+same change**, or the browser refuses the script and the button never shows.
+Every other page still has no JavaScript.
 
 ## Company details as published
 

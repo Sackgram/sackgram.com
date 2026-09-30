@@ -41,6 +41,13 @@
 
         <div class="card">
           <p>If Sackgram is installed on this phone, a Sackgram link opens the app directly and you never see this page. Seeing it means the app is not on this device yet.</p>
+          <!-- ADDED 2026-09-30. A plain fact a person can check against a link
+               or a code they were sent, not a promise about fraud. It must stay
+               true for every link the app issues: personal and group invites
+               and signboards are all https://sackgram.com/i/ followed by "#".
+               If the app ever issues another shape, change this line in the
+               same change. -->
+          <p>A Sackgram invite address always begins with <strong>https://sackgram.com/i/</strong>.</p>
         </div>
 
         <h2>What Sackgram is</h2>

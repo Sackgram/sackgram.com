@@ -68,6 +68,10 @@ should be reviewed by counsel in your jurisdiction before launch.
 ```
 index.html            Home — the long introduction (English), company name
 ko/index.html         Home in Korean — the original of the introduction -> /ko
+<lang>/…               ko de es fr id it ja pt ru zh ar: home, privacy/, terms/,
+                      delete-account/ in that language (generated — see
+                      "Twelve languages")
+tools/build_pages.py  Generates the pages above; tools/home/<lang>.json = home text
 privacy/index.html    Privacy Policy   -> /privacy   (required by both app stores)
 terms/index.html      Terms of Service -> /terms
 delete-account/index.html  Account deletion -> /delete-account (required by Google Play)
@@ -291,24 +295,51 @@ does not resolve a bare directory to its `index.html`:
 cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 ```
 
-## The legal pages and the account deletion page come from the app repository
+## Twelve languages, and where every page comes from
 
-Since 2026-10-06, `privacy/` and `terms/` are the app repository's
-`docs/legal/privacy-en.md` and `docs/legal/terms-en.md` converted to HTML
-verbatim — the same text the app ships in `apps/mobile/assets/legal/`. **Edit
-the Markdown there, never the HTML here**, and regenerate; a fix made only here
-makes the website and the app say different things. `delete-account/` quotes
-the policy's 6-8, 6-9, 6-10, 7-2 and 7-3 and must change when they do.
-Google Play's Data safety form points at `/delete-account`, so that URL must
-not move.
+⚠ **2026-10-06 (Eric): the site is in twelve languages of equal weight** — en,
+ko, de, es, fr, id, it, ja, pt, ru, zh, ar. SACKGRAM ships in 170 countries in
+these twelve at once, and an English home with one Korean page beside it made
+it look like a local Korean app.
+
+- **Every page lists all twelve languages**, by their own names (English,
+  한국어, Deutsch, Español, Français, Bahasa Indonesia, Italiano, 日本語,
+  Português, Русский, 中文, العربية), in that fixed order, at one size and
+  weight. The current one is marked by an underline only. **Do not make one
+  language bigger, bolder or first-by-visitor.** There is **no automatic
+  redirect** by browser language — the reader chooses.
+- **Home, Privacy, Terms and Delete account exist in all twelve**: English at
+  `/`, `/privacy/`, `/terms/`, `/delete-account/` (**these English addresses
+  are what Google Play points at and must not move**), the others under
+  `/<lang>/`. Each carries `hreflang` alternates for all twelve plus
+  `x-default` (English). `zh` is `zh-Hans`, `pt` is `pt-BR`. Arabic pages are
+  `dir="rtl"` with Western digits; the stylesheet uses logical properties
+  (`margin-inline-end`, `padding-inline-start`, …) so both directions work.
+- **Support, Company and the invite page (`i/`) stay English.** Their language
+  list links each language's home.
+
+**These pages are GENERATED — edit the sources, then run**
+`python3 tools/build_pages.py /path/to/Sackgram-app`:
+
+| Page | Source |
+|---|---|
+| Home `/`, `/<lang>/` | `tools/home/<lang>.json`. **ko is the original** (Sackgram-app `docs/website/SACKGRAM-소개문구-초안.docx`, part 2); every other language is its translation and must say the same thing — change ko first. Terms follow each language's app strings (ARB). Cross-review copies for the translations are in Sackgram-app `docs/website/` |
+| Privacy, Terms | the app repository's `docs/legal/privacy-en.md`, `terms-en.md`, `review-ko/*-ko.md` and `i18n-drafts/<lang>/*.md`, converted to HTML verbatim — the same text the app ships in `apps/mobile/assets/legal/`. **Edit the Markdown there, never the HTML here** |
+| Delete account (`/<lang>/delete-account/`) | that language's Privacy Policy 7-2, 7-3, 6-8, 6-9, 6-10, 6-1, 6-2 and 6-3, quoted verbatim under the page's own headings |
+| Delete account (English, `/delete-account/`) | hand-written from the English policy's 6-8, 6-9, 6-10, 7-2 and 7-3; the build regenerates only its header and footer. It must change when those paragraphs do |
+
+The header and footer labels (and the delete page's headings) are the `T`
+table at the top of `tools/build_pages.py`; account words there are the app's
+own ARB strings.
 
 ## Content rules used here, worth keeping
 
 ⚠ **2026-10-06: the "Why Sackgram exists" section below is RETIRED.** The app's
 About screen was restructured on 2026-10-05 (#578) and no longer carries it,
 and the home page now carries the long introduction Eric approved on
-2026-10-05 instead (English at `/`, the Korean original at `/ko/`). The two
-home pages must say the same thing. The note is kept as the record of why the
+2026-10-05 instead (the Korean original at `/ko/`; English at `/` and ten more
+languages since 2026-10-06 — see "Twelve languages" above). All twelve home
+pages must say the same thing. The note is kept as the record of why the
 section existed.
 
 - **The "Why Sackgram exists" section is one statement kept in three places.**

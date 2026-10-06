@@ -42,13 +42,23 @@ a:hover { text-decoration: none; }
 }
 .brand {
   font-weight: 800; letter-spacing: 0.14em; font-size: 1.05rem;
-  color: var(--ink); text-decoration: none; margin-right: auto;
+  color: var(--ink); text-decoration: none; margin-inline-end: auto;
 }
 .brand span { color: var(--link); }
 nav ul { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; margin: 0; padding: 0; }
 nav a { font-size: 0.95rem; text-decoration: none; }
 nav a:hover, nav a[aria-current="page"] { text-decoration: underline; }
 nav a[aria-current="page"] { font-weight: 600; }
+
+/* ---------- languages ---------- */
+/* All twelve languages, by their own names, at one size and weight, in one
+   fixed order on every page (Eric, 2026-10-06). The current one is marked by
+   an underline only — never bolder or bigger, so no language looks primary.
+   No automatic redirect: the reader chooses. */
+.lang-list { flex-basis: 100%; }
+.lang-list ul { gap: 0.35rem 0.9rem; }
+.lang-list a { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+.lang-list a[aria-current="page"] { font-weight: 400; color: var(--ink); text-decoration: underline; }
 
 /* ---------- hero ---------- */
 .hero { background: var(--brand); color: var(--brand-ink); padding: 3.25rem 0; }
@@ -83,7 +93,7 @@ h3 { margin: 1.6rem 0 0.4rem; font-size: 1.05rem; }
 main > .wrap > h2:first-child, main > .wrap > h1:first-child { margin-top: 0; }
 h1 { font-size: clamp(1.7rem, 5vw, 2.1rem); line-height: 1.25; margin: 0 0 0.5rem; }
 p, ul, ol { margin: 0 0 1rem; }
-ul, ol { padding-left: 1.35rem; }
+ul, ol { padding-inline-start: 1.35rem; }
 li { margin-bottom: 0.4rem; }
 strong { font-weight: 650; }
 
@@ -93,7 +103,7 @@ strong { font-weight: 650; }
 .card {
   background: var(--bg-soft);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--brand);
+  border-inline-start: 4px solid var(--brand);
   border-radius: 6px;
   padding: 1rem 1.15rem;
   margin: 1.5rem 0;
@@ -118,9 +128,9 @@ strong { font-weight: 650; }
 #open-app { margin-bottom: 1rem; }
 
 .features { list-style: none; padding: 0; }
-.features li { padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; }
+.features li { padding-inline-start: 1.5rem; position: relative; margin-bottom: 0.8rem; }
 .features li::before {
-  content: ""; position: absolute; left: 0; top: 0.62em;
+  content: ""; position: absolute; inset-inline-start: 0; top: 0.62em;
   width: 0.6rem; height: 0.6rem; border-radius: 2px; background: var(--brand);
 }
 
@@ -130,14 +140,12 @@ dd { margin: 0.2rem 0 0; color: var(--muted); }
 
 /* The home page's language link, inside the brand-filled hero: same
    --brand-ink text as the hero (7.07:1), underlined so it reads as a link. */
-.hero .lang-switch { margin-top: 1rem; font-size: 0.95rem; }
-.hero .lang-switch a { color: var(--brand-ink); font-weight: 650; }
 
 /* Tables in the Privacy Policy (the processors list). Scrolls sideways on a
    narrow phone rather than squeezing three columns. */
 .table-scroll { overflow-x: auto; margin: 0 0 1rem; }
 table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
-th, td { border: 1px solid var(--line); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+th, td { border: 1px solid var(--line); padding: 0.5rem 0.6rem; text-align: start; vertical-align: top; }
 th { background: var(--bg-soft); font-weight: 650; }
 
 h4 { margin: 1.3rem 0 0.4rem; font-size: 1rem; }

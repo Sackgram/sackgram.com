@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Privacy Policy — Sackgram</title>
-    <meta name="description" content="How Sackgram Labs, Inc. handles your information.">
+    <title>Privacy Policy — SACKGRAM</title>
+    <meta name="description" content="How Sackgram Labs, Inc. handles information in the SACKGRAM app.">
     <meta name="theme-color" content="#3BC3DE">
     <link rel="stylesheet" href="../style.css">
   </head>
@@ -25,208 +25,112 @@
     </header>
     <main>
       <div class="wrap">
+        <!-- Generated from Sackgram-app main (docs/legal/privacy-en.md) by converting the Markdown verbatim. Edit the source document in the app repository, not this file. -->
         <h1>Privacy Policy</h1>
-        <p class="meta">Effective August 26, 2026 &middot; Last updated September 18, 2026</p>
-
-        <p class="lede">This policy describes how Sackgram Labs,&nbsp;Inc. ("Sackgram", "we") handles information in the Sackgram application. We have tried to write it plainly, and to describe what actually happens rather than what sounds best.</p>
-
-        <div class="card">
-          <p><strong>The short version.</strong> Creating an account does not require a phone number or an email address. Message content is end-to-end encrypted and we cannot read it. We do still hold some information — a randomly assigned account identifier, who you are connected to, when messages were sent, and a few records we are required to keep. Sections 1 and 2 list all of it.</p>
-        </div>
-
-        <h2>1. Information we collect</h2>
-
-        <h3>1.1 Account</h3>
-        <ul>
-          <li><strong>A randomly assigned account identifier.</strong> Created when you first open the app. It is not derived from your device, your phone number, or anything about you.</li>
-          <li><strong>Your SACKGRAM ID.</strong> The name you choose at sign-up, recorded so that no two people can hold the same one.</li>
-          <li><strong>Your device's public key.</strong> Needed so other people can send you encrypted messages.</li>
-          <li><strong>A record that you confirmed you are 18 or older,</strong> and, on Android devices where the operating system offers one, the result of an age signal provided by the app store. We keep the resulting decision as a compliance record. We do not keep your date of birth.</li>
-          <li><strong>A record that you accepted these documents,</strong> including which language you read them in.</li>
-        </ul>
-        <p>We do <strong>not</strong> ask for your name, phone number, email address, or contact list.</p>
-
-        <h3>1.2 Messages and media</h3>
-        <ul>
-          <li><strong>Message content is end-to-end encrypted.</strong> We store it only in encrypted form and cannot read it. The same applies to photos, videos and files you send.</li>
-          <li><strong>We do see some information around messages,</strong> and it is important to be clear about this: which accounts are in a conversation, when messages were sent, roughly how large they are, and — for file attachments — the file name and size, which are not encrypted. <strong>The file name is stored with the message record</strong>, in readable form, so that the app can show you what the attachment is called before you download it. The file itself is encrypted and is stored under a random identifier rather than under its name.</li>
-        </ul>
-
-        <h3>1.3 Contacts and groups</h3>
-        <p>The accounts you have connected with, the nickname you gave each of them (visible only to you), how the connection was made, and your group memberships.</p>
-
-        <!-- WORDING NOTE, 2026-08-26. This section deliberately does NOT say
-             that calls "connect directly between the two devices" or that call
-             data "does not pass through our servers", which is what it said
-             before. Two reasons, and both are about staying true LATER rather
-             than reading better NOW:
-
-             1. Relay servers are a live candidate. Without one, a call between
-                two devices that cannot reach each other simply fails, so
-                adding relaying is on the table as a reliability fix. The
-                moment it ships, "connects directly" becomes false.
-             2. Even today it was misleading. Voice does not touch our servers,
-                but the network addresses that establish the call do — a reader
-                fairly took the old wording to mean a call leaves no trace on
-                our side.
-
-             Rewriting a policy to match what was already happening is a
-             correction users cannot verify and have no reason to trust. Say
-             the wider, true thing first; then a later change is a product
-             announcement rather than a policy that moved after the fact. Keep
-             this shape if this section is edited. -->
-        <h3>1.4 Calls</h3>
-        <p>We hold call records: who called whom, when the call started and ended, and whether it was answered.</p>
-        <p><strong>Call audio is not recorded, and we cannot listen to it.</strong></p>
-        <p>Setting up a call requires the two devices to exchange network addresses, which include IP addresses. <strong>Those addresses reach our servers</strong> — passing them between the two devices is how a call gets connected — and they are shared with the person you are calling. We delete them once the call ends.</p>
-        <p>Where a call was not answered, we record when that happened, so that the person who missed it can be shown that someone tried to reach them.</p>
-        <p>How the audio itself travels depends on the call, and there are two arrangements. In the first, the audio passes directly between the devices; where the network between them does not allow that, a <strong>relay server</strong> forwards it without being able to read it, which is an ordinary part of how internet calling works. In the second, a <strong>media server</strong> receives each person's audio and forwards it to the others — see section 3 for who operates it. In both, your device encrypts the audio before it is sent, so what passes through any server is encrypted; it is not recorded and we cannot listen to it.</p>
-
-        <h3>1.5 Notifications</h3>
-        <p>If you allow notifications, we store a push notification token for your device so we can tell it that a call is coming in. Notification delivery is handled by Google's push service.</p>
-
-        <h3>1.6 Technical information</h3>
-        <p>Our infrastructure providers receive IP addresses and connection information as an ordinary part of delivering network traffic, and may retain them in operational logs. This is normal for any internet service, and we mention it because a privacy policy that omitted it would be misleading.</p>
-        <p>We use a Google service that checks whether a request genuinely comes from the Sackgram app running on an ordinary device, so that our servers can turn away automated abuse. It examines the app and the device and returns a verdict to us; it does not tell us who you are, and we do not use it for anything else.</p>
-
-        <!-- WORDING NOTE, 2026-08-26. "We do not include advertising" was
-             removed from this list, and it was removed on principle rather
-             than because anyone plans to add ads.
-
-             This document says how user data is handled. It is not the place
-             to promise a business model. "We don't run ads" is a promise we
-             may not be able to keep; "we don't hand your data to advertisers"
-             is one we can keep even if ads ever appear — and it is the thing
-             a reader is actually worried about when they look for the word
-             "advertising" in a privacy policy. Promising the wrong one costs
-             the credibility of the right one, because a policy that has to be
-             walked back teaches people it describes intentions rather than
-             obligations.
-
-             The three claims kept here are all statements about DATA and all
-             checkable: what leaves our hands, what code we ship, what we
-             build about a person. Keep that test if this list is edited — if
-             a proposed line is about the company rather than about data, it
-             belongs on the home page or nowhere.
-
-             One consequence worth naming rather than discovering later: the
-             profiles line commits us to non-profiling advertising if ads are
-             ever introduced. That is deliberate, but it is a real constraint,
-             not a throwaway. -->
-        <h3>1.7 What we do not do</h3>
-        <ul>
-          <li><strong>We do not sell or rent your personal information, and we do not share it with third parties for advertising.</strong></li>
-          <li>We do not use advertising or tracking software development kits.</li>
-          <li>We do not build advertising or marketing profiles about you.</li>
-          <li>We do not read your messages, because we cannot.</li>
-        </ul>
-
-        <h2>2. Why we hold it</h2>
-        <ul>
-          <li><strong>To run the service</strong> — deliver messages, connect calls, keep your contacts and groups.</li>
-          <li><strong>To keep it working and secure</strong> — diagnose faults and prevent abuse of the service.</li>
-          <li><strong>To meet legal obligations</strong> — the age and agreement records in section 1.1 exist for this reason and no other.</li>
-        </ul>
-        <p>We do not use your information for any purpose other than the ones listed here.</p>
-
-        <h2>3. Service providers</h2>
-        <p>We use Google Cloud Platform and Firebase (Google LLC) for storage, authentication and push notifications. They process data on our instructions. If you buy a subscription, the purchase is handled by Apple or Google through their app stores — we do not receive your payment card details.</p>
-        <p>We use <strong>LiveKit</strong> (LiveKit,&nbsp;Inc.) for real-time voice infrastructure. Your device encrypts call audio before it is sent, so what passes through LiveKit is ciphertext and they cannot listen to it. They carry the connection, which means they receive the network addresses of the devices on a call, the identifiers of the accounts in it, and a short status string each device publishes — whether its loudspeaker is on, and whether Voice Privacy is on — which is how the other people on the call are shown those things.</p>
-        <p>We use <strong>RevenueCat</strong> (RevenueCat,&nbsp;Inc.) to keep track of whether an account holds a subscription. When you sign in, we give them the identifier of your account, so that a purchase made through the app store can be matched to it; they tell our servers which subscription that account holds and when it runs out. They do not receive your messages, your calls, or your payment card details.</p>
-        <p>We do not share your information with anyone else, except where section 5 applies.</p>
-
-        <h2>4. How long we keep it</h2>
-        <ul>
-          <li><strong>Messages</strong> stay until deleted. You can delete a message you sent, set a conversation to delete messages automatically, or remove a contact — which deletes that conversation's history for both people.</li>
-          <li><strong>Call network addresses</strong> are deleted when the call ends.</li>
-          <li><strong>The record that a call was not answered</strong> stays until the next unanswered call from the same person replaces it, or until the connection between you is removed.</li>
-          <li><strong>Your account record and connections</strong> stay for as long as the account is in use.</li>
-          <li><strong>Age and agreement records</strong> are kept for as long as we are required to be able to show that we took these steps.</li>
-        </ul>
-
-        <h2>5. When we may disclose information</h2>
-        <p>We may disclose information we hold if we are legally required to, such as in response to a valid legal order. What we can produce is limited to what we actually have — the categories in section 1. <strong>We cannot produce the content of messages, because we do not hold it in readable form.</strong></p>
-
-        <h2>6. Your choices and rights</h2>
-        <p>Depending on where you live, you may have the right to ask what information we hold about you, to have it corrected or deleted, or to object to how we use it. Contact us at <a href="mailto:info@sackgram.com">info@sackgram.com</a>.</p>
-        <p>Because accounts are not tied to a phone number or email address, we may be unable to verify that an account belongs to the person asking. Where we cannot verify ownership, we may have to decline the request. Most deletion can be done directly in the app — see <a href="../support/">Support</a>.</p>
-
-        <!-- WORDING NOTE, 2026-08-26. This section used to make ONE claim —
-             "we cannot recover your account or your conversations". It now
-             makes two separate ones, because they have different futures:
-
-             - Conversation history is permanent and by design. It is not
-               going to change, so it is stated at full strength.
-             - Account access is a different question. Recovering identity,
-               connections and groups after a lost device may be offered
-               later. If the old single sentence had stayed, shipping that
-               would have made a published policy retroactively false.
-
-             Note what this does NOT do: it does not describe a recovery
-             feature that does not exist. "We do not offer it today" is the
-             claim; anything more would be selling something unbuilt. -->
-        <h2>7. Voice Privacy</h2>
-        <p>Voice Privacy changes the pitch of your voice so that the person you
-        are calling does not hear your natural voice. This section describes what
-        it means for your information; what the feature is for, and the limits on
-        how it may be used, are in section 4 of the <a href="/terms">Terms</a>.</p>
-        <p><strong>The processing happens on your device.</strong> Your voice is
-        changed on your own phone, before anything is sent. We do not receive the
-        original audio, and we do not receive the changed audio either — call audio
-        is end-to-end encrypted and travels between the two devices.</p>
-        <p><strong>We do not store your voice.</strong> Not the original, not the
-        modified version. There is no recording of either on our servers, with or
-        without this feature.</p>
-        <p><strong>While a call is in progress</strong> our servers hold a flag
-        indicating whether Voice Privacy is switched on, alongside the other call
-        information described in section 1. It is there so the other participant
-        can be shown that they are not hearing your real voice, and it is cleared
-        when the call ends.</p>
-        <p><strong>What it does not do.</strong> It does not make you anonymous.
-        Changing the pitch of a voice does not change how quickly someone speaks,
-        their rhythm, their accent or their choice of words, and it has no effect
-        on any other information described in this policy.</p>
-
-        <h2>8. Losing your device</h2>
-        <p><strong>Your conversations cannot be recovered — not by us, not by anyone.</strong> The keys that decrypt your messages exist only on your device and we hold no copy of them. This is a deliberate part of how Sackgram is built, not a limitation we are working to remove.</p>
-        <p>Recovering <em>access to your account</em> — your identity and your contacts, but never the contents of your conversations — is a separate question, and the answer depends on whether you set up a passkey.</p>
-        <p><strong>If you set up a passkey</strong>, you can get back into your account on a new phone using your SACKGRAM ID and your fingerprint. Your account, your SACKGRAM ID and your contact list come back. Your conversations do not, for the reason above. Groups have to invite you again, because each member's group key is held for them on their own device.</p>
-        <p>You can also use it on the phone you already have, if you have forgotten your password.</p>
-        <p><strong>If you did not set one up, there is no way back into the account.</strong> A passkey needs Android 9 or later, or iOS 16 or later, and a Google or Apple account — so on an older phone, or without one of those accounts, this route is not available and losing the device means losing the account.</p>
-        <p>Please read this before relying on Sackgram for anything you cannot afford to lose.</p>
-
-        <!-- WORDING NOTE, 2026-08-26. This section was headed "Children" and
-             used the word "child". Both were replaced with "under 18"
-             throughout, and the reason is legal reading rather than style:
-
-             In US law "child" carries COPPA's definition — under 13. A
-             section headed "Children" is read by reviewers and regulators as
-             the COPPA clause, and "we do not collect information from
-             children" then implies 13 to 17 year olds are fine. Sackgram's
-             floor is 18, which is HIGHER than COPPA requires, so the old
-             wording understated the policy while sounding like it stated it.
-
-             Say the age, never the category. If this section is edited, keep
-             "under 18" and do not reintroduce "child" — the one place that
-             word is correct on this site is the prohibited-conduct clause in
-             Terms §3, where it is the standard term. -->
-        <h2>9. Age requirement</h2>
-        <p>Sackgram is for people aged 18 and over. We do not knowingly collect information from anyone under 18.</p>
-        <p><strong>How age is checked.</strong> At sign-up you enter your date of birth and we use it to confirm you are 18 or older. This is self-attested: <strong>we do not ask for identity documents and we do not check it against any official record.</strong> On some Android devices the app store can supply an additional age signal, which we use where it is available. As set out in section 1.1, we keep the resulting decision as a compliance record — we do not keep the date of birth itself.</p>
-        <p><strong>If you believe someone under 18 has an account</strong>, email <a href="mailto:info@sackgram.com">info@sackgram.com</a>. We will close the account and delete the information we hold for it — the categories listed in section 1. Message content is end-to-end encrypted and we cannot read it, so what we are able to delete is limited to what we actually hold; anything already delivered to another person's device is on that device and beyond our reach.</p>
-
-        <h2>10. International transfers</h2>
-        <p>We operate in the United States and our service providers may process and store data there and in other countries. By using Sackgram you understand that your information may be processed outside the country where you live.</p>
-
-        <h2>11. Changes to this policy</h2>
-        <p>If we change this policy we will update the date at the top of this page, and for significant changes we will notify you in the app before the change takes effect.</p>
-
-        <h2>12. Contact</h2>
-        <p>Sackgram Labs,&nbsp;Inc.<br>
-        PO Box 40401<br>
-        North Charleston, SC 29423<br>
-        United States<br>
-        <a href="mailto:info@sackgram.com">info@sackgram.com</a></p>
+        <p class="meta">Effective Date: October 7, 2026 · Last Updated: October 7, 2026</p>
+<h2>Section 0. Overview and Basic Principles</h2>
+<p><strong>0-1</strong> This Privacy Policy explains what information Sackgram Labs, Inc. ("the Company") processes in the SACKGRAM app and how it is processed and protected. It has been written to be clear and is based on how the system actually works.</p>
+<p><strong>0-2</strong> The Company does not own or operate its own database servers. Data needed to provide the service is stored on Google's cloud services (Google Cloud and Firebase, together "Google Cloud").</p>
+<p><strong>0-3</strong> Key points:</p>
+<ul><li>Phone numbers, email addresses, and real names are not requested or collected during registration.</li><li>Messages, photos, videos, and files are end-to-end encrypted and are stored on Google Cloud only in encrypted form; neither the Company nor any third party can read their contents. Call audio is also end-to-end encrypted in transit and is not stored anywhere.</li><li>The minimum metadata necessary to provide the service (such as connection information, sending times, and group names) is processed in a form the Company can read. A detailed list is provided in Section 1.</li><li>Everplace room signboards are, by the nature of the service, designed to be public.</li><li>The Company does not sell Users' personal information and does not use it for targeted advertising.</li></ul>
+<h2>Section 1. Information Collected and Stored</h2>
+<p><strong>1-1</strong> Data processed by SACKGRAM falls into two broad categories:</p>
+<ul><li><strong>Covered by end-to-end encryption (the Company cannot read it):</strong><ul><li>Message text, and photos, videos, and files exchanged in chats, including their file names and formats</li><li>Call audio (encrypted in transit and not stored)</li><li>The encrypted copy of the key used for account recovery, and the key copy transferred when moving to a new device by QR code (Section 9)</li></ul></li><li><strong>Not covered by end-to-end encryption (readable by the Company in order to provide the service):</strong><ul><li>Account identifier, SACKGRAM ID, public key, and age verification and terms agreement records (1-2)</li><li>List of connected Users and the nicknames assigned to them, list of groups and Everplace rooms joined, group names, and in-room profile names (1-3, 1-4)</li><li>Sending information for each message (sender, sending time, message type, attachment size, and read status) and call history (1-3, 1-5)</li><li>Account identifiers of participants in group calls and Everplace room calls, room names, and each participant's speakerphone and Voice Privacy status (1-5)</li><li>Everplace room join requests, report and action records, plan subscription and usage records, and notification tokens (1-4, 1-6, 1-8, 1-10)</li><li>Everplace room signboard information and posted photos (public data, 1-7)</li></ul></li></ul>
+<p>Note: Google Cloud applies default encryption at the storage (disk) level. This is an infrastructure security measure separate from end-to-end encryption and does not limit the Company's system-level processing of data.</p>
+<h3>[Account Information]</h3>
+<ul><li><strong>1-2a Account identifier:</strong> A unique value generated at random when the app is first opened. It is not derived from personal information such as the User's phone number.</li><li><strong>1-2b SACKGRAM ID:</strong> A unique name the User sets during registration. It is stored and managed to prevent duplicates.</li><li><strong>1-2c Public key:</strong> A key made available so that other Users can send the User encrypted messages. The matching private key used for decryption is stored only on the User's device.</li><li><strong>1-2d Age verification record:</strong> Only the age range and the verification result are stored, not the date of birth itself. (Where the Google Play Store's age signal is used, this includes the age determination result and the Google installation identifier.) The date of birth entered exists only on the User's device.</li><li><strong>1-2e Terms and policy agreement record:</strong> Includes the time of agreement, language setting, and whether the Voice Privacy notice was confirmed.</li></ul>
+<h3>[Messages, Media, and Files]</h3>
+<ul><li><strong>1-3a</strong> The contents, file names, and formats of message text and attachments are end-to-end encrypted, and the Company cannot read them.</li><li><strong>1-3b</strong> The account identifiers of chat participants, the sending time and type of each message, and attachment sizes can be seen by the Company in order to deliver the service.</li><li><strong>1-3c</strong> For groups, the group name, each member's in-room profile name, and the sender name are stored. This keeps the sender of earlier messages identifiable even after a member leaves.</li><li><strong>1-3d Read status (read receipts):</strong> Processed to show the other person when a message was read. This can be turned off in settings; when it is off, the User's read status is not recorded and other people's read status is not shown.</li></ul>
+<h3>[Friends, Groups, and Everplace Rooms]</h3>
+<ul><li><strong>1-4a</strong> Connected User accounts, the nicknames assigned to them, and the time each connection was made.</li><li><strong>1-4b</strong> The member list of each group.</li><li><strong>1-4c</strong> The customer list of an Everplace room, chat history (end-to-end encrypted), and join request information. The nickname and message written by someone who asks to join are sent and stored as plain text so that the owner can read them.</li></ul>
+<h3>[Call Data]</h3>
+<ul><li><strong>1-5a</strong> The Company does not record calls and cannot intercept or collect voice conversations.</li><li><strong>1-5b One-to-one calls:</strong> Under the default setting, audio is encrypted on the device and delivered through a relay server (Cloudflare), so the other party to the call cannot learn the User's IP address. The relay server only passes along encrypted audio; it cannot listen to the content and does not store it. Users can turn this protection off in settings; when it is off, the two devices connect directly for call quality (using Google's connection service to find each device's network address), and the other party to the call can learn the User's IP address. Connection information exchanged to set up the call is deleted from Google Cloud when the call ends, and if it is not cleaned up then, it is automatically deleted within 24 hours at the latest.</li><li><strong>1-5c Group calls and Everplace room calls:</strong> Audio streams are delivered through a media server (LiveKit). Because the audio is encrypted on the device before it is sent, LiveKit's servers also cannot listen to the content. LiveKit receives participants' account identifiers, room names, and speakerphone and Voice Privacy on/off status, which it uses to show this information on participants' screens. When connecting, LiveKit also receives technical connection information (IP address, operating system and version, and device model).</li><li><strong>1-5d</strong> Call records in a chat (caller, call outcome, call duration, and, for group calls, the maximum number of participants) are stored as unencrypted metadata. A User cannot delete an individual call record but can hide it from their own screen; it remains on the other participants' screens. When the room's Evaporation timer is on, call records disappear together with the room's messages when the timer runs out. They are also deleted when the chat or room itself is deleted.</li></ul>
+<h3>[Notifications]</h3>
+<ul><li><strong>1-6a</strong> If the User allows notifications, the device's notification token (push token), together with the app-installation identifier it depends on, is stored, and notifications are delivered through Google's push notification infrastructure.</li><li><strong>1-6b</strong> Push notifications contain only technical information such as room and call identifiers, and do not include user names or message content. Names shown on screen are matched on the device itself, and can be controlled with the "Hide room names in notifications" option in settings.</li><li><strong>1-6c</strong> The owner of an Everplace room is notified when someone asks to join, and a customer is notified when let in. (No notification is sent when a request is declined.)</li></ul>
+<h3>[Everplace Room Signboards (Public Information)]</h3>
+<ul><li><strong>1-7a</strong> The business name, description, contact details, address, announcements, business category, region, and main photos posted on a signboard are public data. Any SACKGRAM User can view them, and posted photos are not encrypted.</li><li><strong>1-7b</strong> Signboard photos are converted to JPEG on the device and stripped of metadata (EXIF), including location information, before they are posted. Photos that cannot be converted are not posted.</li><li><strong>1-7c</strong> When searching for signboards, the filters the User selects (country, region, business category and tags) are sent to the server as search conditions.</li></ul>
+<h3>[Reports and Action Records]</h3>
+<ul><li><strong>1-8a</strong> When a signboard is reported, the reporter's account identifier, the reported signboard, the reason, any additional details, and the time are recorded. This record is not disclosed to others, and the reporter's information is not provided to the owner of the signboard.</li><li><strong>1-8b</strong> When the Company takes action against a signboard or account, the time and reason for the action are recorded. (Reporter information is not included.)</li></ul>
+<h3>[Account Recovery and Security Keys]</h3>
+<ul><li><strong>1-9a</strong> When a passkey is registered, the passkey's public identifying information and verification data (registration and last-use times) are stored. The passkey's secret data itself is kept only on the User's chosen device and password manager.</li><li><strong>1-9b Conversation recovery:</strong> When enabled, an encrypted copy of the key used to decrypt conversations is stored on Google Cloud. This copy can be decrypted only with the User's passkey (fingerprint, face, or screen lock), and the Company holds no key that can decrypt it.</li><li><strong>1-9c Moving to a new device (QR code):</strong> The old device encrypts the account key with a one-time key contained only in the QR code and stores it temporarily on Google Cloud, where the new device retrieves it. It is deleted immediately when the move is completed or after the confirmation code is entered incorrectly 5 times. A move that is not completed expires after a short time, and its record is normally deleted automatically within a day.</li></ul>
+<h3>[Plans and Usage]</h3>
+<ul><li><strong>1-10a</strong> Subscription plan tier (Free, Trial, Silver, Gold), purchased product information, and expiration time are managed. Payments are processed through the app stores, and the Company does not directly collect credit card information.</li><li><strong>1-10b</strong> Quantity data needed to provide the service is managed, including the number of connections, number of groups, number of invitation QR codes created, monthly cumulative Voice Privacy usage time, and monthly attachment upload volume.</li></ul>
+<h3>[Device and Connection Technical Information]</h3>
+<ul><li><strong>1-11a</strong> IP addresses and connection information are collected in the course of communication and may be temporarily retained in system operation logs (see Section 6 for retention periods).</li><li><strong>1-11b</strong> Google's security services (Firebase App Check / Play Integrity) are used to verify that the app is genuine. These services return only the results of app authenticity and device integrity checks and do not identify individual Users.</li></ul>
+<h3>[Information Not Collected and Activities Not Performed]</h3>
+<ul><li><strong>1-12a</strong> The Company does not sell or rent Users' personal information to third parties and does not use it for targeted advertising.</li><li><strong>1-12b</strong> The app contains no third-party advertising trackers, commercial analytics SDKs, or crash reporting trackers. Accordingly, there is no need to respond separately to "Do Not Track" signals from web browsers.</li><li><strong>1-12c</strong> The Company does not collect Users' actual GPS location, device contacts (address book), or phone numbers.</li></ul>
+<h2>Section 2. Purposes and Legal Bases for Processing</h2>
+<p><strong>2-1</strong> The Company processes information only for the following purposes:</p>
+<ul><li><strong>Providing the service:</strong> Delivering messages, connecting calls, maintaining friends, groups, and Everplace rooms, and applying subscription plans</li><li><strong>Operating the service safely:</strong> Diagnosing system errors, preventing abuse of the service, and protecting the service infrastructure through app authenticity checks</li><li><strong>Handling signboard reports:</strong> Reviewing reports of signboards that violate the rules and taking appropriate action</li><li><strong>Meeting legal obligations:</strong> Keeping age verification and terms/policy agreement records (1-2d, 1-2e)</li></ul>
+<p><strong>2-2</strong> The legal bases for processing personal data under the EU and UK GDPR are as follows:</p>
+<ul><li><strong>Performance of a contract (Article 6(1)(b)):</strong> Providing the service and applying subscription plans</li><li><strong>Legitimate interests (Article 6(1)(f)):</strong> Ensuring the stability of the service, preventing abuse, and handling reports of unlawful signboards</li><li><strong>Compliance with legal obligations (Article 6(1)(c)):</strong> Age verification and keeping agreement records</li><li>The Company does not rely on consent as the sole legal basis for any processing.</li></ul>
+<p><strong>2-3</strong> An account cannot be created without the required registration items (SACKGRAM ID, password, and date of birth). Apart from the age verification process, there is no automated decision-making that produces legal effects for Users.</p>
+<h2>Section 3. Data Processors</h2>
+<p><strong>3-1</strong> To provide the service, the Company engages the specialist providers below to carry out certain data processing. These providers process data only under the Company's control and instructions:</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Processor</th><th>Services provided</th><th>Data processed</th></tr></thead>
+<tbody>
+<tr><td><strong>Google LLC</strong> (Google Cloud, Firebase)</td><td>Storage of the data described in Section 1, service infrastructure, sign-in, push notifications, app authenticity checks, receipt of age signals</td><td>All data described in Section 1 (end-to-end encrypted items are stored only in encrypted form)</td></tr>
+<tr><td><strong>LiveKit, Inc.</strong></td><td>Real-time delivery of audio streams for group calls and Everplace room calls</td><td>Encrypted audio, the call status information described in 1-5c, and technical connection information</td></tr>
+<tr><td><strong>Cloudflare, Inc.</strong></td><td>Real-time relay of one-to-one call audio</td><td>Encrypted audio, and network information needed for the connection</td></tr>
+<tr><td><strong>RevenueCat, Inc.</strong></td><td>Managing subscription status and synchronizing in-app purchases</td><td>Account identifier and purchase history</td></tr>
+<tr><td><strong>Google Play</strong> (and Apple App Store)</td><td>Processing in-app purchases and billing</td><td>Purchase data linked to the store account</td></tr>
+</tbody></table></div>
+<p><strong>3-2</strong> Except as described in Section 5 (legal requirements), the Company does not provide Users' information to any third party other than the processors listed above.</p>
+<h2>Section 4. International Data Transfers</h2>
+<p><strong>4-1</strong> The Company operates the service as a U.S. company, and all information stored on Google Cloud is kept in data centers in the United States. The database is replicated within a Google Cloud multi-region in the United States, and encrypted attachments and signboard photos are stored in the South Carolina, USA (us-east1) region.</p>
+<p><strong>4-2</strong> Audio for group calls and Everplace room calls is only relayed in real time through LiveKit servers located in the United States and is not stored on those servers. Audio for one-to-one calls is only relayed in real time through the Cloudflare data center closest to the User and is not stored. RevenueCat also processes subscription data on infrastructure in the United States.</p>
+<p><strong>4-3</strong> The information of Users who live outside the United States is transferred over the internet to the United States for processing when they register and use the service. If you do not want your information transferred internationally, you may stop using the SACKGRAM app or delete your account. (In that case, you will not be able to use the service.)</p>
+<p><strong>4-4</strong> Transfers of EU and UK Users' data to the United States are based on the Standard Contractual Clauses (SCCs) included in the data processing terms with Google Cloud/Firebase. Transfers to LiveKit, Cloudflare, and RevenueCat are likewise governed by the safeguards set out in each company's Data Processing Agreement (DPA).</p>
+<h2>Section 5. Disclosure to Third Parties and Legal Requests</h2>
+<p><strong>5-1</strong> Where a legal obligation arises, such as a valid court order or a lawful warrant from a competent investigative authority, the Company may disclose the minimum necessary information that it holds. Disclosure is limited to the metadata not covered by end-to-end encryption, as described in Section 1.</p>
+<p><strong>5-2</strong> The actual content of messages, photos, videos, files, and call audio is end-to-end encrypted, and the Company does not hold decrypted originals. It is therefore technically impossible for the Company to provide that content, even at the request of law enforcement or a court.</p>
+<h2>Section 6. Retention Periods and Deletion</h2>
+<p><strong>6-1</strong> Messages and attachments are retained until the sender deletes them or until the disappearing message timer set for them expires.</p>
+<p><strong>6-2 Deletion and Evaporation:</strong> When the sender deletes a message or its timer expires, the data is deleted from all three places: ① the SACKGRAM app screen, ② the memory and storage of the sender's and recipient's devices, and ③ Google Cloud. If the recipient's device is not connected, the data is deleted as soon as it reconnects. Thumbnails and viewer copies temporarily created on the device are also deleted as soon as the app receives the change, and any open media screen closes automatically. Messages whose timer has expired are normally deleted from Google Cloud within 1 minute.</p>
+<p><strong>6-3</strong> A User who receives a message can hide it on their own screen, but only the sender can actually delete it. Hidden messages are also deleted when their timer expires.</p>
+<p><strong>6-4</strong> The expiry time of a disappearing message timer is calculated using Google Cloud's server time, not the clock on the User's device.</p>
+<p><strong>6-5</strong> Connection information used to set up one-to-one calls is deleted when the call ends, and if it is not cleaned up then, it is automatically deleted within 24 hours at the latest.</p>
+<p><strong>6-6</strong> Google Cloud system operation logs (which may include IP addresses and account identifiers) are kept for 30 days and then deleted automatically.</p>
+<p><strong>6-7</strong> Signboard reports and records of actions taken are permanently deleted automatically 1 year after they are created. If a reporter deletes their account, their reports are deleted immediately.</p>
+<p><strong>6-8 Deleted immediately when the account is deleted (Settings → Delete account):</strong></p>
+<ul><li>Account profile and public key</li><li>Friend list, and the User's entry in other Users' friend lists</li><li>One-to-one chats and all data in them (messages, media, files, and call history), deleted immediately on both Users' screens</li><li>Group memberships (if the User was the last member of a group, the entire group and its data are deleted)</li><li>In Everplace rooms the User joined as a customer: chat history, files, join requests, and block and report records</li><li>For Everplace rooms the User owned: the signboard, photos, and permanent QR link, and all customer relationship data for that room (chat history, media, call history, and pending join requests). The room's signboard is taken down and its customer relationships end, even if other members remain.</li><li>Account recovery data (the public part of the passkey and the encrypted key copy)</li><li>Plan and usage data stored on Google Cloud, notification tokens, and all invitation link data created or used</li><li>Read status and blocking identifier data remaining in groups that still have other members</li><li>The RevenueCat customer record. For Google Play subscriptions, automatic renewal stops from the next billing date, and amounts already paid are not refunded.</li></ul>
+<p><em>(Encrypted media files are normally fully removed from the servers within a few minutes of the deletion request.)</em></p>
+<p><strong>6-9 Retained as exceptions after the account is deleted:</strong></p>
+<ul><li><strong>SACKGRAM ID:</strong> Kept permanently in a reserved state, no longer linked to any account, to prevent misuse by others.</li><li><strong>Messages and files in groups that still have other members:</strong> Kept in encrypted form, to preserve the other members' conversation history, until the group's timer removes them or the group itself is deleted.</li><li><strong>Age verification, terms agreement, and Voice Privacy notice records, and the record that the account was deleted:</strong> Kept separately for 3 years from the date of deletion as evidence of legal compliance, and then deleted automatically.</li><li><strong>Reports about signboards the User owned:</strong> Kept for 1 year from the date the report was received, and then deleted.</li><li><strong>Operation logs:</strong> Subject to the 30-day retention period described in 6-6.</li><li><strong>Google Play purchase records:</strong> Kept in accordance with Google's applicable laws and payment policies.</li><li><strong>Passkey data:</strong> Remains on the User's device and in the User's password manager, where the User can delete it.</li></ul>
+<p><strong>6-10 Method of deletion:</strong> All electronic files are deleted from the Google Cloud system, and there is no backup from which the Company could restore deleted data.</p>
+<h2>Section 7. Your Rights and How to Exercise Them</h2>
+<p><strong>7-1</strong> Users may request access to, correction of, deletion of, or suspension of processing of the personal information the Company holds about them. Depending on the laws where they live (such as the GDPR or CCPA), Users may also have additional rights, such as the right to data portability and the right to object.</p>
+<p><strong>7-2</strong> Most rights can be exercised immediately and directly through the app's menus (Delete account, turning off read receipts, hiding room names in notifications, and editing or deleting a signboard). Other inquiries and written requests may be sent to <a href="mailto:info@sackgram.com">info@sackgram.com</a>, and the Company will respond within 30 days of receipt.</p>
+<p><strong>7-3</strong> Because SACKGRAM does not collect phone numbers or email addresses, it may be difficult to confirm that a requester is the legitimate owner of an account. If ownership cannot be established, the Company may be unable to process the request.</p>
+<p><strong>7-4</strong> If you have a complaint about the Company's processing of personal information, you may lodge a complaint with the data protection authority where you live (for example, the Personal Information Protection Commission in Korea, or a data protection authority in the EU).</p>
+<h2>Section 8. Voice Privacy</h2>
+<p><strong>8-1</strong> Voice Privacy converts the voice in real time inside the device, before the audio leaves it. The Company does not collect or store on its servers either the original voice or the converted audio.</p>
+<p><strong>8-2</strong> Whether Voice Privacy is on during a call is sent in real time to the other party to the call and shown on their screen (1-5c). For usage management, only the monthly cumulative usage time is recorded (1-10b).</p>
+<p><strong>8-3</strong> This feature is a security feature that changes the tone of the voice; it does not fully anonymize a User's speech characteristics (such as speaking speed, accent, and intonation).</p>
+<h2>Section 9. Changing Devices and Account Recovery</h2>
+<p><strong>9-1 Changing devices:</strong> If you still have your old device, you can securely move your SACKGRAM ID, account key, and conversation recovery key (if enabled) to a new device by scanning a QR code. Friends, room lists, and messages are downloaded again from Google Cloud on the new device. Your password and settings stored only on the device (such as theme and font size) are not moved; you set a new password on the new device.</p>
+<p><strong>9-2 Recovering an account after losing a device:</strong> If a device is lost, the account can be recovered only if a passkey was registered in advance. On a new device that uses the same password manager ecosystem, the account profile, friends, and room lists are restored after entering the SACKGRAM ID and completing biometric authentication. (Supported on Android 9 or later.)</p>
+<p><strong>9-3 Recovering conversations:</strong> Conversation recovery is turned on when a passkey is registered (currently offered on Android first). If it is on, existing conversations in the User's rooms are restored when the account is recovered. If it was off, or if the environment is not supported, the account profile is recovered but existing encrypted conversations are not, and encrypted conversations cannot be sent or received on the new device.</p>
+<p><strong>9-4</strong> Conversation recovery can be turned off under Settings → Account recovery. When it is turned off, the copy of the decryption key stored on Google Cloud is deleted immediately; after that, conversations cannot be recovered if the device is lost, and conversations cannot be sent or received on a new device. It can be turned back on at any time.</p>
+<p><strong>9-5</strong> If a device is lost and no passkey was registered, no one, including the User and the Company, can recover the account.</p>
+<p><strong>9-6</strong> Messages and media deleted by the sender or removed when their timer expired cannot be recovered under any circumstances.</p>
+<h2>Section 10. Children's Privacy (18 Years of Age or Older)</h2>
+<p><strong>10-1</strong> SACKGRAM is a service for adults aged 18 or older, and the Company does not knowingly collect or process the personal information of anyone under 18.</p>
+<p><strong>10-2</strong> Whether a User is 18 or older is verified using the date of birth entered during registration. The Company does not require excessive personal information such as identity documents. (On some Android devices, the Google Play Store's age signal is used.)</p>
+<p><strong>10-3</strong> If you become aware that a minor has created an account and is using the service, please report it to <a href="mailto:info@sackgram.com">info@sackgram.com</a>. After a verification process, the Company will terminate the account and delete the related information in accordance with Section 6.</p>
+<h2>Section 11. Security Measures</h2>
+<p><strong>11-1</strong> The Company applies end-to-end encryption to all conversation content and call audio. The private key needed for decryption is stored in secure storage on the device protected by the Android Keystore, and is excluded from device backups.</p>
+<p><strong>11-2</strong> The databases on Google Cloud enforce strict access control rules (Security Rules) so that only an authenticated User can access their own data and the data of rooms they belong to. Whether the app is genuine is checked through a security verification service (App Check).</p>
+<h2>Section 12. Changes to This Privacy Policy</h2>
+<p><strong>12-1</strong> When this Privacy Policy is amended, the "Last Updated" date at the top will be revised, and changes that materially affect Users will be announced in advance, before they take effect, through in-app notices or similar means.</p>
+<p><strong>12-2</strong> This Policy may be provided in multiple languages. In the event of any inconsistency in interpretation between language versions, the English version shall prevail.</p>
+<h2>Section 13. Privacy Officer and Representatives</h2>
+<ul><li><strong>Company name:</strong> Sackgram Labs, Inc.</li><li><strong>Address:</strong> PO Box 40401, North Charleston, SC 29423, USA</li><li><strong>Contact email:</strong> <a href="mailto:info@sackgram.com">info@sackgram.com</a></li></ul>
+<p><strong>Privacy Officer:</strong></p>
+<ul><li><strong>Title:</strong> Chief Executive Officer (CEO)</li><li><strong>Contact:</strong> <a href="mailto:info@sackgram.com">info@sackgram.com</a></li></ul>
+<p><strong>EU and UK Representatives:</strong></p>
+<p>We are appointing representatives in the EU (GDPR Article 27) and the UK (UK GDPR Article 27). Once appointed, their details will be published here. Until then, please contact us at <a href="mailto:info@sackgram.com">info@sackgram.com</a>.</p>
       </div>
     </main>
     <footer class="site-footer">
@@ -235,6 +139,7 @@
           <li><a href="../privacy/">Privacy Policy</a></li>
           <li><a href="../terms/">Terms of Service</a></li>
           <li><a href="../support/">Support</a></li>
+          <li><a href="../delete-account/">Delete account</a></li>
           <li><a href="../company/">Company</a></li>
         </ul>
         <p>&copy; 2026 Sackgram Labs, Inc. All rights reserved.<br>

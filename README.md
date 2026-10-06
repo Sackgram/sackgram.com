@@ -20,7 +20,7 @@ Every other page still has no JavaScript.
 | Company name | Sackgram Labs, Inc. |
 | Mailing address | PO Box 40401, North Charleston, SC 29423, United States |
 | State of incorporation | Delaware, United States |
-| Effective date on legal pages | August 26, 2026 |
+| Effective date on legal pages | October 7, 2026 (filled in the app repository's `docs/legal/` on 2026-10-06, Sackgram-app #601, and regenerated here). The privacy policy's EU/UK representative paragraph is an interim sentence until the representative contracts are signed (app release checklist item 41) |
 | Governing law | State of Delaware, United States |
 | Venue | State of Delaware, United States |
 
@@ -66,9 +66,11 @@ should be reviewed by counsel in your jurisdiction before launch.
 ## Files
 
 ```
-index.html            Home — what the app does, company name
+index.html            Home — the long introduction (English), company name
+ko/index.html         Home in Korean — the original of the introduction -> /ko
 privacy/index.html    Privacy Policy   -> /privacy   (required by both app stores)
 terms/index.html      Terms of Service -> /terms
+delete-account/index.html  Account deletion -> /delete-account (required by Google Play)
 support/index.html    Support          -> /support   (required by both app stores)
 company/index.html    Legal entity and address -> /company
 i/index.html          Invite landing -> /i   (see below)
@@ -289,7 +291,25 @@ does not resolve a bare directory to its `index.html`:
 cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 ```
 
+## The legal pages and the account deletion page come from the app repository
+
+Since 2026-10-06, `privacy/` and `terms/` are the app repository's
+`docs/legal/privacy-en.md` and `docs/legal/terms-en.md` converted to HTML
+verbatim — the same text the app ships in `apps/mobile/assets/legal/`. **Edit
+the Markdown there, never the HTML here**, and regenerate; a fix made only here
+makes the website and the app say different things. `delete-account/` quotes
+the policy's 6-8, 6-9, 6-10, 7-2 and 7-3 and must change when they do.
+Google Play's Data safety form points at `/delete-account`, so that URL must
+not move.
+
 ## Content rules used here, worth keeping
+
+⚠ **2026-10-06: the "Why Sackgram exists" section below is RETIRED.** The app's
+About screen was restructured on 2026-10-05 (#578) and no longer carries it,
+and the home page now carries the long introduction Eric approved on
+2026-10-05 instead (English at `/`, the Korean original at `/ko/`). The two
+home pages must say the same thing. The note is kept as the record of why the
+section existed.
 
 - **The "Why Sackgram exists" section is one statement kept in three places.**
   It is on this page under the hero, at the top of the app's About screen, and

@@ -128,6 +128,20 @@ dl { margin: 0 0 1rem; }
 dt { font-weight: 650; margin-top: 1rem; }
 dd { margin: 0.2rem 0 0; color: var(--muted); }
 
+/* The home page's language link, inside the brand-filled hero: same
+   --brand-ink text as the hero (7.07:1), underlined so it reads as a link. */
+.hero .lang-switch { margin-top: 1rem; font-size: 0.95rem; }
+.hero .lang-switch a { color: var(--brand-ink); font-weight: 650; }
+
+/* Tables in the Privacy Policy (the processors list). Scrolls sideways on a
+   narrow phone rather than squeezing three columns. */
+.table-scroll { overflow-x: auto; margin: 0 0 1rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { border: 1px solid var(--line); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-soft); font-weight: 650; }
+
+h4 { margin: 1.3rem 0 0.4rem; font-size: 1rem; }
+
 /* ---------- footer ---------- */
 .site-footer {
   border-top: 1px solid var(--line);

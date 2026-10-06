@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sackgram — private messaging and calling</title>
-    <meta name="description" content="Sackgram is a private messaging and calling app from Sackgram Labs, Inc. No phone number or email address required to sign up.">
+    <title>SACKGRAM — words and records, sealed in a sack</title>
+    <meta name="description" content="SACKGRAM is a privacy messenger from Sackgram Labs, Inc. Sign up without a phone number or email address.">
     <meta name="theme-color" content="#3BC3DE">
     <link rel="stylesheet" href="style.css">
+    <link rel="alternate" hreflang="en" href="https://sackgram.com/">
+    <link rel="alternate" hreflang="ko" href="https://sackgram.com/ko/">
   </head>
   <body>
     <header class="site-header">
@@ -14,7 +16,7 @@
         <a class="brand" href="./">SACK<span>GRAM</span></a>
         <nav aria-label="Main">
           <ul>
-          <li><a href="./" aria-current="page">Home</a></li>
+          <li><a href="" aria-current="page">Home</a></li>
           <li><a href="privacy/">Privacy</a></li>
           <li><a href="terms/">Terms</a></li>
           <li><a href="support/">Support</a></li>
@@ -25,47 +27,73 @@
     </header>
     <div class="hero">
       <div class="wrap">
-        <h1>Messaging and calling, without handing over your phone number or email.</h1>
-        <p>Sackgram is a private messenger for Android and iOS, built by Sackgram Labs,&nbsp;Inc.</p>
+        <h1>SACKGRAM — words and records, sealed in a sack</h1>
+        <p>Sack means a sack, and Gram means writing and records. The name carries the idea of putting everyday conversations, letters and calls into a sack and sealing it.</p>
+        <p class="lang-switch"><a href="ko/" hreflang="ko" lang="ko">한국어</a></p>
       </div>
     </div>
-
-    <!-- The founding declaration. It sits above the feature list on purpose:
-         why this exists comes before what it does. The text is identical to
-         the app's About screen and to section J of the claims register in the
-         app repository — three copies of one statement, and changing one
-         without the others makes them three different claims. -->
-    <section class="why" aria-labelledby="why-sackgram">
-      <div class="wrap">
-        <h2 id="why-sackgram">Why Sackgram exists</h2>
-        <p>Conversations belong to people. What you say should be seen by no one you haven't allowed — not a company, not a hacker, not any power.</p>
-        <p>We didn't make this a promise. We made it the structure. The content of your conversations stays on our servers only as ciphertext that even we cannot open, and what you delete doesn't stay even as that. We don't ask for your phone number or your email. The less we know about you, the less anyone can learn about you through us.</p>
-        <p class="why-close">Privacy isn't a hiding place for people with something to hide. It is the basic condition for everyone to live with dignity.</p>
-      </div>
-    </section>
-
     <main>
       <div class="wrap">
-        <h2>What Sackgram does</h2>
+        <!-- The home page body is the "long version" approved by Eric on
+             2026-10-05 (Sackgram-app: SACKGRAM-소개문구-초안.docx, part 2,
+             moved to docs/website/). The Korean original is /ko/; this page
+             is its English translation. The two must say the same thing —
+             change both, or neither. Terms follow the app's About screen. -->
+        <p class="lede">In the digital world, our conversations, photos, faces, voices and locations are left behind and passed along more easily than we think. SACKGRAM is a Privacy Protection Messenger built to leave fewer of those traces. It is for adults aged 18 and over.</p>
+
+        <h2>It is different from sign-up</h2>
+        <p>SACKGRAM does not ask for your phone number, email address or real name. You start with a SACKGRAM ID you choose and a password.</p>
+
+        <h2>You connect only with people you choose</h2>
+        <p>On SACKGRAM, a relationship starts only from a QR code or a dedicated link. You do not need to give your phone number or email address to someone you do not yet trust. People you have not connected with cannot send you messages or call you, and no ads arrive either.</p>
+
+        <h2>Conversations open only on the two phones — End-to-end encryption</h2>
+        <p>Messages, photos, videos, files and call audio are end-to-end encrypted. They are encrypted on the sending phone and can be decrypted only on the receiving phone. They cannot be read if intercepted in between, and SACKGRAM cannot read them either. This encryption is free for every user.</p>
+
+        <h2>What you delete disappears from three places — Triple Evaporation</h2>
+        <p>You can set an evaporation timer for each room, from 1 minute to 7 days. Messages, photos and files you delete, and records whose evaporation time has passed (including call records), disappear from three places — the app screen, both phones, and Google Cloud — and cannot be recovered. You can delete a message you sent, for both sides, at any time by pressing and holding it.</p>
+        <p>SACKGRAM does not run a central server of its own. Conversation content is kept in Google Cloud only in encrypted form, and SACKGRAM cannot open it.</p>
+
+        <h2>Protecting your voice — Voice Privacy</h2>
+        <p>Technology that can clone a voice from a short sample (about 3 seconds) is known to exist. During a call, SACKGRAM changes the pitch of your voice inside your phone before sending it. Your real voice does not leave your phone, which lowers the chance that your voice can be cloned. Your way of speaking and your pace stay the same, so the conversation flows naturally.</p>
+        <p>When Voice Privacy is active, it is shown on the other person's screen, so you both know.</p>
+
+        <h2>Protecting your location — Call IP protection (Location Privacy)</h2>
+        <p>In app calls where the two devices connect directly, the devices exchange IP addresses the moment the call connects. It is known that, with a computer and free software available on the internet, the other person's IP address and approximate location (at the level of city and network provider) can be found within a minute.</p>
+        <p>With the default setting, SACKGRAM's one-to-one calls connect through a relay, so the other person cannot learn your IP address. This protection is free for every user, and you can turn it off in Settings. SACKGRAM also does not collect GPS location, and removes location data from the photos and videos you send, whether you send them as a photo or as a file. If a phone cannot remove it from a particular photo, the app tells you before you send it.</p>
+
+        <h2>Designed to leave less behind</h2>
         <ul class="features">
-          <li><strong>End-to-end encrypted messages.</strong> Message content is encrypted on your device and decrypted on the recipient's. We cannot read it.</li>
-          <li><strong>Sign up without a phone number or email.</strong> Creating an account does not require a phone number or an email address. You choose a SACKGRAM ID instead.</li>
-          <li><strong>Messages that disappear.</strong> You can set a conversation to delete its messages automatically after a chosen period, or delete a message you sent for both sides.</li>
-          <li><strong>Voice calls.</strong> One-to-one calls between people who have connected, and group calls within a group you are in.</li>
-          <li><strong>You add people deliberately.</strong> Nobody can look you up by searching. A connection starts from a link or a QR code you hand over yourself, or from an introduction by someone you are both connected to.</li>
-          <li><strong>Group chats.</strong> Encrypted group conversations with people you have already connected with.</li>
-          <li><strong>Screenshot blocking on Android.</strong> Chats and media viewers ask Android to block screenshots and screen recording on the device showing them.</li>
+          <li>SACKGRAM has no video calls, so your face is not left in digital space.</li>
+          <li>Screenshots and screen recording are blocked on main screens such as conversations, calls, photos and videos.</li>
+          <li>Messages, photos, videos and files you receive cannot be forwarded to others or copied inside SACKGRAM. Only the sender can send them again.</li>
+          <li>If the other person is using Voice Privacy or a speakerphone, you are told on screen.</li>
+          <li>Scan QR opens SACKGRAM invite codes only. Any other QR code of unknown origin is not opened; its content is shown as text.</li>
         </ul>
 
-        <div class="card">
-          <p><strong>What we do not claim.</strong> Sackgram protects the content of your messages, and we have designed it to ask for as little about you as we can. It cannot protect you from someone photographing their screen with another camera, and it does not make you anonymous on the internet. We would rather say that plainly than imply otherwise.</p>
-        </div>
+        <h2>Your account stays yours even if you lose your phone</h2>
+        <p>Your account key is stored only in app-private storage protected by your phone's security hardware (Android Keystore). If you set up account recovery, you can get your account back on a new phone with your passkey (your phone's fingerprint, face, PIN or pattern). Account recovery is free.</p>
 
-        <h2>Availability</h2>
-        <p>Sackgram is in development and is not yet publicly released. This site will be updated when the app is available.</p>
+        <h2>Everplace rooms — your own place that people can find from anywhere (SACKGRAM EVERPLACE)</h2>
+        <p>An Everplace room is a space for shops and organizations. The owner makes a signboard with the name, an introduction, contact details, photos and announcements, and can update it with new news at any time. The signboard's QR code does not expire (while on the Gold plan), so it can be printed on business cards and in the shop and kept in use. It is a digital business card you can hand out freely.</p>
+        <p>SACKGRAM users in 170 countries around the world can browse signboards by country, region and category. Anyone who wants to get in touch first asks to join, and the owner decides whether to let them in. No one can come in without asking to join.</p>
+        <p>The owner decides what the signboard shows. It can carry an address and a phone number, or show nothing at all and keep every conversation and call inside SACKGRAM. Customers, too, can talk with the place without giving their phone number or name.</p>
+
+        <h2>Who it is for</h2>
+        <p><strong>People whose identity being known would cause trouble.</strong> Celebrities, athletes, legal professionals, journalists and other professionals whose daily life and contact details would be a problem if exposed can protect their privacy with Voice Privacy, no video calls, no identity disclosure, call IP protection and Triple Evaporation.</p>
+        <p><strong>When you get in touch with someone you have just met.</strong> You do not need to give your phone number or email address to someone you do not yet trust. Connect by QR, talk, and decide for yourself whether to continue the relationship without revealing who you are.</p>
+        <p><strong>A, a tour guide.</strong> A welcomes new tourists every week. During a trip, A makes a group with a QR code so everyone can stay in touch without knowing each other's contact details, and closes the group when the trip ends. Instead, A hands out a digital business card carrying an Everplace signboard QR, so guests who want to find A again can get in touch at any time.</p>
+        <p><strong>B, an estate agent.</strong> Giving a personal phone number to clients B had never met was always a burden. Now B is contacted through an Everplace signboard QR and keeps work conversations inside SACKGRAM. B's identity stays protected and the work carries on as before.</p>
+        <p><strong>C, who needs advice.</strong> Even with a worry that is hard to tell anyone, C can ask for advice from a professional who runs an Everplace room, without revealing who C is or what C's voice sounds like.</p>
+
+        <h2>No ads — supported by subscriptions</h2>
+        <p>Privacy features are the same on every plan. SACKGRAM is designed not to collect personal information for advertising in the first place. That is why it runs on paid subscriptions instead of ads.</p>
+
+        <h2>Patents</h2>
+        <p>SACKGRAM's messenger technology and Everplace rooms are the subject of ⟦TO CONFIRM: number⟧ U.S. provisional patent applications.</p>
 
         <h2>Company</h2>
-        <p>Sackgram is developed and operated by <strong>Sackgram Labs,&nbsp;Inc.</strong> See <a href="company/">Company</a> for registration and address details, or <a href="support/">Support</a> to get in touch.</p>
+        <p>SACKGRAM is developed and operated by <strong>Sackgram Labs,&nbsp;Inc.</strong> See <a href="company/">Company</a> for registration and address details, or <a href="support/">Support</a> to get in touch.</p>
       </div>
     </main>
     <footer class="site-footer">
@@ -74,6 +102,7 @@
           <li><a href="privacy/">Privacy Policy</a></li>
           <li><a href="terms/">Terms of Service</a></li>
           <li><a href="support/">Support</a></li>
+          <li><a href="delete-account/">Delete account</a></li>
           <li><a href="company/">Company</a></li>
         </ul>
         <p>&copy; 2026 Sackgram Labs, Inc. All rights reserved.<br>

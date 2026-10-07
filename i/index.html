@@ -97,29 +97,34 @@
 
         <h2>Getting the app</h2>
         <!-- ==================================================================
-             ⚠ THE STORE BADGES GO HERE, AND THEY ARE ABSENT ON PURPOSE.
-             As of 2026-09-14 Sackgram has NO PUBLIC LISTING ON EITHER STORE:
-             the Android build has only reached Play internal testing, which a
-             stranger cannot install from, and there is no iOS build at all
-             (no Apple Team ID yet). The site's own home page says "not yet
-             publicly released", so a badge here would be a dead link on the
-             one page whose whole job is to give a stranger somewhere to go.
+             CHANGED FOR LAUNCH DAY (prepared 2026-10-07, merge on the day the
+             Google Play listing is public — the PR title says so). Until then
+             the paragraph this replaced said "not publicly released".
 
-             WHEN A LISTING EXISTS, replace the paragraph below with the
-             badges. Two rules that are not style preferences:
-               1. SELF-HOST the badge images (add them to this repo). The
-                  official badge URLs are on Google's and Apple's servers, and
-                  loading one from here hands them this visitor's IP address.
-                  See this file's <head> comment.
-               2. Put NOTHING from the incoming link into the store URL — no
-                  referrer parameter, no campaign tag, no token. See the note
-                  at the bottom of this page, which would stop being true.
-             ================================================================== -->
-        <p>Sackgram is not publicly released yet, so there is nothing to install from an app store today. When there is, the links will be on this page and on the <a href="../">home page</a>.</p>
-        <p>If you would like to be told when it is available, email <a href="mailto:info@sackgram.com">info@sackgram.com</a>.</p>
+             ⚠ A TEXT LINK, NOT A BADGE IMAGE, AND THAT IS THE CSP RATHER THAN
+             TASTE. This page's Content-Security-Policy has img-src 'none'
+             (see <head>), and keeping that CSP unchanged was part of the
+             decision. A badge image would need img-src 'self' plus a
+             self-hosted copy of Google's artwork; if that is ever wanted,
+             change the CSP in the same change and say why.
+
+             ⚠ THE STORE URL CARRIES NOTHING FROM THE INCOMING LINK — no
+             referrer parameter, no campaign tag, no token. It is a plain
+             navigation, which connect-src does not govern, and it is what
+             keeps the sentence at the bottom of this page true. The deferred
+             deep link (app repo, sackgram-install-referrer-pr7-en.md) will
+             change exactly this, and that sentence, together.
+
+             iOS: there is no App Store listing, so iOS gets a sentence, not a
+             link that goes nowhere. -->
+        <p><a class="open-app" href="https://play.google.com/store/apps/details?id=com.sackgram.labs">Get it on Google Play</a></p>
+        <p>Android only for now. An iPhone version is coming; it is not in the App Store yet.</p>
 
         <h2>After you install it</h2>
-        <p>Scan the same code again, or open the same link again. It will open in Sackgram.</p>
+        <!-- Matches the app (v9): a link that arrives before sign-up is kept
+             and opens once sign-up is finished. Before v9 the app dropped it,
+             which is why this used to say only "open the same link again". -->
+        <p>After you install it, open the same link, or scan the same code, once more. When you have finished signing up, Sackgram opens the invitation for you.</p>
 
         <div class="card">
           <!-- ⚠ THIS SENTENCE BINDS THE FORMAT OF EVERY LINK THAT POINTS HERE,

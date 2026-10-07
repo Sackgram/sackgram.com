@@ -298,7 +298,7 @@ cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 ## Twelve languages, and where every page comes from
 
 ⚠ **2026-10-06 (Eric): the site is in twelve languages of equal weight** — en,
-ko, de, es, fr, id, it, ja, pt, ru, zh, ar. SACKGRAM ships in 170 countries in
+ko, de, es, fr, id, it, ja, pt, ru, zh, ar. SACKGRAM ships worldwide in
 these twelve at once, and an English home with one Korean page beside it made
 it look like a local Korean app.
 

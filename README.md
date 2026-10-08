@@ -120,7 +120,10 @@ key breaks passkeys and App Links on exactly those devices. The app's server
 accept-list (`WEBAUTHN_ANDROID_CERT_SHA256` in Sackgram-app's
 `backend/signaling/.env`) must hold the same two.
 
-#### ⚠️ A DEBUG FINGERPRINT IS IN THIS FILE RIGHT NOW AND MUST COME OUT BEFORE RELEASE
+#### ✅ THE DEBUG FINGERPRINT WAS REMOVED BEFORE THE FIRST STORE RELEASE
+
+**Removed by the PR that carries this line (merged just before the release build, Eric's call, 2026-10-08).** The file now holds one statement — `E9:D4` (Play app signing, current), `E3:82` (Play app signing, previous) and `C5:0F` (upload key) — and those three stay. What follows is the record of why the debug statement was there.
+
 
 Added **2026-09-16**, deliberately and temporarily, overriding the rule that
 used to stand here. That rule is quoted below rather than deleted, because it
@@ -128,7 +131,7 @@ is still the right default and this is an exception to it with an end date.
 
 | Key | Fingerprint starts | Relations | Added | Removed |
 |---|---|---|---|---|
-| Debug keystore (development machine) | `96:A5:2A:57…` | `handle_all_urls` only | 2026-09-16 | **before the first store release** |
+| Debug keystore (development machine) | `96:A5:2A:57…` | `handle_all_urls` only | 2026-09-16 | **removed — see above** |
 
 Removing it is deleting the **second statement object** in its entirety — the
 one with a single fingerprint in it. Nothing in the first statement changes.

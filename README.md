@@ -20,7 +20,7 @@ Every other page still has no JavaScript.
 | Company name | Sackgram Labs, Inc. |
 | Mailing address | PO Box 40401, North Charleston, SC 29423, United States |
 | State of incorporation | Delaware, United States |
-| Effective date on legal pages | October 7, 2026 (filled in the app repository's `docs/legal/` on 2026-10-06, Sackgram-app #601, and regenerated here). The privacy policy's §13 names the EU and UK GDPR Art. 27 representatives and the EU DSA Art. 13 legal representative (Prighter, contract signed 2026-10-09), with the Prighter Trust Center as the contact — privacy v17, Sackgram-app #653 (app release checklist item 41) |
+| Effective date on legal pages | October 9, 2026 for both the Terms and the Privacy Policy (v17, Sackgram-app #653, set with `tools/set_legal_date.py` and regenerated here). The privacy policy's §13 names the EU and UK GDPR Art. 27 representatives and the EU DSA Art. 13 legal representative (Prighter, contract signed 2026-10-09), with the Prighter Trust Center as the contact — privacy v17, Sackgram-app #653 (app release checklist item 41) |
 | Governing law | State of Delaware, United States |
 | Venue | State of Delaware, United States |
 

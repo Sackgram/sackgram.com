@@ -323,13 +323,14 @@ def alternates(page):
     return '\n'.join(out) + '\n'
 
 
-def write_page(lang, page, title, description, current, main_html, hero=''):
+def write_page(lang, page, title, description, current, main_html, hero='', head_extra='', tail_html=''):
     d = page_path(lang, page)
     dir_attr = ' dir="rtl"' if lang in RTL else ''
     targets = {l: page_path(l, page) for l in LANGS}
     s = ('<!DOCTYPE html>\n'
          f'<html lang="{HREFLANG.get(lang, lang)}"{dir_attr}>\n  <head>\n'
          '    <meta charset="utf-8">\n'
+         + head_extra +
          '    <meta name="viewport" content="width=device-width, initial-scale=1">\n'
          f'    <title>{title}</title>\n'
          f'    <meta name="description" content="{html.escape(description)}">\n'
@@ -341,7 +342,7 @@ def write_page(lang, page, title, description, current, main_html, hero=''):
          '      </div>\n    </header>\n'
          + hero +
          '    <main>\n      <div class="wrap">\n' + main_html + '      </div>\n    </main>\n'
-         + footer(d, lang) + '  </body>\n</html>\n')
+         + footer(d, lang) + tail_html + '  </body>\n</html>\n')
     os.makedirs(os.path.join(ROOT, d), exist_ok=True)
     with open(os.path.join(ROOT, d, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(s)
@@ -434,6 +435,84 @@ def add_list_to_english_only(path):
     open(p, 'w', encoding='utf-8').write(s)
 
 
+
+# ---------- /download (link track PR 6, prepared 2026-10-07; merge on launch day) ----------
+
+# Channel paths add ONLY utm_source to the Play link, so Play Console's
+# acquisition report can count installs per channel. Nothing is stored or
+# measured on our side: these are static pages with no request of their own.
+# Add a channel by adding its name here and rebuilding.
+DOWNLOAD_CHANNELS = ['kakao', 'instagram', 'youtube', 'x']
+PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sackgram.labs'
+
+# On an Android phone the page opens Google Play by itself; everyone else sees
+# the page. The script reads the link from the page, so it is byte-identical
+# on every page and one CSP hash covers all of them.
+DOWNLOAD_SCRIPT = ("(function(){var a=document.getElementById('play-link');"
+                   "if(a&&/Android/i.test(navigator.userAgent)){location.replace(a.href);}})();")
+
+DL = {
+ 'en': dict(title='Get SACKGRAM', play='Get it on Google Play',
+            android='On an Android phone, this page opens Google Play by itself.',
+            ios='iPhone: SACKGRAM is coming soon. It is not in the App Store yet.'),
+ 'ko': dict(title='SACKGRAM 받기', play='Google Play에서 받기',
+            android='Android 휴대폰에서는 이 페이지가 Google Play를 바로 엽니다.',
+            ios='iPhone: SACKGRAM은 곧 출시됩니다. 아직 App Store에는 없습니다.'),
+ 'de': dict(title='SACKGRAM herunterladen', play='Jetzt bei Google Play',
+            android='Auf einem Android-Telefon öffnet diese Seite Google Play automatisch.',
+            ios='iPhone: SACKGRAM kommt bald. Im App Store ist es noch nicht verfügbar.'),
+ 'es': dict(title='Descargar SACKGRAM', play='Disponible en Google Play',
+            android='En un teléfono Android, esta página abre Google Play automáticamente.',
+            ios='iPhone: SACKGRAM llegará pronto. Todavía no está en la App Store.'),
+ 'fr': dict(title='Télécharger SACKGRAM', play='Disponible sur Google Play',
+            android="Sur un téléphone Android, cette page ouvre Google Play d'elle-même.",
+            ios="iPhone : SACKGRAM arrive bientôt. Il n'est pas encore sur l'App Store."),
+ 'id': dict(title='Unduh SACKGRAM', play='Dapatkan di Google Play',
+            android='Di ponsel Android, halaman ini membuka Google Play secara otomatis.',
+            ios='iPhone: SACKGRAM segera hadir. Belum tersedia di App Store.'),
+ 'it': dict(title='Scarica SACKGRAM', play='Disponibile su Google Play',
+            android='Su un telefono Android, questa pagina apre Google Play da sola.',
+            ios="iPhone: SACKGRAM arriverà presto. Non è ancora sull'App Store."),
+ 'ja': dict(title='SACKGRAM を入手', play='Google Play で手に入れよう',
+            android='Android の端末では、このページが自動で Google Play を開きます。',
+            ios='iPhone：SACKGRAM はまもなく公開予定です。まだ App Store にはありません。'),
+ 'pt': dict(title='Baixar o SACKGRAM', play='Disponível no Google Play',
+            android='Em um celular Android, esta página abre o Google Play sozinha.',
+            ios='iPhone: o SACKGRAM chega em breve. Ainda não está na App Store.'),
+ 'ru': dict(title='Скачать SACKGRAM', play='Доступно в Google Play',
+            android='На телефоне Android эта страница сама откроет Google Play.',
+            ios='iPhone: SACKGRAM скоро появится. В App Store его пока нет.'),
+ 'zh': dict(title='获取 SACKGRAM', play='在 Google Play 上获取',
+            android='在 Android 手机上，本页面会自动打开 Google Play。',
+            ios='iPhone：SACKGRAM 即将推出，目前尚未上架 App Store。'),
+ 'ar': dict(title='احصل على SACKGRAM', play='احصل عليه من Google Play',
+            android='على هاتف Android، تفتح هذه الصفحة Google Play تلقائيًا.',
+            ios='iPhone: سيتوفر SACKGRAM قريبًا، وهو غير متوفر بعد في App Store.'),
+}
+
+
+def download_csp():
+    import base64, hashlib
+    h = base64.b64encode(hashlib.sha256(DOWNLOAD_SCRIPT.encode('utf-8')).digest()).decode()
+    return ('    <meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'self\'; '
+            f"script-src 'sha256-{h}'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'\">\n"
+            '    <meta name="referrer" content="no-referrer">\n')
+
+
+def build_download(lang, channel=None):
+    t = DL[lang]
+    url = PLAY_URL + (f'&referrer=utm_source%3D{channel}' if channel else '')
+    page = 'download' + (f'/{channel}' if channel else '')
+    main = ('        <!-- Generated by tools/build_pages.py (build_download). Link track PR 6:\n'
+            '             no request, no storage; a channel path only adds utm_source to the\n'
+            '             Play link, which Play Console counts. -->\n'
+            f'        <h1>{esc(t["title"])}</h1>\n'
+            f'        <p><a id="play-link" class="open-app" href="{html.escape(url)}">{esc(t["play"])}</a></p>\n'
+            f'        <p>{esc(t["android"])}</p>\n'
+            f'        <p>{esc(t["ios"])}</p>\n')
+    write_page(lang, page, t['title'], t['title'], '', main,
+               head_extra=download_csp(), tail_html=f'    <script>{DOWNLOAD_SCRIPT}</script>\n')
+
 def main():
     app = sys.argv[1]
     for lang in LANGS:
@@ -442,6 +521,9 @@ def main():
         build_legal(app, lang, 'terms')
         if lang != 'en':
             build_delete_translated(app, lang)
+        build_download(lang)
+        for channel in DOWNLOAD_CHANNELS:
+            build_download(lang, channel)
     rewrap_english_delete()
     for p in ('support/index.html', 'company/index.html', 'i/index.html', '404.html'):
         add_list_to_english_only(p)

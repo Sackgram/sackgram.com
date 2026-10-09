@@ -154,6 +154,10 @@ def esc(t):
 def inline(t):
     t = esc(t).replace('"', '"')
     t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', t)
+    # A bare https URL (the privacy policy's Prighter Trust Center) becomes a
+    # link here; the app shows the same line as plain text.
+    t = re.sub(r'(?<!["=>/\w])(https://[^\s<]+?)(?=[.,;)]?(?:\s|$|<))',
+               r'<a href="\1">\1</a>', t)
     t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
     t = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', t)
     t = re.sub(r'(?<![\w.@/:">])([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+)',

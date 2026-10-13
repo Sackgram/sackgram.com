@@ -82,7 +82,33 @@ style.css             All styling
 CNAME                 Custom domain for GitHub Pages — do not delete
 .nojekyll             Serve files as-is, skip Jekyll processing
 .well-known/assetlinks.json   Android Digital Asset Links — see below
+.well-known/apple-app-site-association   iOS passkeys (webcredentials) — see below
 ```
+
+### `.well-known/apple-app-site-association` — the iPhone's half of passkeys
+
+Added 2026-10-13 (Sackgram-app iOS checklist item 16, step P1). It is what lets
+the iPhone app use a passkey bound to `sackgram.com` — the same job
+`get_login_creds` does in `assetlinks.json` below — and it holds **only
+`webcredentials`**. There is no `applinks` section on purpose: iPhone links
+opening straight in the app (Universal Links) is a separate decision, not taken.
+
+- The app ID is `<Team ID>.<Bundle ID>` = `4323NLTHP3.com.sackgram.labs`. If
+  either changes, this file must change in the same release.
+- **No file extension**, at exactly this path, HTTPS, **no redirect**.
+- The app side is the `webcredentials:sackgram.com` Associated Domain in the
+  app's `Runner.entitlements`, plus Associated Domains switched on for the App
+  ID on developer.apple.com.
+
+**To check it without a device**, ask Apple's CDN — that copy, not this site,
+is what iPhones read, and it refreshes on Apple's schedule (hours to a day):
+
+```
+curl -sS https://app-site-association.cdn-apple.com/a/v1/sackgram.com
+```
+
+A JSON answer naming `4323NLTHP3.com.sackgram.labs` means Apple has it; a 404
+means it has not been fetched yet, or could not be parsed.
 
 ### `.well-known/assetlinks.json` — read this before editing it
 

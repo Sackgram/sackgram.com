@@ -65,6 +65,36 @@ nav a[aria-current="page"] { font-weight: 600; }
 .hero h1 { margin: 0 0 0.75rem; font-size: clamp(1.9rem, 6vw, 2.6rem); line-height: 1.2; }
 .hero p { margin: 0; font-size: clamp(1.05rem, 3.2vw, 1.2rem); max-width: 34rem; }
 
+/* ---------- get the app (2026-10-09) ---------- */
+/* Beside the title on a computer; under it on a phone. On a phone the QR code
+   is hidden — a phone cannot scan its own screen — and the Play badge is the
+   whole block, larger. The badge is Google's own artwork, unmodified: only its
+   height is set here, and Google's PNG already carries the clear space its
+   guidelines require around the badge, so no extra padding is added. */
+.hero .hero-row { max-width: 62rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2.5rem; }
+.hero-text { flex: 1 1 26rem; min-width: 0; }
+.get-app { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.get-app-qr { display: flex; flex-direction: column; align-items: center; }
+.get-app-qr svg { width: 9rem; height: 9rem; display: block; border-radius: 4px; }
+.get-app .get-app-qr p { margin: 0.5rem 0 0; font-size: 0.85rem; max-width: 11rem; line-height: 1.4; }
+.get-app-badge { display: inline-block; margin-top: 0.25rem; }
+.get-app-badge img { display: block; height: 72px; width: auto; }
+.get-app .get-app-ios { margin: 0.25rem 0 0; font-size: 0.95rem; }
+.get-app .get-app-tm { margin: 0.25rem 0 0; font-size: 0.7rem; max-width: 13rem; line-height: 1.35; opacity: 0.85; }
+main .get-app { align-items: flex-start; text-align: start; margin: 0 0 1.5rem; }
+main .get-app-qr { align-items: flex-start; }
+main .get-app .get-app-tm { color: var(--muted); opacity: 1; max-width: none; }
+
+@media (max-width: 40rem), (hover: none) and (pointer: coarse) {
+  .get-app-qr { display: none; }
+  .get-app { flex-basis: 100%; align-items: flex-start; text-align: start; }
+  .get-app-badge img { height: 88px; }
+}
+/* /download on an iPhone (set by the page's own script): the QR and the Play
+   badge are of no use there, so only the iPhone line remains. */
+.is-ios .get-app-qr, .is-ios .get-app-badge, .is-ios .get-app-tm, .is-ios .get-app-android { display: none; }
+.is-ios .get-app .get-app-ios { font-size: 1.1rem; font-weight: 650; }
+
 /* ---------- why ---------- */
 /* The declaration between the hero and the feature list. Deliberately quiet:
    a second coloured band under the brand-filled hero would compete with it,

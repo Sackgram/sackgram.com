@@ -95,21 +95,27 @@ style.css             All styling
 CNAME                 Custom domain for GitHub Pages — do not delete
 .nojekyll             Serve files as-is, skip Jekyll processing
 .well-known/assetlinks.json   Android Digital Asset Links — see below
-.well-known/apple-app-site-association   iOS passkeys (webcredentials) — see below
+.well-known/apple-app-site-association   iOS passkeys (webcredentials) + invite links (applinks) — see below
 ```
 
-### `.well-known/apple-app-site-association` — the iPhone's half of passkeys
+### `.well-known/apple-app-site-association` — the iPhone's half of passkeys and invite links
 
 Added 2026-10-13 (Sackgram-app iOS checklist item 16, step P1). It is what lets
 the iPhone app use a passkey bound to `sackgram.com` — the same job
-`get_login_creds` does in `assetlinks.json` below — and it holds **only
-`webcredentials`**. There is no `applinks` section on purpose: iPhone links
-opening straight in the app (Universal Links) is a separate decision, not taken.
+`get_login_creds` does in `assetlinks.json` below.
+
+**`applinks` added 2026-10-15** (Sackgram-app iOS checklist item 27): invite
+links under `/i/*` open the iPhone app (Universal Links) — the same job
+`handle_all_urls` does for Android in `assetlinks.json`. Only `/i/*`; no other
+path of this site opens the app. The token is in the fragment, so matching
+never sees it. The app side is `applinks:sackgram.com` in `Runner.entitlements`.
+Publishing this before an app that claims it is harmless: an iPhone without
+that entitlement ignores the block.
 
 - The app ID is `<Team ID>.<Bundle ID>` = `4323NLTHP3.com.sackgram.labs`. If
   either changes, this file must change in the same release.
 - **No file extension**, at exactly this path, HTTPS, **no redirect**.
-- The app side is the `webcredentials:sackgram.com` Associated Domain in the
+- The app side is the `webcredentials:sackgram.com` (and `applinks:sackgram.com`) Associated Domain in the
   app's `Runner.entitlements`, plus Associated Domains switched on for the App
   ID on developer.apple.com.
 
@@ -121,7 +127,10 @@ curl -sS https://app-site-association.cdn-apple.com/a/v1/sackgram.com
 ```
 
 A JSON answer naming `4323NLTHP3.com.sackgram.labs` means Apple has it; a 404
-means it has not been fetched yet, or could not be parsed.
+means it has not been fetched yet, or could not be parsed. ⚠ GitHub Pages
+serves this extensionless file as `application/octet-stream`, not
+`application/json`, and cannot be told otherwise; Apple's CDN accepted it that
+way (`Apple-Origin-Format: json`, checked 2026-10-15), so leave it.
 
 ### `.well-known/assetlinks.json` — read this before editing it
 

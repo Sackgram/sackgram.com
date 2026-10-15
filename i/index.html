@@ -17,7 +17,7 @@
          is edited, its hash in `script-src` must be recomputed in the same
          change (the browser then refuses the edited script — it fails CLOSED,
          the button simply never appears). -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-pHNOO0I9NaHEv4uCpzKBGQCCw4YdnivrsepvhUY4i8U='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-OLRwWFAqkkyU+yY46NUayx6CDoQkp7oa3m8lPrE+Fgs='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
     <meta name="referrer" content="no-referrer">
     <!-- The ONLY request this page makes besides itself. No analytics, no
          tracking pixels, no web fonts, no remote images, and one inline script
@@ -115,10 +115,16 @@
              deep link (app repo, sackgram-install-referrer-pr7-en.md) will
              change exactly this, and that sentence, together.
 
-             iOS: there is no App Store listing, so iOS gets a sentence, not a
-             link that goes nowhere. -->
+             iOS: the App Store listing is not public yet, so iOS gets a
+             sentence, not a link that goes nowhere. CHANGED 2026-10-15 with
+             Universal Links (the AASA's `applinks` /i/*): the iPhone app opens
+             these links itself, so the sentence no longer says it does not
+             exist. "Messages, Mail or Notes" because a link tapped on THIS
+             page, inside Safari, stays in Safari — iOS opens a Universal Link
+             from another app, not from the same site. Add the App Store link
+             here when the listing is public. -->
         <p><a class="open-app" href="https://play.google.com/store/apps/details?id=com.sackgram.labs">Get it on Google Play</a></p>
-        <p>Android only for now. An iPhone version is coming; it is not in the App Store yet.</p>
+        <p>On an iPhone with Sackgram installed, a Sackgram link tapped in Messages, Mail or Notes opens the app. The App Store link will be added to this page.</p>
 
         <h2>After you install it</h2>
         <!-- Matches the app (v9): a link that arrives before sign-up is kept
@@ -188,10 +194,12 @@
   var ua = navigator.userAgent;
   if (!/Android/i.test(ua)) return;
   // Only the two shapes the app issues: #c/TOKEN (personal) and #g/TOKEN
-  // (group invite or signboard). A token is a Firestore document id. Anything
-  // else, including a value that could break out of the intent: syntax with a
-  // ';' or '#', gets neither the button nor the KakaoTalk hand-off.
-  var m = /^#([cg])(?:\/|%2F)([A-Za-z0-9]{1,64})$/i.exec(location.hash);
+  // (group invite or signboard). A token is letters, digits, '.', '_' and '-'
+  // (a Firestore document id, which a group link may follow with a '.' and a
+  // base64url secret). Anything else, including a value that could break out
+  // of the intent: syntax with a ';' or '#', gets neither the button nor the
+  // KakaoTalk hand-off.
+  var m = /^#([cg])(?:\/|%2F)([A-Za-z0-9._-]{1,128})$/i.exec(location.hash);
   if (!m) return;
   // This page's own address, rebuilt from the checked value rather than
   // copied from location.href, so nothing else in the URL travels on.

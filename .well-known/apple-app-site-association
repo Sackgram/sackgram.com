@@ -1,4 +1,19 @@
 {
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "4323NLTHP3.com.sackgram.labs"
+        ],
+        "components": [
+          {
+            "/": "/i/*",
+            "comment": "Invite links. The token is in the fragment, which is never sent to this server."
+          }
+        ]
+      }
+    ]
+  },
   "webcredentials": {
     "apps": [
       "4323NLTHP3.com.sackgram.labs"

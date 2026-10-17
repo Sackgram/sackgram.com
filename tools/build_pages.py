@@ -2,6 +2,7 @@
 """Builds the twelve-language pages of sackgram.com.
 
     python3 tools/build_pages.py /path/to/Sackgram-app
+    python3 tools/build_pages.py --stores      # only /i/ and /download
 
 Writes, for each of en ko de es fr id it ja pt ru zh ar:
   home            /  and  /<lang>/                 from tools/home/<lang>.json
@@ -11,8 +12,9 @@ Writes, for each of en ko de es fr id it ja pt ru zh ar:
                   from its header and footer) and /<lang>/delete-account/,
                   built from that language's Privacy Policy 6-1~6-3, 6-8~6-10,
                   7-2 and 7-3, quoted verbatim
+  invite          /i/  and  /<lang>/i/              from tools/invite/<lang>.json
 and adds the language list to the English-only pages (support/, company/,
-i/, 404.html).
+404.html).
 
 ADDED 2026-10-06 (Eric): twelve languages of equal weight. Every page lists all
 twelve by their own names, at one size, in one order; nothing redirects by
@@ -327,12 +329,13 @@ def alternates(page):
     return '\n'.join(out) + '\n'
 
 
-def write_page(lang, page, title, description, current, main_html, hero='', head_extra='', tail_html=''):
+def write_page(lang, page, title, description, current, main_html, hero='', head_extra='', tail_html='',
+               html_attrs=''):
     d = page_path(lang, page)
     dir_attr = ' dir="rtl"' if lang in RTL else ''
     targets = {l: page_path(l, page) for l in LANGS}
     s = ('<!DOCTYPE html>\n'
-         f'<html lang="{HREFLANG.get(lang, lang)}"{dir_attr}>\n  <head>\n'
+         f'<html lang="{HREFLANG.get(lang, lang)}"{dir_attr}{html_attrs}>\n  <head>\n'
          '    <meta charset="utf-8">\n'
          + head_extra +
          '    <meta name="viewport" content="width=device-width, initial-scale=1">\n'
@@ -459,7 +462,11 @@ PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sackgram.labs'
 # None: an iPhone sees "the iPhone version is in preparation" and no QR.
 # A URL (https://apps.apple.com/app/id…): an iPhone is sent there, the way an
 # Android phone is sent to Google Play, and the note becomes a link to it.
-# Rebuild after changing it; the script below is the same either way.
+# It also drives the twelve /i/ invite pages (build_invite): None shows "the
+# App Store version is in preparation", a URL shows a "Download on the App
+# Store" button there — never a redirect, the invite page has to stay readable.
+# Rebuild after changing it (`python3 tools/build_pages.py /path/to/Sackgram-app`,
+# or `--stores` for /i/ and /download alone); the scripts are the same either way.
 APP_STORE_URL = None
 
 # Android -> Google Play; iPhone/iPad -> the App Store link if the page has
@@ -586,9 +593,244 @@ def build_download(lang, channel=None):
                head_extra=download_csp(), tail_html=f'    <script>{DOWNLOAD_SCRIPT}</script>\n')
 
 
+# ---------- /i/ — the invite landing page (twelve languages since 2026-10-17) ----------
+
+# Every link the app issues is https://sackgram.com/i/#c/TOKEN or #g/TOKEN, so
+# /i/ (English) is where everybody lands; /<lang>/i/ are the translations,
+# reached from the language list (or the one-line suggestion below), never by
+# a redirect. ⚠ THE TRANSLATIONS ARE NOT UNDER /i/ ON PURPOSE: the Android App
+# Link (pathPrefix "/i/") and the iOS Universal Link (AASA "/i/*") both match
+# /i/ only, so /ko/i/ is always a web page and never handed to the app with a
+# path the app does not parse.
+#
+# Text: tools/invite/<lang>.json. Feature words follow each language's app
+# strings (ARB): invite link, sign up.
+#
+# The store links. Android sees Google Play, an iPhone/iPad sees the App Store
+# line, a computer or anything unrecognised (and every browser without
+# JavaScript) sees both. Nothing redirects: the reader has to be able to read
+# the instructions first. The App Store line is the "in preparation" sentence
+# until APP_STORE_URL (above, in the /download section) is set — that one line
+# changes /download and every /i/ page together.
+
+def invite_text(lang):
+    return json.load(open(os.path.join(ROOT, 'tools/invite', f'{lang}.json'), encoding='utf-8'))
+
+
+def invite_script():
+    """One script, byte-identical on all twelve pages, so one CSP hash covers
+    them. The language suggestions are written into it from tools/invite."""
+    sugg = ','.join(f"{l}:{json.dumps(invite_text(l)['suggest'], ensure_ascii=False)}"
+                    for l in LANGS if l != 'en')
+    return r"""(function () {
+  var d = document, h = d.documentElement, ua = navigator.userAgent;
+  // 1. Which store line to show. A class on <html>; the stylesheet hides the
+  // other store. iPadOS reports itself as a Mac, hence the touch-point test.
+  // Anything else (a computer, an unknown browser) keeps both.
+  var android = /Android/i.test(ua);
+  var ios = !android && (/iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+  if (android) h.classList.add('inv-android');
+  else if (ios) h.classList.add('inv-ios');
+
+  // Only the two shapes the app issues: #c/TOKEN (personal) and #g/TOKEN
+  // (group invite or signboard). A token is letters, digits, '.', '_' and '-'
+  // (a Firestore document id, which a group link may follow with a '.' and a
+  // base64url secret). Anything else, including a value that could break out
+  // of the intent: syntax with a ';' or '#', is carried nowhere.
+  var m = /^#([cg])(?:\/|%2F)([A-Za-z0-9._-]{1,128})$/i.exec(location.hash);
+  var fragment = m ? m[1].toLowerCase() + '/' + m[2] : '';
+
+  // 2. On the English page only: offer the browser's own language as one link.
+  // An offer, not a redirect -- the reader chooses (site rule, 2026-10-06).
+  if (h.lang === 'en') {
+    var S = {""" + sugg + r"""};
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var t = String(prefs[i]).toLowerCase(), c = t.split('-')[0];
+      // The Chinese page is Simplified; a Traditional reader is not offered it.
+      if (c === 'zh' && /-(tw|hk|mo|hant)\b/.test(t)) continue;
+      if (c === 'en') break;
+      var to = S[c] && d.querySelector('.lang-list a[lang="' + c + '"]');
+      if (to) {
+        var a = d.getElementById('lang-suggest-link');
+        a.textContent = S[c];
+        a.setAttribute('href', to.getAttribute('href'));
+        a.setAttribute('lang', c);
+        if (c === 'ar') a.setAttribute('dir', 'rtl');
+        d.getElementById('lang-suggest').hidden = false;
+        break;
+      }
+    }
+  }
+
+  if (!m) return;
+
+  // 3. Switching language keeps the invite: every language link (and the
+  // suggestion) carries the checked fragment. A fragment is never sent to a
+  // server, so this moves nothing off the phone.
+  var links = d.querySelectorAll('.lang-list a, #lang-suggest-link');
+  for (var j = 0; j < links.length; j++) {
+    var href = links[j].getAttribute('href');
+    if (href) links[j].setAttribute('href', href.split('#')[0] + '#' + fragment);
+  }
+
+  // Android only from here: both mechanisms below are Android's.
+  if (!android) return;
+  // The address the app issues (and App Links match), rebuilt from the checked
+  // value rather than copied from location.href, so nothing else travels on.
+  var here = 'https://sackgram.com/i/#' + fragment;
+  // This page in its own language, for the browser to come back to.
+  var page = h.getAttribute('data-invite-page');
+  if (!/^(?:[a-z]{2}\/)?i\/$/.test(page || '')) page = 'i/';
+  var back = 'https://sackgram.com/' + page + '#' + fragment;
+
+  // 4. The button, for every Android browser. Android rebuilds the link as
+  // https://sackgram.com/i/#FRAGMENT (Intent.parseUri splits at the LAST '#',
+  // the one before "Intent;"), and package= means only the Sackgram app can
+  // receive it. Without the app, Chrome goes to the fallback: this same page,
+  // in the language the reader is reading.
+  d.getElementById('open-app-link').href =
+    'intent://sackgram.com/i/#' + fragment +
+    '#Intent;scheme=https;package=com.sackgram.labs;S.browser_fallback_url=' +
+    encodeURIComponent(back) + ';end';
+  d.getElementById('open-app').hidden = false;
+
+  // 5. KakaoTalk's in-app browser: ask KakaoTalk to hand the link to the
+  // system, where the verified App Link opens Sackgram (or, without the app,
+  // the phone's browser shows /i/). ONCE per tab: the flag is set BEFORE
+  // leaving, and if it cannot be stored nothing is attempted, so a reload,
+  // Back or a language switch can never bounce the page in a loop. The button
+  // above stays either way.
+  if (/KAKAOTALK/i.test(ua)) {
+    var key = 'sackgram-kakao-handoff';
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, '1');
+    } catch (e) {
+      return;
+    }
+    location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(here);
+  }
+})();"""
+
+
+def invite_csp(script):
+    import base64, hashlib
+    h = base64.b64encode(hashlib.sha256(script.encode('utf-8')).digest()).decode()
+    return (
+        "    <!-- Not content anyone should find by searching: this page is the far end\n"
+        "         of a code somebody was handed, not a page of the site. -->\n"
+        '    <meta name="robots" content="noindex">\n'
+        "    <!-- ⚠ THIS PAGE MAKES NO REQUEST BUT ITS OWN STYLESHEET, AND THE\n"
+        "         CONTENT-SECURITY-POLICY BELOW ENFORCES IT RATHER THAN ONLY PROMISING\n"
+        "         IT. `connect-src 'none'` refuses fetch, XHR, beacons and WebSockets;\n"
+        "         `img-src 'none'` refuses a tracking pixel (and is why the store\n"
+        "         links are text, not badge images); the one script is allowed by its\n"
+        "         SHA-256 and nothing else runs. The hash is computed by\n"
+        "         tools/build_pages.py from invite_script(), so edit the script there and\n"
+        "         rebuild — an edit made here only is refused by the browser (it fails\n"
+        "         CLOSED: the button simply never appears).\n"
+        "         No analytics, no web fonts, no remote images: the person reading this\n"
+        "         is a stranger meeting SACKGRAM for the first time and has not agreed\n"
+        "         to anything yet. -->\n"
+        '    <meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'self\'; '
+        f"script-src 'sha256-{h}'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'\">\n"
+        '    <meta name="referrer" content="no-referrer">\n')
+
+
+def build_invite(lang, script):
+    t = invite_text(lang)
+    dl = DL[lang]
+    page = 'i'
+    d = page_path(lang, page)
+    home = rel(d, page_path(lang, ''))
+    if APP_STORE_URL:
+        ios_store = (f'<p class="store-ios"><a id="appstore-link" class="open-app" '
+                     f'href="{html.escape(APP_STORE_URL)}">{esc(dl["appstore"])}</a></p>')
+    else:
+        ios_store = f'<p class="store-ios">{t["ios_prep"]}</p>'
+    suggest = ('        <!-- Filled and shown by the script on the English page only, when the\n'
+               "             browser's first preferred language is one of the other eleven. -->\n"
+               '        <p id="lang-suggest" class="lang-suggest" hidden><a id="lang-suggest-link" href="./"></a></p>\n'
+               if lang == 'en' else '')
+    main = (
+        f'        <!-- Generated by tools/build_pages.py (build_invite) from tools/invite/{lang}.json. -->\n'
+        + suggest +
+        f'        <h1>{t["title"]}</h1>\n'
+        f'        <p class="lede">{t["lede"]}</p>\n\n'
+        '        <div class="card">\n'
+        '          <!-- A link tapped in KakaoTalk opens here, in KakaoTalk\'s own browser,\n'
+        '               on a phone that HAS the app (device test 2026-09-30): a messenger\'s\n'
+        '               in-app browser loads the page itself, so App Links never run. -->\n'
+        f'          <p>{t["installed"]}</p>\n'
+        '          <!-- ⚠ HIDDEN UNTIL THE SCRIPT SHOWS IT: only on Android, and only when\n'
+        '               the link carries an invite this page recognises. -->\n'
+        '          <div id="open-app" hidden>\n'
+        f'            <p>{t["open_hint"].format(btn=t["btn"])}</p>\n'
+        f'            <p><a id="open-app-link" class="open-app" href="./">{t["btn"]}</a></p>\n'
+        '          </div>\n'
+        '          <!-- A plain fact a person can check against a link they were sent. It\n'
+        '               must stay true for every link the app issues (personal and group\n'
+        '               invites and signboards are all https://sackgram.com/i/ then "#"). -->\n'
+        f'          <p>{t["address"]}</p>\n'
+        '        </div>\n\n'
+        f'        <h2>{t["what_h"]}</h2>\n'
+        f'        <p>{t["what"]}</p>\n'
+        f'        <p>{t["more"].format(home=home)}</p>\n\n'
+        f'        <h2>{t["get_h"]}</h2>\n'
+        '        <!-- Android: .store-android only; iPhone/iPad: .store-ios only; anything\n'
+        '             else, or no JavaScript: both (the script sets inv-android / inv-ios\n'
+        '             on <html>, style.css hides the other store).\n'
+        '             ⚠ THE STORE URLS CARRY NOTHING FROM THE INCOMING LINK — no referrer,\n'
+        '             no campaign tag, no token — which keeps the next section true.\n'
+        '             The App Store line is a sentence until APP_STORE_URL is set in\n'
+        '             tools/build_pages.py. "Messages, Mail or Notes" because a link\n'
+        '             tapped on THIS page, inside Safari, stays in Safari — iOS opens a\n'
+        '             Universal Link from another app, not from the same site. -->\n'
+        f'        <p class="store-android"><a class="open-app" href="{html.escape(PLAY_URL)}">{esc(dl["play"])}</a></p>\n'
+        f'        {ios_store}\n'
+        f'        <p class="store-ios">{t["ios_links"]}</p>\n\n'
+        f'        <h2>{t["after_h"]}</h2>\n'
+        '        <!-- ⚠ Installing does NOT open the invitation: nothing carries the link\n'
+        '             through the store (deferred install hand-off postponed). The second\n'
+        '             sentence is only about a link opened in the app BEFORE sign-up,\n'
+        '             which the app keeps until sign-up is finished. -->\n'
+        f'        <p>{t["after1"]}</p>\n'
+        f'        <p>{t["after2"]}</p>\n\n'
+        '        <div class="card">\n'
+        '          <!-- ⚠ THIS SENTENCE BINDS THE FORMAT OF EVERY LINK THAT POINTS HERE.\n'
+        '               It is true because the part of the link that identifies a code is\n'
+        '               the URL FRAGMENT (after "#"), which browsers never send to a\n'
+        '               server — absent from server logs, from the Referer header and from\n'
+        '               our hosting provider, by construction. It stops being true the\n'
+        '               moment a link puts that value in the PATH; delete it in that same\n'
+        '               change. The script reads the fragment and puts it only into the\n'
+        '               language links (same site, fragment still never sent), the\n'
+        '               intent: address (package= pins it to the SACKGRAM app) and, inside\n'
+        '               KakaoTalk only, kakaotalk://web/openExternal — KakaoTalk already\n'
+        '               holds the whole link. Keep that true or change the sentence. -->\n'
+        f'          <p>{t["privacy"]}</p>\n'
+        '        </div>\n')
+    write_page(lang, page, t['title'], html.unescape(t['desc']), None, main,
+               head_extra=invite_csp(script), tail_html=f'    <script>{script}</script>\n',
+               html_attrs=f' data-invite-page="{d}"')
+
+
 def main():
+    script = invite_script()
+    if sys.argv[1:] == ['--stores']:
+        # Only the pages that carry store links (/i/ and /download), which
+        # need no app repository checkout — what to run after APP_STORE_URL.
+        for lang in LANGS:
+            build_invite(lang, script)
+            build_download(lang)
+            for channel in DOWNLOAD_CHANNELS:
+                build_download(lang, channel)
+        return
     app = sys.argv[1]
     for lang in LANGS:
+        build_invite(lang, script)
         build_home(lang)
         build_legal(app, lang, 'privacy')
         build_legal(app, lang, 'terms')
@@ -598,7 +840,7 @@ def main():
         for channel in DOWNLOAD_CHANNELS:
             build_download(lang, channel)
     rewrap_english_delete()
-    for p in ('support/index.html', 'company/index.html', 'i/index.html', '404.html'):
+    for p in ('support/index.html', 'company/index.html', '404.html'):
         add_list_to_english_only(p)
 
 

@@ -1,0 +1,20 @@
+{
+ "title": "This link opens in SACKGRAM",
+ "desc": "You were given a SACKGRAM link. Here is what SACKGRAM is and how to open it.",
+ "lede": "Someone gave you a SACKGRAM code &mdash; on a sign, a card, or in a message.",
+ "installed": "If SACKGRAM is installed on this phone, a SACKGRAM link usually opens the app directly. A link opened inside a messenger's own browser can land on this page instead, even when the app is installed.",
+ "open_hint": "If this page opened inside a messenger, tap <strong>{btn}</strong>.",
+ "btn": "Open in SACKGRAM",
+ "address": "A SACKGRAM invite address always begins with <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "What SACKGRAM is",
+ "what": "SACKGRAM is a private messenger for Android and iOS, built by Sackgram Labs,&nbsp;Inc. Message content is encrypted on your device and decrypted on the other person's, and creating an account does not ask for your phone number or your email address.",
+ "more": "There is more about SACKGRAM on the <a href=\"{home}\">home page</a>.",
+ "get_h": "Getting the app",
+ "ios_prep": "The App Store version is in preparation.",
+ "ios_links": "On an iPhone with SACKGRAM installed, a SACKGRAM link tapped in Messages, Mail or Notes opens the app.",
+ "after_h": "After you install it",
+ "after1": "After you install it, open the same link, or scan the same code, once more. Installing the app does not open the invitation by itself.",
+ "after2": "If you open the link in SACKGRAM before you have finished signing up, SACKGRAM keeps it and opens the invitation for you once sign-up is done.",
+ "privacy": "This page does not send your code to us or to anyone else. The part of the link that identifies it stays on this phone. To open the link, this page hands it only to apps on this phone: to SACKGRAM, or, inside KakaoTalk, back to KakaoTalk, which already has the link.",
+ "suggest": "Read this page in English"
+}

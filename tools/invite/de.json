@@ -1,0 +1,20 @@
+{
+ "title": "Dieser Link öffnet sich in SACKGRAM",
+ "desc": "Sie haben einen SACKGRAM-Link erhalten. Hier steht, was SACKGRAM ist und wie Sie den Link öffnen.",
+ "lede": "Jemand hat Ihnen einen SACKGRAM-Code gegeben &ndash; auf einem Schild, einer Karte oder in einer Nachricht.",
+ "installed": "Wenn SACKGRAM auf diesem Telefon installiert ist, öffnet ein SACKGRAM-Link in der Regel direkt die App. Ein Link, der im eigenen Browser eines Messengers geöffnet wird, kann stattdessen auf dieser Seite landen, auch wenn die App installiert ist.",
+ "open_hint": "Wenn sich diese Seite in einem Messenger geöffnet hat, tippen Sie auf <strong>{btn}</strong>.",
+ "btn": "In SACKGRAM öffnen",
+ "address": "Eine SACKGRAM-Einladungsadresse beginnt immer mit <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "Was SACKGRAM ist",
+ "what": "SACKGRAM ist ein Privatsphäre-Messenger für Android und iOS von Sackgram Labs,&nbsp;Inc. Nachrichteninhalte werden auf Ihrem Gerät verschlüsselt und auf dem Gerät der anderen Person entschlüsselt, und beim Erstellen eines Kontos werden weder Ihre Telefonnummer noch Ihre E-Mail-Adresse abgefragt.",
+ "more": "Mehr über SACKGRAM finden Sie auf der <a href=\"{home}\">Startseite</a>.",
+ "get_h": "Die App herunterladen",
+ "ios_prep": "Die App-Store-Version ist in Vorbereitung.",
+ "ios_links": "Auf einem iPhone, auf dem SACKGRAM installiert ist, öffnet ein SACKGRAM-Link die App, wenn Sie ihn in Nachrichten, Mail oder Notizen antippen.",
+ "after_h": "Nach der Installation",
+ "after1": "Öffnen Sie nach der Installation denselben Link noch einmal oder scannen Sie denselben Code noch einmal. Die Installation allein öffnet die Einladung nicht.",
+ "after2": "Wenn Sie den Link in SACKGRAM öffnen, bevor Sie die Anmeldung abgeschlossen haben, merkt sich SACKGRAM ihn und öffnet die Einladung, sobald die Anmeldung abgeschlossen ist.",
+ "privacy": "Diese Seite sendet Ihren Code weder an uns noch an andere. Der Teil des Links, der ihn kennzeichnet, bleibt auf diesem Telefon. Um den Link zu öffnen, übergibt ihn diese Seite nur an Apps auf diesem Telefon: an SACKGRAM oder, innerhalb von KakaoTalk, zurück an KakaoTalk, das den Link bereits hat.",
+ "suggest": "Diese Seite auf Deutsch lesen"
+}

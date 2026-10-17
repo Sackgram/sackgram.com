@@ -467,7 +467,7 @@ PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sackgram.labs'
 # Store" button there — never a redirect, the invite page has to stay readable.
 # Rebuild after changing it (`python3 tools/build_pages.py /path/to/Sackgram-app`,
 # or `--stores` for /i/ and /download alone); the scripts are the same either way.
-APP_STORE_URL = None
+APP_STORE_URL = 'https://apps.apple.com/app/id6822281667'
 
 # Android -> Google Play; iPhone/iPad -> the App Store link if the page has
 # one, otherwise the page marks itself `is-ios` (the stylesheet then hides the

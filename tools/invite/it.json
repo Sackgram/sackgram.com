@@ -1,0 +1,20 @@
+{
+ "title": "Questo link si apre in SACKGRAM",
+ "desc": "Ha ricevuto un link SACKGRAM. Qui trova che cos'è SACKGRAM e come aprire il link.",
+ "lede": "Qualcuno le ha dato un codice SACKGRAM: su un'insegna, su un biglietto o in un messaggio.",
+ "installed": "Se SACKGRAM è installato su questo telefono, di solito un link SACKGRAM apre direttamente l'app. Un link aperto nel browser interno di un'app di messaggistica può invece arrivare a questa pagina, anche se l'app è installata.",
+ "open_hint": "Se questa pagina si è aperta all'interno di un'app di messaggistica, tocchi <strong>{btn}</strong>.",
+ "btn": "Apri in SACKGRAM",
+ "address": "Un indirizzo di invito SACKGRAM inizia sempre con <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "Che cos'è SACKGRAM",
+ "what": "SACKGRAM è un messenger per la protezione della privacy per Android e iOS, sviluppato da Sackgram Labs,&nbsp;Inc. Il contenuto dei messaggi viene cifrato sul suo dispositivo e decifrato su quello dell'altra persona, e per creare un account non le vengono chiesti né il numero di telefono né l'indirizzo e-mail.",
+ "more": "Trova altre informazioni su SACKGRAM nella <a href=\"{home}\">home page</a>.",
+ "get_h": "Scaricare l'app",
+ "ios_prep": "La versione per l'App Store è in preparazione.",
+ "ios_links": "Su un iPhone con SACKGRAM installato, toccando un link SACKGRAM in Messaggi, Mail o Note si apre l'app.",
+ "after_h": "Dopo l'installazione",
+ "after1": "Dopo l'installazione, apra di nuovo lo stesso link o inquadri di nuovo lo stesso codice. La sola installazione dell'app non apre l'invito.",
+ "after2": "Se apre il link in SACKGRAM prima di aver completato la registrazione, SACKGRAM lo conserva e apre l'invito non appena la registrazione è completata.",
+ "privacy": "Questa pagina non invia il suo codice né a noi né ad altri. La parte del link che lo identifica resta su questo telefono. Per aprire il link, questa pagina lo passa solo ad app di questo telefono: a SACKGRAM oppure, all'interno di KakaoTalk, di nuovo a KakaoTalk, che ha già il link.",
+ "suggest": "Leggi questa pagina in italiano"
+}

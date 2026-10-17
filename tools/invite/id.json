@@ -1,0 +1,20 @@
+{
+ "title": "Tautan ini dibuka di SACKGRAM",
+ "desc": "Anda menerima tautan SACKGRAM. Berikut penjelasan tentang SACKGRAM dan cara membuka tautannya.",
+ "lede": "Seseorang memberi Anda kode SACKGRAM &mdash; di papan nama, kartu, atau pesan.",
+ "installed": "Jika SACKGRAM terpasang di ponsel ini, tautan SACKGRAM biasanya langsung membuka aplikasinya. Tautan yang dibuka di browser bawaan aplikasi pesan bisa sampai ke halaman ini, meskipun aplikasinya sudah terpasang.",
+ "open_hint": "Jika halaman ini terbuka di dalam aplikasi pesan, ketuk <strong>{btn}</strong>.",
+ "btn": "Buka di SACKGRAM",
+ "address": "Alamat undangan SACKGRAM selalu diawali dengan <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "Apa itu SACKGRAM",
+ "what": "SACKGRAM adalah aplikasi pesan pelindung privasi untuk Android dan iOS, yang dikembangkan oleh Sackgram Labs,&nbsp;Inc. Isi pesan dienkripsi di perangkat Anda dan didekripsi di perangkat lawan bicara, dan pembuatan akun tidak meminta nomor telepon maupun alamat email Anda.",
+ "more": "Informasi lebih lanjut tentang SACKGRAM ada di <a href=\"{home}\">beranda</a>.",
+ "get_h": "Mendapatkan aplikasinya",
+ "ios_prep": "Versi App Store sedang disiapkan.",
+ "ios_links": "Di iPhone yang sudah terpasang SACKGRAM, mengetuk tautan SACKGRAM di Pesan, Mail, atau Catatan akan membuka aplikasinya.",
+ "after_h": "Setelah memasang",
+ "after1": "Setelah memasang, buka tautan yang sama atau pindai kode yang sama sekali lagi. Memasang aplikasi saja tidak membuka undangannya.",
+ "after2": "Jika Anda membuka tautan di SACKGRAM sebelum selesai mendaftar, SACKGRAM menyimpannya dan membuka undangan untuk Anda setelah pendaftaran selesai.",
+ "privacy": "Halaman ini tidak mengirim kode Anda kepada kami atau kepada siapa pun. Bagian tautan yang menandainya tetap ada di ponsel ini. Untuk membuka tautan, halaman ini hanya menyerahkannya kepada aplikasi di ponsel ini: kepada SACKGRAM, atau di dalam KakaoTalk, kembali kepada KakaoTalk yang sudah memiliki tautan itu.",
+ "suggest": "Baca halaman ini dalam Bahasa Indonesia"
+}

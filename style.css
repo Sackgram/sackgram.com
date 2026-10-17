@@ -156,6 +156,12 @@ strong { font-weight: 650; }
 }
 /* Its last <p> loses its margin to `.card p:last-child`; the block keeps one. */
 #open-app { margin-bottom: 1rem; }
+/* The /i/ pages' store lines (2026-10-17). The page's own script marks an
+   Android phone `inv-android` and an iPhone/iPad `inv-ios`; each then sees only
+   its own store. A computer, anything unrecognised, or no JavaScript: both. */
+.inv-android .store-ios, .inv-ios .store-android { display: none; }
+/* "Read this page in <language>" on the English /i/ page, shown by its script. */
+.lang-suggest { margin: 0 0 1.25rem; font-weight: 650; }
 
 .features { list-style: none; padding: 0; }
 .features li { padding-inline-start: 1.5rem; position: relative; margin-bottom: 0.8rem; }

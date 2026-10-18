@@ -484,50 +484,62 @@ DOWNLOAD_SCRIPT = ("(function(){var d=document,a=d.getElementById('play-link'),"
 DL = {
  'en': dict(title='Get SACKGRAM', play='Get it on Google Play',
             android='On an Android phone, this page opens Google Play by itself.',
+            devices='On an iPhone this page opens the App Store, and on an Android phone Google Play, by itself.',
             ios='The iPhone version is in preparation.', appstore='Download on the App Store',
             qr="Scan with your phone's camera to get it right away."),
  'ko': dict(title='SACKGRAM 받기', play='Google Play에서 받기',
             android='Android 휴대폰에서는 이 페이지가 Google Play를 바로 엽니다.',
+            devices='iPhone에서는 App Store, Android 휴대폰에서는 Google Play가 바로 열립니다.',
             ios='iPhone 버전은 준비 중입니다.', appstore='App Store에서 받기',
             qr='휴대폰 카메라로 찍으면 바로 받을 수 있습니다.'),
  'de': dict(title='SACKGRAM herunterladen', play='Jetzt bei Google Play',
             android='Auf einem Android-Telefon öffnet diese Seite Google Play automatisch.',
+            devices='Auf einem iPhone öffnet diese Seite automatisch den App Store, auf einem Android-Telefon Google Play.',
             ios='Die iPhone-Version ist in Vorbereitung.', appstore='Laden im App Store',
             qr='Mit der Kamera Ihres Telefons scannen und direkt herunterladen.'),
  'es': dict(title='Descargar SACKGRAM', play='Disponible en Google Play',
             android='En un teléfono Android, esta página abre Google Play automáticamente.',
+            devices='En un iPhone, esta página abre la App Store automáticamente, y en un teléfono Android, Google Play.',
             ios='La versión para iPhone está en preparación.', appstore='Descargar en la App Store',
             qr='Escanéelo con la cámara de su teléfono para descargarlo al instante.'),
  'fr': dict(title='Télécharger SACKGRAM', play='Disponible sur Google Play',
             android="Sur un téléphone Android, cette page ouvre Google Play d'elle-même.",
+            devices="Sur un iPhone, cette page ouvre l'App Store d'elle-même, et sur un téléphone Android, Google Play.",
             ios="La version iPhone est en préparation.", appstore="Télécharger dans l'App Store",
             qr="Scannez-le avec l'appareil photo de votre téléphone pour le télécharger directement."),
  'id': dict(title='Unduh SACKGRAM', play='Dapatkan di Google Play',
             android='Di ponsel Android, halaman ini membuka Google Play secara otomatis.',
+            devices='Di iPhone, halaman ini membuka App Store secara otomatis, dan di ponsel Android, Google Play.',
             ios='Versi iPhone sedang disiapkan.', appstore='Unduh di App Store',
             qr='Pindai dengan kamera ponsel Anda untuk langsung mengunduhnya.'),
  'it': dict(title='Scarica SACKGRAM', play='Disponibile su Google Play',
             android='Su un telefono Android, questa pagina apre Google Play da sola.',
+            devices="Su un iPhone questa pagina apre da sola l'App Store, su un telefono Android Google Play.",
             ios="La versione per iPhone è in preparazione.", appstore="Scarica dall'App Store",
             qr='Lo inquadri con la fotocamera del telefono per scaricarlo subito.'),
  'ja': dict(title='SACKGRAM を入手', play='Google Play で手に入れよう',
             android='Android の端末では、このページが自動で Google Play を開きます。',
+            devices='iPhone では App Store、Android の端末では Google Play が、このページから自動で開きます。',
             ios='iPhone 版は準備中です。', appstore='App Store からダウンロード',
             qr='スマートフォンのカメラで読み取ると、すぐに入手できます。'),
  'pt': dict(title='Baixar o SACKGRAM', play='Disponível no Google Play',
             android='Em um celular Android, esta página abre o Google Play sozinha.',
+            devices='Em um iPhone, esta página abre a App Store sozinha, e em um celular Android, o Google Play.',
             ios='A versão para iPhone está em preparação.', appstore='Baixar na App Store',
             qr='Aponte a câmera do celular para baixar na hora.'),
  'ru': dict(title='Скачать SACKGRAM', play='Доступно в Google Play',
             android='На телефоне Android эта страница сама откроет Google Play.',
+            devices='На iPhone эта страница сама откроет App Store, а на телефоне Android — Google Play.',
             ios='Версия для iPhone готовится.', appstore='Загрузите в App Store',
             qr='Наведите камеру телефона, чтобы сразу скачать приложение.'),
  'zh': dict(title='获取 SACKGRAM', play='在 Google Play 上获取',
             android='在 Android 手机上，本页面会自动打开 Google Play。',
+            devices='在 iPhone 上，本页面会自动打开 App Store；在 Android 手机上，会自动打开 Google Play。',
             ios='iPhone 版本正在准备中。', appstore='在 App Store 下载',
             qr='用手机相机扫描即可直接获取。'),
  'ar': dict(title='احصل على SACKGRAM', play='احصل عليه من Google Play',
             android='على هاتف Android، تفتح هذه الصفحة Google Play تلقائيًا.',
+            devices='على iPhone تفتح هذه الصفحة App Store تلقائيًا، وعلى هاتف Android تفتح Google Play.',
             ios='إصدار iPhone قيد الإعداد.', appstore='التنزيل من App Store',
             qr='امسح الرمز بكاميرا هاتفك لتحصل على التطبيق مباشرة.'),
 }
@@ -608,12 +620,17 @@ def build_download(lang, channel=None):
     t = DL[lang]
     url = PLAY_URL + (f'&referrer=utm_source%3D{channel}' if channel else '')
     page = 'download' + (f'/{channel}' if channel else '')
+    # The note under the badges names both phones once APP_STORE_URL is set
+    # (the script then sends an iPhone to the App Store too); until then it
+    # names Android alone, and the stylesheet hides it on an iPhone.
+    note_class, note_key = (('get-app-devices', 'devices') if APP_STORE_URL
+                            else ('get-app-android', 'android'))
     main = ('        <!-- Generated by tools/build_pages.py (build_download). Link track PR 6:\n'
             '             no request, no storage; a channel path only adds utm_source to the\n'
             '             Play link, which Play Console counts. The QR code carries none. -->\n'
             f'        <h1>{esc(t["title"])}</h1>\n'
             + get_app_block(lang, page_path(lang, page), url, ios_note=True) +
-            f'        <p class="get-app-android">{esc(t["android"])}</p>\n')
+            f'        <p class="{note_class}">{esc(t[note_key])}</p>\n')
     write_page(lang, page, t['title'], t['title'], '', main,
                head_extra=download_csp(), tail_html=f'    <script>{DOWNLOAD_SCRIPT}</script>\n')
 

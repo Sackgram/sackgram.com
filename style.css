@@ -67,20 +67,30 @@ nav a[aria-current="page"] { font-weight: 600; }
 
 /* ---------- get the app (2026-10-09) ---------- */
 /* Beside the title on a computer; under it on a phone. On a phone the QR code
-   is hidden — a phone cannot scan its own screen — and the Play badge is the
+   is hidden — a phone cannot scan its own screen — and the store badges are the
    whole block, larger. The badge is Google's own artwork, unmodified: only its
    height is set here, and Google's PNG already carries the clear space its
    guidelines require around the badge, so no extra padding is added. */
 .hero .hero-row { max-width: 62rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2.5rem; }
 .hero-text { flex: 1 1 26rem; min-width: 0; }
 .get-app { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.get-app-badges { justify-content: center; }
+main .get-app-badges { justify-content: flex-start; }
 .get-app-qr { display: flex; flex-direction: column; align-items: center; }
 .get-app-qr svg { width: 9rem; height: 9rem; display: block; border-radius: 4px; }
 .get-app .get-app-qr p { margin: 0.5rem 0 0; font-size: 0.85rem; max-width: 11rem; line-height: 1.4; }
-.get-app-badge { display: inline-block; margin-top: 0.25rem; }
+/* The two store badges side by side, App Store first (Apple's rule). Apple's
+   SVG has no padding of its own, so its clear space — a quarter of its height,
+   14px at 55px — is the gap and the margins here. Its height matches the Play
+   badge's VISIBLE height (Google's PNG is 250px with transparent padding: the
+   artwork is 190px of it, 167px in en and ar — .as-sm). */
+.get-app-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin: 0.875rem 0 0.5rem; }
+.get-app-badge, .get-app-appstore { display: inline-block; }
 .get-app-badge img { display: block; height: 72px; width: auto; }
+.get-app-appstore img { display: block; height: 55px; width: auto; }
+.get-app-appstore.as-sm img { height: 48px; }
 .get-app .get-app-ios { margin: 0.25rem 0 0; font-size: 0.95rem; }
-.get-app .get-app-tm { margin: 0.25rem 0 0; font-size: 0.7rem; max-width: 13rem; line-height: 1.35; opacity: 0.85; }
+.get-app .get-app-tm { margin: 0.25rem 0 0; font-size: 0.7rem; max-width: 22rem; line-height: 1.35; opacity: 0.85; }
 main .get-app { align-items: flex-start; text-align: start; margin: 0 0 1.5rem; }
 main .get-app-qr { align-items: flex-start; }
 main .get-app .get-app-tm { color: var(--muted); opacity: 1; max-width: none; }
@@ -88,7 +98,10 @@ main .get-app .get-app-tm { color: var(--muted); opacity: 1; max-width: none; }
 @media (max-width: 40rem), (hover: none) and (pointer: coarse) {
   .get-app-qr { display: none; }
   .get-app { flex-basis: 100%; align-items: flex-start; text-align: start; }
+  .get-app-badges { justify-content: flex-start; }
   .get-app-badge img { height: 88px; }
+  .get-app-appstore img { height: 67px; }
+  .get-app-appstore.as-sm img { height: 59px; }
 }
 /* /download on an iPhone (set by the page's own script): the QR and the Play
    badge are of no use there, so only the iPhone line remains. */
@@ -156,6 +169,12 @@ strong { font-weight: 650; }
 }
 /* Its last <p> loses its margin to `.card p:last-child`; the block keeps one. */
 #open-app { margin-bottom: 1rem; }
+/* The /i/ pages' store lines (2026-10-17). The page's own script marks an
+   Android phone `inv-android` and an iPhone/iPad `inv-ios`; each then sees only
+   its own store. A computer, anything unrecognised, or no JavaScript: both. */
+.inv-android .store-ios, .inv-ios .store-android { display: none; }
+/* "Read this page in <language>" on the English /i/ page, shown by its script. */
+.lang-suggest { margin: 0 0 1.25rem; font-weight: 650; }
 
 .features { list-style: none; padding: 0; }
 .features li { padding-inline-start: 1.5rem; position: relative; margin-bottom: 0.8rem; }

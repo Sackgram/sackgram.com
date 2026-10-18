@@ -1,0 +1,20 @@
+{
+ "title": "Este enlace se abre en SACKGRAM",
+ "desc": "Ha recibido un enlace de SACKGRAM. Aquí le explicamos qué es SACKGRAM y cómo abrir el enlace.",
+ "lede": "Alguien le ha dado un código de SACKGRAM: en un letrero, en una tarjeta o en un mensaje.",
+ "installed": "Si SACKGRAM está instalado en este teléfono, un enlace de SACKGRAM suele abrir la aplicación directamente. Un enlace abierto en el navegador propio de una aplicación de mensajería puede llegar a esta página, aunque la aplicación esté instalada.",
+ "open_hint": "Si esta página se abrió dentro de una aplicación de mensajería, toque <strong>{btn}</strong>.",
+ "btn": "Abrir en SACKGRAM",
+ "address": "Una dirección de invitación de SACKGRAM siempre empieza por <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "Qué es SACKGRAM",
+ "what": "SACKGRAM es una aplicación de mensajería para proteger su privacidad, para Android e iOS, desarrollada por Sackgram Labs,&nbsp;Inc. El contenido de los mensajes se cifra en su dispositivo y se descifra en el de la otra persona, y para crear una cuenta no se le pide su número de teléfono ni su correo electrónico.",
+ "more": "Encontrará más información sobre SACKGRAM en la <a href=\"{home}\">página de inicio</a>.",
+ "get_h": "Obtener la aplicación",
+ "ios_prep": "La versión para la App Store está en preparación.",
+ "ios_links": "En un iPhone con SACKGRAM instalado, al tocar un enlace de SACKGRAM en Mensajes, Mail o Notas se abre la aplicación.",
+ "after_h": "Después de instalarla",
+ "after1": "Después de instalarla, vuelva a abrir el mismo enlace o vuelva a escanear el mismo código. Instalar la aplicación no abre la invitación por sí solo.",
+ "after2": "Si abre el enlace en SACKGRAM antes de terminar el registro, SACKGRAM lo guarda y abre la invitación cuando termine de registrarse.",
+ "privacy": "Esta página no envía su código ni a nosotros ni a nadie más. La parte del enlace que lo identifica se queda en este teléfono. Para abrir el enlace, esta página solo lo entrega a aplicaciones de este teléfono: a SACKGRAM o, dentro de KakaoTalk, de vuelta a KakaoTalk, que ya tiene el enlace.",
+ "suggest": "Leer esta página en español"
+}

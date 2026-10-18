@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-invite-page="i/">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>This link opens in Sackgram</title>
-    <meta name="description" content="You were given a Sackgram link. Here is what Sackgram is and how to open it.">
-    <meta name="theme-color" content="#3BC3DE">
     <!-- Not content anyone should find by searching: this page is the far end
          of a code somebody was handed, not a page of the site. -->
     <meta name="robots" content="noindex">
-    <!-- ⚠ THIS PAGE MAKES NO REQUEST BUT ITS OWN STYLESHEET, AND SINCE
-         2026-09-30 THE CONTENT-SECURITY-POLICY BELOW ENFORCES IT RATHER THAN
-         ONLY PROMISING IT. `connect-src 'none'` refuses fetch, XHR, beacons
-         and WebSockets; `img-src 'none'` refuses a tracking pixel; the one
-         script is allowed by its SHA-256 and nothing else runs. If the script
-         is edited, its hash in `script-src` must be recomputed in the same
-         change (the browser then refuses the edited script — it fails CLOSED,
-         the button simply never appears). -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-OLRwWFAqkkyU+yY46NUayx6CDoQkp7oa3m8lPrE+Fgs='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+    <!-- ⚠ THIS PAGE MAKES NO REQUEST BUT ITS OWN STYLESHEET, AND THE
+         CONTENT-SECURITY-POLICY BELOW ENFORCES IT RATHER THAN ONLY PROMISING
+         IT. `connect-src 'none'` refuses fetch, XHR, beacons and WebSockets;
+         `img-src 'none'` refuses a tracking pixel (and is why the store
+         links are text, not badge images); the one script is allowed by its
+         SHA-256 and nothing else runs. The hash is computed by
+         tools/build_pages.py from invite_script(), so edit the script there and
+         rebuild — an edit made here only is refused by the browser (it fails
+         CLOSED: the button simply never appears).
+         No analytics, no web fonts, no remote images: the person reading this
+         is a stranger meeting SACKGRAM for the first time and has not agreed
+         to anything yet. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-nvAP64G7tLrHUu0znj7of6NNJMBtzreJ7wePMRICmoA='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
     <meta name="referrer" content="no-referrer">
-    <!-- The ONLY request this page makes besides itself. No analytics, no
-         tracking pixels, no web fonts, no remote images, and one inline script
-         that sends nothing (see the Open in Sackgram block) — and
-         that is a rule for this page rather than a coincidence, because the
-         person reading it is a stranger meeting Sackgram for the first time
-         and has not agreed to anything yet. A store badge added later must be
-         a LOCAL image file for the same reason: the official badge images are
-         hosted by Google and Apple, and hotlinking one hands them this
-         visitor's IP address before they have even heard of us. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>This link opens in SACKGRAM</title>
+    <meta name="description" content="You were given a SACKGRAM link. Here is what SACKGRAM is and how to open it.">
+    <meta name="theme-color" content="#3BC3DE">
     <link rel="stylesheet" href="../style.css">
+    <link rel="alternate" hreflang="en" href="https://sackgram.com/i/">
+    <link rel="alternate" hreflang="ko" href="https://sackgram.com/ko/i/">
+    <link rel="alternate" hreflang="de" href="https://sackgram.com/de/i/">
+    <link rel="alternate" hreflang="es" href="https://sackgram.com/es/i/">
+    <link rel="alternate" hreflang="fr" href="https://sackgram.com/fr/i/">
+    <link rel="alternate" hreflang="id" href="https://sackgram.com/id/i/">
+    <link rel="alternate" hreflang="it" href="https://sackgram.com/it/i/">
+    <link rel="alternate" hreflang="ja" href="https://sackgram.com/ja/i/">
+    <link rel="alternate" hreflang="pt-BR" href="https://sackgram.com/pt/i/">
+    <link rel="alternate" hreflang="ru" href="https://sackgram.com/ru/i/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://sackgram.com/zh/i/">
+    <link rel="alternate" hreflang="ar" href="https://sackgram.com/ar/i/">
+    <link rel="alternate" hreflang="x-default" href="https://sackgram.com/i/">
   </head>
   <body>
     <header class="site-header">
@@ -45,124 +53,87 @@
         </nav>
         <nav class="lang-list" aria-label="Languages">
           <ul>
-          <li><a href="../" hreflang="en" lang="en" aria-current="page">English</a></li>
-          <li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li>
-          <li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li>
-          <li><a href="../es/" hreflang="es" lang="es">Español</a></li>
-          <li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li>
-          <li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li>
-          <li><a href="../it/" hreflang="it" lang="it">Italiano</a></li>
-          <li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li>
-          <li><a href="../pt/" hreflang="pt-BR" lang="pt">Português</a></li>
-          <li><a href="../ru/" hreflang="ru" lang="ru">Русский</a></li>
-          <li><a href="../zh/" hreflang="zh-Hans" lang="zh">中文</a></li>
-          <li><a href="../ar/" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
+          <li><a href="../i/" hreflang="en" lang="en" aria-current="page">English</a></li>
+          <li><a href="../ko/i/" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="../de/i/" hreflang="de" lang="de">Deutsch</a></li>
+          <li><a href="../es/i/" hreflang="es" lang="es">Español</a></li>
+          <li><a href="../fr/i/" hreflang="fr" lang="fr">Français</a></li>
+          <li><a href="../id/i/" hreflang="id" lang="id">Bahasa Indonesia</a></li>
+          <li><a href="../it/i/" hreflang="it" lang="it">Italiano</a></li>
+          <li><a href="../ja/i/" hreflang="ja" lang="ja">日本語</a></li>
+          <li><a href="../pt/i/" hreflang="pt-BR" lang="pt">Português</a></li>
+          <li><a href="../ru/i/" hreflang="ru" lang="ru">Русский</a></li>
+          <li><a href="../zh/i/" hreflang="zh-Hans" lang="zh">中文</a></li>
+          <li><a href="../ar/i/" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
           </ul>
         </nav>
       </div>
     </header>
     <main>
       <div class="wrap">
-        <h1>This link opens in Sackgram</h1>
-        <p class="lede">Someone gave you a Sackgram code &mdash; on a sign, a card, or in a message.</p>
+        <!-- Generated by tools/build_pages.py (build_invite) from tools/invite/en.json. -->
+        <!-- Filled and shown by the script on the English page only, when the
+             browser's first preferred language is one of the other eleven. -->
+        <p id="lang-suggest" class="lang-suggest" hidden><a id="lang-suggest-link" href="./"></a></p>
+        <h1>This link opens in SACKGRAM</h1>
+        <p class="lede">Someone gave you a SACKGRAM code &mdash; on a sign, a card, or in a message.</p>
 
         <div class="card">
-          <!-- CHANGED 2026-09-30. It used to end "Seeing it means the app is
-               not on this device yet", which a device test proved false: a
-               link tapped in KakaoTalk opened here, in KakaoTalk's own
-               browser, on a phone that HAD the app. A messenger's in-app
-               browser loads the page itself instead of handing the link to
-               Android, so App Links never get the chance to run. -->
-          <p>If Sackgram is installed on this phone, a Sackgram link usually opens the app directly. A link opened inside a messenger's own browser can land on this page instead, even when the app is installed.</p>
-          <!-- ⚠ HIDDEN UNTIL THE SCRIPT BELOW SHOWS IT: only on Android, and
-               only when the link carries an invite this page recognises.
-               Without JavaScript, on iOS, or with no invite, nobody sees a
-               button that could not work. -->
+          <!-- A link tapped in KakaoTalk opens here, in KakaoTalk's own browser,
+               on a phone that HAS the app (device test 2026-09-30): a messenger's
+               in-app browser loads the page itself, so App Links never run. -->
+          <p>If SACKGRAM is installed on this phone, a SACKGRAM link usually opens the app directly. A link opened inside a messenger's own browser can land on this page instead, even when the app is installed.</p>
+          <!-- ⚠ HIDDEN UNTIL THE SCRIPT SHOWS IT: only on Android, and only when
+               the link carries an invite this page recognises. -->
           <div id="open-app" hidden>
-            <p>If this page opened inside a messenger, tap <strong>Open in Sackgram</strong>.</p>
-            <p><a id="open-app-link" class="open-app" href="./">Open in Sackgram</a></p>
+            <p>If this page opened inside a messenger, tap <strong>Open in SACKGRAM</strong>.</p>
+            <p><a id="open-app-link" class="open-app" href="./">Open in SACKGRAM</a></p>
           </div>
-          <!-- ADDED 2026-09-30. A plain fact a person can check against a link
-               or a code they were sent, not a promise about fraud. It must stay
-               true for every link the app issues: personal and group invites
-               and signboards are all https://sackgram.com/i/ followed by "#".
-               If the app ever issues another shape, change this line in the
-               same change. -->
-          <p>A Sackgram invite address always begins with <strong>https://sackgram.com/i/</strong>.</p>
+          <!-- A plain fact a person can check against a link they were sent. It
+               must stay true for every link the app issues (personal and group
+               invites and signboards are all https://sackgram.com/i/ then "#"). -->
+          <p>A SACKGRAM invite address always begins with <strong>https://sackgram.com/i/</strong>.</p>
         </div>
 
-        <h2>What Sackgram is</h2>
-        <p>Sackgram is a private messenger for Android and iOS, built by Sackgram Labs,&nbsp;Inc. Message content is encrypted on your device and decrypted on the other person's, and creating an account does not ask for your phone number or your email address.</p>
-        <p>There is more on the <a href="../">home page</a>, including what we do not claim.</p>
+        <h2>What SACKGRAM is</h2>
+        <p>SACKGRAM is a private messenger for Android and iOS, built by Sackgram Labs,&nbsp;Inc. Message content is encrypted on your device and decrypted on the other person's, and creating an account does not ask for your phone number or your email address.</p>
+        <p>There is more about SACKGRAM on the <a href="../">home page</a>.</p>
 
         <h2>Getting the app</h2>
-        <!-- ==================================================================
-             CHANGED FOR LAUNCH DAY (prepared 2026-10-07, merge on the day the
-             Google Play listing is public — the PR title says so). Until then
-             the paragraph this replaced said "not publicly released".
-
-             ⚠ A TEXT LINK, NOT A BADGE IMAGE, AND THAT IS THE CSP RATHER THAN
-             TASTE. This page's Content-Security-Policy has img-src 'none'
-             (see <head>), and keeping that CSP unchanged was part of the
-             decision. A badge image would need img-src 'self' plus a
-             self-hosted copy of Google's artwork; if that is ever wanted,
-             change the CSP in the same change and say why.
-
-             ⚠ THE STORE URL CARRIES NOTHING FROM THE INCOMING LINK — no
-             referrer parameter, no campaign tag, no token. It is a plain
-             navigation, which connect-src does not govern, and it is what
-             keeps the sentence at the bottom of this page true. The deferred
-             deep link (app repo, sackgram-install-referrer-pr7-en.md) will
-             change exactly this, and that sentence, together.
-
-             iOS: the App Store listing is not public yet, so iOS gets a
-             sentence, not a link that goes nowhere. CHANGED 2026-10-15 with
-             Universal Links (the AASA's `applinks` /i/*): the iPhone app opens
-             these links itself, so the sentence no longer says it does not
-             exist. "Messages, Mail or Notes" because a link tapped on THIS
-             page, inside Safari, stays in Safari — iOS opens a Universal Link
-             from another app, not from the same site. Add the App Store link
-             here when the listing is public. -->
-        <p><a class="open-app" href="https://play.google.com/store/apps/details?id=com.sackgram.labs">Get it on Google Play</a></p>
-        <p>On an iPhone with Sackgram installed, a Sackgram link tapped in Messages, Mail or Notes opens the app. The App Store link will be added to this page.</p>
+        <!-- Android: .store-android only; iPhone/iPad: .store-ios only; anything
+             else, or no JavaScript: both (the script sets inv-android / inv-ios
+             on <html>, style.css hides the other store).
+             ⚠ THE STORE URLS CARRY NOTHING FROM THE INCOMING LINK — no referrer,
+             no campaign tag, no token — which keeps the next section true.
+             The App Store line is a sentence until APP_STORE_URL is set in
+             tools/build_pages.py. "Messages, Mail or Notes" because a link
+             tapped on THIS page, inside Safari, stays in Safari — iOS opens a
+             Universal Link from another app, not from the same site. -->
+        <p class="store-android"><a class="open-app" href="https://play.google.com/store/apps/details?id=com.sackgram.labs">Get it on Google Play</a></p>
+        <p class="store-ios"><a id="appstore-link" class="open-app" href="https://apps.apple.com/app/id6822281667">Download on the App Store</a></p>
+        <p class="store-ios">On an iPhone with SACKGRAM installed, a SACKGRAM link tapped in Messages, Mail or Notes opens the app.</p>
 
         <h2>After you install it</h2>
-        <!-- Matches the app (v9): a link that arrives before sign-up is kept
-             and opens once sign-up is finished. Before v9 the app dropped it,
-             which is why this used to say only "open the same link again". -->
-        <p>After you install it, open the same link, or scan the same code, once more. When you have finished signing up, Sackgram opens the invitation for you.</p>
+        <!-- ⚠ Installing does NOT open the invitation: nothing carries the link
+             through the store (deferred install hand-off postponed). The second
+             sentence is only about a link opened in the app BEFORE sign-up,
+             which the app keeps until sign-up is finished. -->
+        <p>After you install it, open the same link, or scan the same code, once more. Installing the app does not open the invitation by itself.</p>
+        <p>If you open the link in SACKGRAM before you have finished signing up, SACKGRAM keeps it and opens the invitation for you once sign-up is done.</p>
 
         <div class="card">
-          <!-- ⚠ THIS SENTENCE BINDS THE FORMAT OF EVERY LINK THAT POINTS HERE,
-               and it is the reason this page has no JavaScript.
-
-               It is true because the part of the link that identifies a code
-               is carried in the URL FRAGMENT — the part after "#" — which
-               browsers never send to a server. It is therefore absent from web
-               server logs, from the Referer header, and from anything our
-               hosting provider can see, by construction rather than by
-               policy.
-
-               It stops being true the moment a link puts that value in the
-               PATH instead (sackgram.com/i/SOMETHING). If the app is ever
-               changed to emit that shape, this sentence must be deleted in the
-               same change — otherwise the site is making a privacy claim its
-               own URLs contradict, in a place a stranger reads first.
-
-               ⚠ CHANGED 2026-09-30, AND THE OLD RULE HERE WAS "never add a
-               script that reads location.hash". The Open in Sackgram button
-               needs the invite to hand it to the app, so one script now reads
-               it — and the sentence below was reworded because "This page
-               does not read your code" stopped being literally true. What it
-               promises instead is what the CSP in <head> enforces: the value
-               goes nowhere but into the button's intent: address, which
-               Android delivers only to the Sackgram app (package= pins it),
-               and, inside KakaoTalk only, into kakaotalk://web/openExternal —
-               KakaoTalk already holds the whole link, because the link came
-               through a KakaoTalk chat.
-               The script makes no request and the CSP would refuse one if it
-               tried. Keep both of those true or change the sentence. -->
-          <p>This page does not send your code to us or to anyone else. The part of the link that identifies it stays on this phone. To open the link, this page hands it only to apps on this phone: to Sackgram, or, inside KakaoTalk, back to KakaoTalk, which already has the link.</p>
+          <!-- ⚠ THIS SENTENCE BINDS THE FORMAT OF EVERY LINK THAT POINTS HERE.
+               It is true because the part of the link that identifies a code is
+               the URL FRAGMENT (after "#"), which browsers never send to a
+               server — absent from server logs, from the Referer header and from
+               our hosting provider, by construction. It stops being true the
+               moment a link puts that value in the PATH; delete it in that same
+               change. The script reads the fragment and puts it only into the
+               language links (same site, fragment still never sent), the
+               intent: address (package= pins it to the SACKGRAM app) and, inside
+               KakaoTalk only, kakaotalk://web/openExternal — KakaoTalk already
+               holds the whole link. Keep that true or change the sentence. -->
+          <p>This page does not send your code to us or to anyone else. The part of the link that identifies it stays on this phone. To open the link, this page hands it only to apps on this phone: to SACKGRAM, or, inside KakaoTalk, back to KakaoTalk, which already has the link.</p>
         </div>
       </div>
     </main>
@@ -179,51 +150,86 @@
         Contact: <a href="mailto:info@sackgram.com">info@sackgram.com</a></p>
       </div>
     </footer>
-    <!-- The Open in Sackgram button and the KakaoTalk hand-off. ADDED
-         2026-09-30 — see the comments at #open-app and at the end of <main>.
-         It reads location.hash, writes one href, in KakaoTalk navigates once
-         to kakaotalk://web/openExternal, and makes no request (the CSP in
-         <head> would refuse one).
-         ⚠ THE KAKAOTALK HAND-OFF CARRIES THE INVITE: its url= is this page's
-         address including the fragment, handed to the KakaoTalk app on this
-         phone so it can pass the link to Android. That is a hand-over inside
-         the phone, not a request to anybody's server — but it is the one
-         place the value leaves this page other than into the button. -->
     <script>(function () {
-  // Android only: both mechanisms below are Android's.
-  var ua = navigator.userAgent;
-  if (!/Android/i.test(ua)) return;
+  var d = document, h = d.documentElement, ua = navigator.userAgent;
+  // 1. Which store line to show. A class on <html>; the stylesheet hides the
+  // other store. iPadOS reports itself as a Mac, hence the touch-point test.
+  // Anything else (a computer, an unknown browser) keeps both.
+  var android = /Android/i.test(ua);
+  var ios = !android && (/iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+  if (android) h.classList.add('inv-android');
+  else if (ios) h.classList.add('inv-ios');
+
   // Only the two shapes the app issues: #c/TOKEN (personal) and #g/TOKEN
   // (group invite or signboard). A token is letters, digits, '.', '_' and '-'
   // (a Firestore document id, which a group link may follow with a '.' and a
   // base64url secret). Anything else, including a value that could break out
-  // of the intent: syntax with a ';' or '#', gets neither the button nor the
-  // KakaoTalk hand-off.
+  // of the intent: syntax with a ';' or '#', is carried nowhere.
   var m = /^#([cg])(?:\/|%2F)([A-Za-z0-9._-]{1,128})$/i.exec(location.hash);
-  if (!m) return;
-  // This page's own address, rebuilt from the checked value rather than
-  // copied from location.href, so nothing else in the URL travels on.
-  var fragment = m[1].toLowerCase() + '/' + m[2];
-  var here = 'https://sackgram.com/i/#' + fragment;
+  var fragment = m ? m[1].toLowerCase() + '/' + m[2] : '';
 
-  // 1. The button, for every Android browser. Android rebuilds the link as
+  // 2. On the English page only: offer the browser's own language as one link.
+  // An offer, not a redirect -- the reader chooses (site rule, 2026-10-06).
+  if (h.lang === 'en') {
+    var S = {ko:"이 안내를 한국어로 보기",de:"Diese Seite auf Deutsch lesen",es:"Leer esta página en español",fr:"Lire cette page en français",id:"Baca halaman ini dalam Bahasa Indonesia",it:"Leggi questa pagina in italiano",ja:"このページを日本語で読む",pt:"Ler esta página em português",ru:"Открыть эту страницу на русском",zh:"用中文阅读此页面",ar:"اقرأ هذه الصفحة بالعربية"};
+    var prefs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < prefs.length; i++) {
+      var t = String(prefs[i]).toLowerCase(), c = t.split('-')[0];
+      // The Chinese page is Simplified; a Traditional reader is not offered it.
+      if (c === 'zh' && /-(tw|hk|mo|hant)\b/.test(t)) continue;
+      if (c === 'en') break;
+      var to = S[c] && d.querySelector('.lang-list a[lang="' + c + '"]');
+      if (to) {
+        var a = d.getElementById('lang-suggest-link');
+        a.textContent = S[c];
+        a.setAttribute('href', to.getAttribute('href'));
+        a.setAttribute('lang', c);
+        if (c === 'ar') a.setAttribute('dir', 'rtl');
+        d.getElementById('lang-suggest').hidden = false;
+        break;
+      }
+    }
+  }
+
+  if (!m) return;
+
+  // 3. Switching language keeps the invite: every language link (and the
+  // suggestion) carries the checked fragment. A fragment is never sent to a
+  // server, so this moves nothing off the phone.
+  var links = d.querySelectorAll('.lang-list a, #lang-suggest-link');
+  for (var j = 0; j < links.length; j++) {
+    var href = links[j].getAttribute('href');
+    if (href) links[j].setAttribute('href', href.split('#')[0] + '#' + fragment);
+  }
+
+  // Android only from here: both mechanisms below are Android's.
+  if (!android) return;
+  // The address the app issues (and App Links match), rebuilt from the checked
+  // value rather than copied from location.href, so nothing else travels on.
+  var here = 'https://sackgram.com/i/#' + fragment;
+  // This page in its own language, for the browser to come back to.
+  var page = h.getAttribute('data-invite-page');
+  if (!/^(?:[a-z]{2}\/)?i\/$/.test(page || '')) page = 'i/';
+  var back = 'https://sackgram.com/' + page + '#' + fragment;
+
+  // 4. The button, for every Android browser. Android rebuilds the link as
   // https://sackgram.com/i/#FRAGMENT (Intent.parseUri splits at the LAST '#',
   // the one before "Intent;"), and package= means only the Sackgram app can
-  // receive it. Without the app, Chrome goes to the fallback, which is this
-  // same page; with no fallback it would open the Play Store listing, which
-  // does not exist publicly yet.
-  document.getElementById('open-app-link').href =
+  // receive it. Without the app, Chrome goes to the fallback: this same page,
+  // in the language the reader is reading.
+  d.getElementById('open-app-link').href =
     'intent://sackgram.com/i/#' + fragment +
     '#Intent;scheme=https;package=com.sackgram.labs;S.browser_fallback_url=' +
-    encodeURIComponent(here) + ';end';
-  document.getElementById('open-app').hidden = false;
+    encodeURIComponent(back) + ';end';
+  d.getElementById('open-app').hidden = false;
 
-  // 2. KakaoTalk's in-app browser: ask KakaoTalk to hand the link to the
+  // 5. KakaoTalk's in-app browser: ask KakaoTalk to hand the link to the
   // system, where the verified App Link opens Sackgram (or, without the app,
-  // the phone's browser shows this page). ONCE per tab: the flag is set
-  // BEFORE leaving, and if it cannot be stored nothing is attempted, so a
-  // reload or Back can never bounce the page in a loop. The button above
-  // stays either way.
+  // the phone's browser shows /i/). ONCE per tab: the flag is set BEFORE
+  // leaving, and if it cannot be stored nothing is attempted, so a reload,
+  // Back or a language switch can never bounce the page in a loop. The button
+  // above stays either way.
   if (/KAKAOTALK/i.test(ua)) {
     var key = 'sackgram-kakao-handoff';
     try {

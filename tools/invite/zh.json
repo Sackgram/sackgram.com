@@ -1,0 +1,20 @@
+{
+ "title": "此链接会在 SACKGRAM 中打开",
+ "desc": "你收到了一个 SACKGRAM 链接。这里介绍 SACKGRAM 是什么，以及如何打开这个链接。",
+ "lede": "有人通过招牌、名片或消息给了你一个 SACKGRAM 代码。",
+ "installed": "如果这部手机已安装 SACKGRAM，SACKGRAM 链接通常会直接在应用中打开。在聊天应用内置浏览器中打开的链接，即使已安装应用，也可能来到此页面。",
+ "open_hint": "如果此页面是在聊天应用中打开的，请点按<strong>{btn}</strong>。",
+ "btn": "在 SACKGRAM 中打开",
+ "address": "SACKGRAM 的邀请链接地址总是以 <strong>https://sackgram.com/i/</strong> 开头。",
+ "what_h": "SACKGRAM 是什么",
+ "what": "SACKGRAM 是 Sackgram Labs,&nbsp;Inc. 开发的隐私保护通讯应用，适用于 Android 和 iOS。消息内容在你的设备上加密，在对方的设备上解密；创建账号时不会要求你提供电话号码或邮箱地址。",
+ "more": "有关 SACKGRAM 的更多介绍，请见<a href=\"{home}\">首页</a>。",
+ "get_h": "获取应用",
+ "ios_prep": "App Store 版本正在准备中。",
+ "ios_links": "在已安装 SACKGRAM 的 iPhone 上，在“信息”“邮件”或“备忘录”中点按 SACKGRAM 链接即可打开应用。",
+ "after_h": "安装之后",
+ "after1": "安装后，请再次打开同一个链接，或再次扫描同一个代码。仅安装应用并不会打开邀请。",
+ "after2": "如果你在完成注册之前已在 SACKGRAM 中打开过链接，SACKGRAM 会保留它，并在注册完成后为你打开邀请。",
+ "privacy": "此页面不会把你的代码发送给我们或任何其他人。链接中标识代码的部分只留在这部手机上。为了打开链接，此页面只会把它交给这部手机上的应用：交给 SACKGRAM，或者在 KakaoTalk 内交还给本来就有这个链接的 KakaoTalk。",
+ "suggest": "用中文阅读此页面"
+}

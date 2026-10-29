@@ -1,0 +1,20 @@
+{
+ "title": "Este link abre no SACKGRAM",
+ "desc": "Você recebeu um link do SACKGRAM. Veja aqui o que é o SACKGRAM e como abrir o link.",
+ "lede": "Alguém passou para você um código do SACKGRAM: em uma placa, em um cartão ou em uma mensagem.",
+ "installed": "Se o SACKGRAM estiver instalado neste celular, um link do SACKGRAM normalmente abre o app diretamente. Um link aberto no navegador próprio de um mensageiro pode cair nesta página, mesmo com o app instalado.",
+ "open_hint": "Se esta página abriu dentro de um mensageiro, toque em <strong>{btn}</strong>.",
+ "btn": "Abrir no SACKGRAM",
+ "address": "Um endereço de convite do SACKGRAM sempre começa com <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "O que é o SACKGRAM",
+ "what": "O SACKGRAM é um mensageiro de privacidade para Android e iOS, desenvolvido pela Sackgram Labs,&nbsp;Inc. O conteúdo das mensagens é criptografado no seu aparelho e descriptografado no da outra pessoa, e criar uma conta não pede seu número de telefone nem seu endereço de e-mail.",
+ "more": "Saiba mais sobre o SACKGRAM na <a href=\"{home}\">página inicial</a>.",
+ "get_h": "Como baixar o app",
+ "ios_prep": "A versão para a App Store está em preparação.",
+ "ios_links": "Em um iPhone com o SACKGRAM instalado, tocar em um link do SACKGRAM no Mensagens, no Mail ou no Notas abre o app.",
+ "after_h": "Depois de instalar",
+ "after1": "Depois de instalar, abra o mesmo link ou escaneie o mesmo código mais uma vez. Só instalar o app não abre o convite.",
+ "after2": "Se você abrir o link no SACKGRAM antes de terminar o cadastro, o SACKGRAM guarda o link e abre o convite quando o cadastro terminar.",
+ "privacy": "Esta página não envia seu código para nós nem para mais ninguém. A parte do link que o identifica fica neste celular. Para abrir o link, esta página o entrega somente a apps deste celular: ao SACKGRAM ou, dentro do KakaoTalk, de volta ao KakaoTalk, que já tem o link.",
+ "suggest": "Ler esta página em português"
+}

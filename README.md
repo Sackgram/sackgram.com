@@ -9,8 +9,14 @@ script that shows the Android *Open in Sackgram* button and, inside
 KakaoTalk's in-app browser, hands the link to KakaoTalk once so Android can
 open the app. It makes no request, and the page's Content-Security-Policy
 (`connect-src 'none'`, `script-src` pinned to that script's SHA-256) refuses
-one if it ever tried. **Editing that script means recomputing the hash in the
-same change**, or the browser refuses the script and the button never shows.
+one if it ever tried. **Since 2026-10-17 the page is generated** (twelve
+languages, `/i/` and `/<lang>/i/`, by `tools/build_pages.py` from
+`tools/invite/<lang>.json`), and so is the hash: edit `invite_script()` there
+and rebuild, never the HTML, or the browser refuses the script and the button
+never shows. The same script also picks the store line (Android → Google Play,
+iPhone/iPad → the App Store line, anything else → both), carries the invite
+fragment onto the language links, and on `/i/` offers the browser's language
+as one link — never a redirect.
 Every other page still has no JavaScript, apart from `/download` (since
 2026-10-09, launch day): one inline script sends an Android phone to Google
 Play and marks an iPhone so the page shows only the iPhone line. Same rules:
@@ -81,7 +87,9 @@ terms/index.html      Terms of Service -> /terms
 delete-account/index.html  Account deletion -> /delete-account (required by Google Play)
 support/index.html    Support          -> /support   (required by both app stores)
 company/index.html    Legal entity and address -> /company
-i/index.html          Invite landing -> /i   (see below)
+i/index.html          Invite landing -> /i   (see below) + /<lang>/i/. Generated
+                      from tools/invite/<lang>.json; store links follow
+                      APP_STORE_URL, like /download.
 download/index.html   Get the app -> /download (+ /<lang>/download/, channel paths)
                       Android -> Google Play, iPhone -> "in preparation" (or the
                       App Store once APP_STORE_URL is set in build_pages.py),
@@ -313,6 +321,17 @@ first. If the link format ever changes, the sentence goes in the same change.
 
 ⚠ **If the app ever emits a longer path** such as `/i/g/#CODE`, that directory
 needs its own `index.html` here first, for the same reason — otherwise it 404s.
+
+#### The translations live at `/<lang>/i/`, outside `/i/`, on purpose
+
+Every link the app issues is `/i/#…`, so `/i/` (English) is where everyone
+lands; the other eleven languages are `/ko/i/`, `/ja/i/` and so on, reached
+from the language list, which keeps the `#…` part. They sit outside `/i/`
+because the Android filter (`pathPrefix="/i/"`) and the AASA (`/i/*`) must
+never hand a language page to the app — the app parses `/i/` only. The
+*Open in SACKGRAM* button and the KakaoTalk hand-off still give Android the
+plain `https://sackgram.com/i/#…`; only the browser fallback returns to the
+page in the reader's language.
 
 #### Only `/i/` is intercepted by the app, not the whole site
 

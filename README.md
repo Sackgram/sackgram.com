@@ -150,7 +150,7 @@ easy to conflate:
 | `delegate_permission/common.get_login_creds` | Use a **passkey** bound to `sackgram.com` for account recovery | A missing fingerprint → recovery fails on those builds |
 | `delegate_permission/common.handle_all_urls` | Open `https://sackgram.com/...` links **directly in the app** instead of a browser (Android App Links) | A missing fingerprint → links open in the browser |
 
-**`sha256_cert_fingerprints` is a list and must hold ALL THREE release keys** (two Google app signing keys — see the 2026-10-03 note below the table — and the upload key). Under Play
+**`sha256_cert_fingerprints` is a list and must hold ALL FOUR release keys** (three Google app signing keys — see the 2026-10-03 and 2026-11-02 notes below the table — and the upload key). Under Play
 App Signing the certificate a real user's installed app carries is **Google's
 app signing key**, not the upload key you sign with locally. Listing only the
 upload key means everything works in a locally built release APK and fails for
@@ -162,9 +162,19 @@ failure can take, because testing does not reveal it.
 | Google app signing key — **current** | `E9:D4:1E:AC…` | Play-installed builds since Play's key upgrade |
 | Google app signing key — **previous (KEEP)** | `E3:82:D2:EB…` | Play-installed builds still served with the previous signer |
 | Upload key | `C5:0F:A8:AD…` | A release APK built and installed locally |
+| Google app signing key — **quantum-ready hybrid (Android 17+)** | `87:C4:72:7D…` | Play-installed builds on Android 17 (API 37) and later, which verify the APK signature scheme v3.2 block |
 
 Both come from **Play Console → Test and release → Setup → App integrity →
 App signing**, in the same colon-hex form `keytool` prints.
+
+⚠ **2026-11-02: Play's quantum-ready hybrid signing adds a FOURTH key, and Android 17 phones present it.**
+Play enrolls an uploaded bundle into hybrid signing (RSA 4096 + ML-DSA-65) by default. It does that with a
+NEW classical key that only Android 17 (API 37) and later use, through the APK signature scheme v3.2 block.
+`apksigner` 36 cannot read that block, so it still prints `E9:D4` for the same APK.
+A Galaxy on SDK 37 presented `android:apk-key-hash:h8RyfULoLB9LQ9hkhJImLSSqeXclw8IHW5PlfqibT3E` = `87:C4:72:7D…`,
+and every passkey registration was refused. The fingerprint is the last of the three under Play Console →
+App signing → "Copy all certificate fingerprints → SHA-256". Keep it here and in the server's
+`WEBAUTHN_ANDROID_CERT_SHA256`. A future hybrid key upgrade adds new fingerprints again.
 
 ⚠ **2026-10-03: Play's app signing key had been UPGRADED.** Play Console →
 Protected with Play → App signing shows `E9:D4:1E:AC…` as the current key and

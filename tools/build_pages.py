@@ -717,43 +717,84 @@ def invite_script():
     if (href) links[j].setAttribute('href', href.split('#')[0] + '#' + fragment);
   }
 
-  // Android only from here: both mechanisms below are Android's.
-  if (!android) return;
-  // The address the app issues (and App Links match), rebuilt from the checked
-  // value rather than copied from location.href, so nothing else travels on.
+  // The address the app issues (and App Links / Universal Links match), rebuilt
+  // from the checked value rather than copied from location.href, so nothing
+  // else travels on.
   var here = 'https://sackgram.com/i/#' + fragment;
-  // This page in its own language, for the browser to come back to.
-  var page = h.getAttribute('data-invite-page');
-  if (!/^(?:[a-z]{2}\/)?i\/$/.test(page || '')) page = 'i/';
-  var back = 'https://sackgram.com/' + page + '#' + fragment;
+  var box = d.getElementById('open-app'), button = d.getElementById('open-app-link');
+  var kakao = /KAKAOTALK/i.test(ua);
+  // Ask KakaoTalk to hand the link to the system, where the verified App Link
+  // or Universal Link opens Sackgram (or, without the app, the phone's browser
+  // shows /i/). The whole address is in the url= value, so the token stays in
+  // the "#" part of it. kakaotalk:// is KakaoTalk's own, not ours: this page
+  // adds NO custom scheme for Sackgram, which any app could claim on an iPhone.
+  var kakaoOut = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(here);
 
-  // 4. The button, for every Android browser. Android rebuilds the link as
-  // https://sackgram.com/i/#FRAGMENT (Intent.parseUri splits at the LAST '#',
-  // the one before "Intent;"), and package= means only the Sackgram app can
-  // receive it. Without the app, Chrome goes to the fallback: this same page,
-  // in the language the reader is reading.
-  d.getElementById('open-app-link').href =
-    'intent://sackgram.com/i/#' + fragment +
-    '#Intent;scheme=https;package=com.sackgram.labs;S.browser_fallback_url=' +
-    encodeURIComponent(back) + ';end';
-  d.getElementById('open-app').hidden = false;
-
-  // 5. KakaoTalk's in-app browser: ask KakaoTalk to hand the link to the
-  // system, where the verified App Link opens Sackgram (or, without the app,
-  // the phone's browser shows /i/). ONCE per tab: the flag is set BEFORE
-  // leaving, and if it cannot be stored nothing is attempted, so a reload,
-  // Back or a language switch can never bounce the page in a loop. The button
-  // above stays either way.
-  if (/KAKAOTALK/i.test(ua)) {
-    var key = 'sackgram-kakao-handoff';
+  // ONCE per tab: the flag is set BEFORE leaving, and if it cannot be stored
+  // nothing is attempted, so a reload, Back or a language switch can never
+  // bounce the page in a loop. The button stays either way.
+  function once(key) {
     try {
-      if (sessionStorage.getItem(key)) return;
+      if (sessionStorage.getItem(key)) return false;
       sessionStorage.setItem(key, '1');
+      return true;
     } catch (e) {
-      return;
+      return false;
     }
-    location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(here);
   }
+
+  if (android) {
+    // This page in its own language, for the browser to come back to.
+    var page = h.getAttribute('data-invite-page');
+    if (!/^(?:[a-z]{2}\/)?i\/$/.test(page || '')) page = 'i/';
+    var back = 'https://sackgram.com/' + page + '#' + fragment;
+
+    // 4. The button, for every Android browser. Android rebuilds the link as
+    // https://sackgram.com/i/#FRAGMENT (Intent.parseUri splits at the LAST '#',
+    // the one before "Intent;"), and package= means only the Sackgram app can
+    // receive it. Without the app, Chrome goes to the fallback: this same page,
+    // in the language the reader is reading.
+    button.href =
+      'intent://sackgram.com/i/#' + fragment +
+      '#Intent;scheme=https;package=com.sackgram.labs;S.browser_fallback_url=' +
+      encodeURIComponent(back) + ';end';
+    box.hidden = false;
+
+    // 5. KakaoTalk's in-app browser.
+    if (kakao && once('sackgram-kakao-handoff')) location.href = kakaoOut;
+    return;
+  }
+
+  // 6. iPhone and iPad (added 2026-11-03). Outside a messenger there is nothing
+  // to do here, and no button: a link to this same page would go nowhere, and
+  // a Universal Link does not fire for a tap on its own domain.
+  if (!ios) return;
+
+  // KakaoTalk: device test 2026-11-03 -- opening kakaoOut from a KakaoTalk chat
+  // on an iPhone opened the app and went straight into the group. The button
+  // is the same address, for when KakaoTalk refuses a move no person pressed.
+  if (kakao) {
+    button.href = kakaoOut;
+    box.hidden = false;
+    if (once('sackgram-kakao-handoff')) location.href = kakaoOut;
+    return;
+  }
+
+  // LINE: its documented openExternalBrowser=1 parameter. ⚠ THE TOKEN STAYS
+  // AFTER THE "#": only the parameter is a query, so the request to this site
+  // carries no token. The app reads the path and the fragment and ignores it.
+  if (/\bLine\/\d/.test(ua)) {
+    var lineOut = 'https://sackgram.com/i/?openExternalBrowser=1#' + fragment;
+    button.href = lineOut;
+    box.hidden = false;
+    if (once('sackgram-line-handoff')) location.href = lineOut;
+    return;
+  }
+
+  // Instagram and Facebook offer no documented way out, so the reader is told
+  // where their own menu is. x-safari-https:// is deliberately not used:
+  // reports conflict on whether it still works, and it is undocumented.
+  if (/\bInstagram\b|FBAN|FBAV|FB_IAB/.test(ua)) d.getElementById('inapp-hint').hidden = false;
 })();"""
 
 
@@ -806,12 +847,15 @@ def build_invite(lang, script):
         '               on a phone that HAS the app (device test 2026-09-30): a messenger\'s\n'
         '               in-app browser loads the page itself, so App Links never run. -->\n'
         f'          <p>{t["installed"]}</p>\n'
-        '          <!-- ⚠ HIDDEN UNTIL THE SCRIPT SHOWS IT: only on Android, and only when\n'
-        '               the link carries an invite this page recognises. -->\n'
+        '          <!-- ⚠ HIDDEN UNTIL THE SCRIPT SHOWS IT: on Android, or inside KakaoTalk or\n'
+        '               LINE on an iPhone, and only when the link carries an invite this page\n'
+        '               recognises. -->\n'
         '          <div id="open-app" hidden>\n'
         f'            <p>{t["open_hint"].format(btn=t["btn"])}</p>\n'
         f'            <p><a id="open-app-link" class="open-app" href="./">{t["btn"]}</a></p>\n'
         '          </div>\n'
+        '          <!-- Shown by the script inside Instagram or Facebook on an iPhone. -->\n'
+        f'          <p id="inapp-hint" hidden>{t["inapp_hint"]}</p>\n'
         '          <!-- A plain fact a person can check against a link they were sent. It\n'
         '               must stay true for every link the app issues (personal and group\n'
         '               invites and signboards are all https://sackgram.com/i/ then "#"). -->\n'

@@ -5,6 +5,7 @@
  "installed": "Si SACKGRAM est installé sur ce téléphone, un lien SACKGRAM ouvre généralement l'application directement. Un lien ouvert dans le navigateur intégré d'une messagerie peut arriver sur cette page à la place, même si l'application est installée.",
  "open_hint": "Si cette page s'est ouverte dans une messagerie, touchez <strong>{btn}</strong>.",
  "btn": "Ouvrir dans SACKGRAM",
+ "inapp_hint": "Pour ouvrir ce lien dans SACKGRAM, touchez le menu <strong>⋯</strong> et choisissez de l'ouvrir dans un navigateur externe.",
  "address": "Une adresse d'invitation SACKGRAM commence toujours par <strong>https://sackgram.com/i/</strong>.",
  "what_h": "Ce qu'est SACKGRAM",
  "what": "SACKGRAM est une messagerie de protection de la vie privée pour Android et iOS, développée par Sackgram Labs,&nbsp;Inc. Le contenu des messages est chiffré sur votre appareil et déchiffré sur celui de votre interlocuteur, et la création d'un compte ne demande ni votre numéro de téléphone ni votre adresse e-mail.",
@@ -15,6 +16,6 @@
  "after_h": "Après l'installation",
  "after1": "Après l'installation, ouvrez de nouveau le même lien ou scannez de nouveau le même code. L'installation seule n'ouvre pas l'invitation.",
  "after2": "Si vous ouvrez le lien dans SACKGRAM avant d'avoir terminé l'inscription, SACKGRAM le garde et ouvre l'invitation une fois l'inscription terminée.",
- "privacy": "Cette page n'envoie votre code ni à nous ni à personne d'autre. La partie du lien qui l'identifie reste sur ce téléphone. Pour ouvrir le lien, cette page ne le transmet qu'à des applications de ce téléphone&nbsp;: à SACKGRAM ou, dans KakaoTalk, de nouveau à KakaoTalk, qui a déjà le lien.",
+ "privacy": "Cette page n'envoie votre code ni à nous ni à personne d'autre. La partie du lien qui l'identifie reste sur ce téléphone. Pour ouvrir le lien, cette page ne le transmet qu'à des applications de ce téléphone&nbsp;: à SACKGRAM ou, dans KakaoTalk ou LINE, de nouveau à cette application, qui a déjà le lien.",
  "suggest": "Lire cette page en français"
 }

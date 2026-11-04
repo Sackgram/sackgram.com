@@ -6,8 +6,13 @@ any `.html` file in a browser to preview it exactly as it will be served.
 
 ⚠ **One page has JavaScript, since 2026-09-30: `i/index.html`** — one inline
 script that shows the Android *Open in Sackgram* button and, inside
-KakaoTalk's in-app browser, hands the link to KakaoTalk once so Android can
-open the app. It makes no request, and the page's Content-Security-Policy
+KakaoTalk's in-app browser, hands the link to KakaoTalk once so the system can
+open the app. **Since 2026-11-03 it does this on an iPhone too**: in KakaoTalk
+the same hand-off plus a button with the same address (device-tested: the app
+opened and went into the group); in LINE its documented
+`?openExternalBrowser=1`, with the token still after the `#`; in Instagram or
+Facebook a line saying where the external-browser menu is. An iPhone gets no
+custom scheme (any app could claim one) and no `x-safari-https://`. It makes no request, and the page's Content-Security-Policy
 (`connect-src 'none'`, `script-src` pinned to that script's SHA-256) refuses
 one if it ever tried. **Since 2026-10-17 the page is generated** (twelve
 languages, `/i/` and `/<lang>/i/`, by `tools/build_pages.py` from
@@ -341,7 +346,8 @@ because the Android filter (`pathPrefix="/i/"`) and the AASA (`/i/*`) must
 never hand a language page to the app — the app parses `/i/` only. The
 *Open in SACKGRAM* button and the KakaoTalk hand-off still give Android the
 plain `https://sackgram.com/i/#…`; only the browser fallback returns to the
-page in the reader's language.
+page in the reader's language. On an iPhone the hand-offs carry that same plain
+address, so the language pages are never handed to the app.
 
 #### Only `/i/` is intercepted by the app, not the whole site
 

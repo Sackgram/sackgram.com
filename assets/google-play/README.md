@@ -1,6 +1,6 @@
 # Google Play badges
 
-`<lang>.png` for each of the twelve site languages: Google's official
+`<lang>.png` for each of the fourteen site languages: Google's official
 "Get it on Google Play" badge, unmodified, from
 https://play.google.com/intl/en_us/badges/ — fetched by
 `tools/fetch_play_badges.ps1`, checked by `tools/check_play_badges.py`.

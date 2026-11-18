@@ -83,9 +83,9 @@ should be reviewed by counsel in your jurisdiction before launch.
 ```
 index.html            Home — the long introduction (English), company name
 ko/index.html         Home in Korean — the original of the introduction -> /ko
-<lang>/…               ko de es fr id it ja pt ru zh ar: home, privacy/, terms/,
+<lang>/…               ko de es fr id it ja pt ru th vi zh ar: home, privacy/, terms/,
                       delete-account/ in that language (generated — see
-                      "Twelve languages")
+                      "Fourteen languages")
 tools/build_pages.py  Generates the pages above; tools/home/<lang>.json = home text
 privacy/index.html    Privacy Policy   -> /privacy   (required by both app stores)
 terms/index.html      Terms of Service -> /terms
@@ -340,7 +340,7 @@ needs its own `index.html` here first, for the same reason — otherwise it 404s
 #### The translations live at `/<lang>/i/`, outside `/i/`, on purpose
 
 Every link the app issues is `/i/#…`, so `/i/` (English) is where everyone
-lands; the other eleven languages are `/ko/i/`, `/ja/i/` and so on, reached
+lands; the other thirteen languages are `/ko/i/`, `/ja/i/` and so on, reached
 from the language list, which keeps the `#…` part. They sit outside `/i/`
 because the Android filter (`pathPrefix="/i/"`) and the AASA (`/i/*`) must
 never hand a language page to the app — the app parses `/i/` only. The
@@ -381,23 +381,30 @@ does not resolve a bare directory to its `index.html`:
 cd sackgram.com && python3 -m http.server 8000   # then open localhost:8000
 ```
 
-## Twelve languages, and where every page comes from
+## Fourteen languages, and where every page comes from
 
 ⚠ **2026-10-06 (Eric): the site is in twelve languages of equal weight** — en,
 ko, de, es, fr, id, it, ja, pt, ru, zh, ar. SACKGRAM ships worldwide in
 these twelve at once, and an English home with one Korean page beside it made
 it look like a local Korean app.
 
-- **Every page lists all twelve languages**, by their own names (English,
+⚠ **2026-11-17 (Eric): fourteen — Thai (th) and Vietnamese (vi) added**, the
+app's other two languages. Their Privacy Policy and Terms are the app's own
+th/vi documents (reused, not translated again); their home and invite text was
+translated from the English pages, cross-review sheet in Sackgram-app
+`docs/website/home-translation-review-th-vi.md`. They sit after Русский,
+keeping the order by language code with Arabic last.
+
+- **Every page lists all fourteen languages**, by their own names (English,
   한국어, Deutsch, Español, Français, Bahasa Indonesia, Italiano, 日本語,
-  Português, Русский, 中文, العربية), in that fixed order, at one size and
+  Português, Русский, ไทย, Tiếng Việt, 中文, العربية), in that fixed order, at one size and
   weight. The current one is marked by an underline only. **Do not make one
   language bigger, bolder or first-by-visitor.** There is **no automatic
   redirect** by browser language — the reader chooses.
-- **Home, Privacy, Terms and Delete account exist in all twelve**: English at
+- **Home, Privacy, Terms and Delete account exist in all fourteen**: English at
   `/`, `/privacy/`, `/terms/`, `/delete-account/` (**these English addresses
   are what Google Play points at and must not move**), the others under
-  `/<lang>/`. Each carries `hreflang` alternates for all twelve plus
+  `/<lang>/`. Each carries `hreflang` alternates for all fourteen plus
   `x-default` (English). `zh` is `zh-Hans`, `pt` is `pt-BR`. Arabic pages are
   `dir="rtl"` with Western digits; the stylesheet uses logical properties
   (`margin-inline-end`, `padding-inline-start`, …) so both directions work.
@@ -424,7 +431,7 @@ own ARB strings.
 About screen was restructured on 2026-10-05 (#578) and no longer carries it,
 and the home page now carries the long introduction Eric approved on
 2026-10-05 instead (the Korean original at `/ko/`; English at `/` and ten more
-languages since 2026-10-06 — see "Twelve languages" above). All twelve home
+languages since 2026-10-06 — see "Fourteen languages" above). All fourteen home
 pages must say the same thing. The note is kept as the record of why the
 section existed.
 

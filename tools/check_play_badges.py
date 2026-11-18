@@ -12,7 +12,7 @@ import struct
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LANGS = ['en', 'ko', 'de', 'es', 'fr', 'id', 'it', 'ja', 'pt', 'ru', 'zh', 'ar']
+LANGS = ['en', 'ko', 'de', 'es', 'fr', 'id', 'it', 'ja', 'pt', 'ru', 'th', 'vi', 'zh', 'ar']
 
 bad = []
 for lang in LANGS:
@@ -35,4 +35,4 @@ for lang in LANGS:
 if bad:
     print('\n'.join(['', 'PROBLEMS:'] + bad))
     sys.exit(1)
-print('all 12 badges present')
+print('all {} badges present'.format(len(LANGS)))

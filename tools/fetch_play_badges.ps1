@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force -Path $out | Out-Null
 # site language -> Google's badge code
 $codes = [ordered]@{
   en = 'en'; ko = 'ko'; de = 'de'; es = 'es'; fr = 'fr'; id = 'id'; it = 'it';
-  ja = 'ja'; pt = 'pt-br'; ru = 'ru'; zh = 'zh-cn'; ar = 'ar'
+  ja = 'ja'; pt = 'pt-br'; ru = 'ru'; th = 'th'; vi = 'vi'; zh = 'zh-cn'; ar = 'ar'
 }
 $failed = @()
 foreach ($lang in $codes.Keys) {

@@ -20,7 +20,7 @@ API = 'https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-ap
 # Site language -> Apple's badge locale. Arabic is ar-ar (ar-sa returns 404).
 LOCALES = {'en': 'en-us', 'ko': 'ko-kr', 'ja': 'ja-jp', 'zh': 'zh-cn', 'de': 'de-de',
            'fr': 'fr-fr', 'es': 'es-es', 'it': 'it-it', 'pt': 'pt-br', 'ru': 'ru-ru',
-           'ar': 'ar-ar', 'id': 'id-id'}
+           'ar': 'ar-ar', 'id': 'id-id', 'th': 'th-th', 'vi': 'vi-vn'}
 
 os.makedirs(OUT, exist_ok=True)
 for lang, loc in LOCALES.items():

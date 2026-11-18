@@ -1,0 +1,21 @@
+{
+ "title": "Liên kết này mở trong SACKGRAM",
+ "desc": "Bạn nhận được một liên kết SACKGRAM. Dưới đây là giới thiệu về SACKGRAM và cách mở liên kết.",
+ "lede": "Ai đó đã đưa cho bạn một mã SACKGRAM &mdash; trên biển hiệu, danh thiếp hoặc trong tin nhắn.",
+ "installed": "Nếu điện thoại này đã cài SACKGRAM, liên kết SACKGRAM thường sẽ mở thẳng ứng dụng. Liên kết được mở trong trình duyệt riêng của ứng dụng nhắn tin có thể dẫn đến trang này, ngay cả khi ứng dụng đã được cài.",
+ "open_hint": "Nếu trang này được mở bên trong ứng dụng nhắn tin, hãy nhấn <strong>{btn}</strong>.",
+ "btn": "Mở trong SACKGRAM",
+ "inapp_hint": "Để mở liên kết này trong SACKGRAM, hãy nhấn vào menu <strong>⋯</strong> và chọn mở bằng trình duyệt bên ngoài.",
+ "address": "Địa chỉ mời của SACKGRAM luôn bắt đầu bằng <strong>https://sackgram.com/i/</strong>.",
+ "what_h": "SACKGRAM là gì",
+ "what": "SACKGRAM là ứng dụng nhắn tin bảo mật dành cho Android và iOS, do Sackgram Labs,&nbsp;Inc. phát triển. Nội dung tin nhắn được mã hóa trên thiết bị của bạn và giải mã trên thiết bị của người kia, và việc tạo tài khoản không yêu cầu số điện thoại hay địa chỉ email của bạn.",
+ "more": "Xem thêm về SACKGRAM tại <a href=\"{home}\">trang chủ</a>.",
+ "get_h": "Tải ứng dụng",
+ "ios_prep": "Phiên bản trên App Store đang được chuẩn bị.",
+ "ios_links": "Trên iPhone đã cài SACKGRAM, liên kết SACKGRAM được nhấn trong Tin nhắn, Mail hoặc Ghi chú sẽ mở ứng dụng.",
+ "after_h": "Sau khi cài đặt",
+ "after1": "Sau khi cài đặt, hãy mở lại chính liên kết đó hoặc quét lại chính mã đó một lần nữa. Việc cài ứng dụng không tự mở lời mời.",
+ "after2": "Nếu bạn mở liên kết trong SACKGRAM trước khi đăng ký xong, SACKGRAM sẽ giữ lại và mở lời mời cho bạn khi đăng ký hoàn tất.",
+ "privacy": "Trang này không gửi mã của bạn cho chúng tôi hay bất kỳ ai khác. Phần của liên kết dùng để nhận diện mã chỉ nằm trên điện thoại này. Để mở liên kết, trang này chỉ chuyển nó cho các ứng dụng trên điện thoại này: cho SACKGRAM, hoặc, khi ở trong KakaoTalk hay LINE, trả lại cho chính ứng dụng đó, vốn đã có liên kết.",
+ "suggest": "Đọc trang này bằng tiếng Việt"
+}

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Builds the twelve-language pages of sackgram.com.
+"""Builds the fourteen-language pages of sackgram.com.
 
     python3 tools/build_pages.py /path/to/Sackgram-app
     python3 tools/build_pages.py --stores      # only /i/ and /download
 
-Writes, for each of en ko de es fr id it ja pt ru zh ar:
+Writes, for each of en ko de es fr id it ja pt ru th vi zh ar:
   home            /  and  /<lang>/                 from tools/home/<lang>.json
   privacy, terms  /privacy/ /terms/ and /<lang>/…  from the app repository's
                   docs/legal sources, converted verbatim
@@ -20,6 +20,13 @@ ADDED 2026-10-06 (Eric): twelve languages of equal weight. Every page lists all
 twelve by their own names, at one size, in one order; nothing redirects by
 browser language — the reader chooses. The English addresses Google Play
 points at (/privacy/, /delete-account/) do not move.
+
+ADDED 2026-11-17 (Eric): Thai (th) and Vietnamese (vi), the app's other two
+languages, making fourteen. Their Privacy Policy and Terms are the app's own
+th/vi documents, converted verbatim like the rest; their home and invite text
+was translated from the English pages (which say the same as ko) with the
+app's th/vi terms (ARB and docs/i18n/glossary.csv). In the list they sit
+after ru, keeping the order by language code with ar last.
 
 ⚠ The legal text is never edited here. Change the Markdown in the app
 repository (docs/legal/privacy-en.md, terms-en.md, review-ko/*-ko.md,
@@ -37,10 +44,10 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://sackgram.com/'
 
-LANGS = ['en', 'ko', 'de', 'es', 'fr', 'id', 'it', 'ja', 'pt', 'ru', 'zh', 'ar']
+LANGS = ['en', 'ko', 'de', 'es', 'fr', 'id', 'it', 'ja', 'pt', 'ru', 'th', 'vi', 'zh', 'ar']
 NAMES = {'en': 'English', 'ko': '한국어', 'de': 'Deutsch', 'es': 'Español', 'fr': 'Français',
          'id': 'Bahasa Indonesia', 'it': 'Italiano', 'ja': '日本語', 'pt': 'Português',
-         'ru': 'Русский', 'zh': '中文', 'ar': 'العربية'}
+         'ru': 'Русский', 'th': 'ไทย', 'vi': 'Tiếng Việt', 'zh': '中文', 'ar': 'العربية'}
 RTL = {'ar'}
 # hreflang values: zh is Simplified, pt is Brazilian Portuguese (the app's).
 HREFLANG = {'zh': 'zh-Hans', 'pt': 'pt-BR'}
@@ -123,6 +130,22 @@ T = {
             del_how='Удаление аккаунта или запрос на удаление', del_deleted='Удаляется сразу', del_kept='Что сохраняется после удаления и как долго',
             del_partial='Удалить часть данных и сохранить аккаунт',
             del_desc='Как удалить аккаунт SACKGRAM — в приложении или без него — и что удаляется и сохраняется. SACKGRAM разрабатывает Sackgram Labs, Inc.'),
+ 'th': dict(home='หน้าแรก', privacy='ความเป็นส่วนตัว', terms='ข้อกำหนด', support='ช่วยเหลือ', company='บริษัท',
+            privacy_policy='นโยบายความเป็นส่วนตัว', terms_of_service='ข้อกำหนดการให้บริการ', delete_account='ลบบัญชี',
+            contact='ติดต่อ', languages='ภาษา',
+            del_title='ลบบัญชี SACKGRAM ของคุณ', del_meta='SACKGRAM พัฒนาโดย Sackgram Labs,&nbsp;Inc.',
+            del_lede='วิธีลบบัญชี SACKGRAM ของคุณ ข้อมูลใดถูกลบ และข้อมูลใดยังคงอยู่และเก็บไว้นานเท่าใด ข้อความด้านล่างยกมาจากข้อที่เกี่ยวข้องในหมวด 6 และหมวด 7 ของ<a href="{privacy}">นโยบายความเป็นส่วนตัว</a>ของเราตามต้นฉบับ',
+            del_how='การลบบัญชีและการขอให้ลบ', del_deleted='ข้อมูลที่ถูกลบทันที', del_kept='ข้อมูลที่ยังคงอยู่หลังการลบและระยะเวลา',
+            del_partial='ลบข้อมูลบางส่วนโดยยังคงบัญชีไว้',
+            del_desc='วิธีลบบัญชี SACKGRAM ทั้งในแอปและโดยไม่ใช้แอป และข้อมูลที่ถูกลบหรือเก็บไว้ SACKGRAM พัฒนาโดย Sackgram Labs, Inc.'),
+ 'vi': dict(home='Trang chủ', privacy='Quyền riêng tư', terms='Điều khoản', support='Hỗ trợ', company='Công ty',
+            privacy_policy='Chính sách quyền riêng tư', terms_of_service='Điều khoản dịch vụ', delete_account='Xóa tài khoản',
+            contact='Liên hệ', languages='Ngôn ngữ',
+            del_title='Xóa tài khoản SACKGRAM của bạn', del_meta='SACKGRAM do Sackgram Labs,&nbsp;Inc. phát triển.',
+            del_lede='Cách xóa tài khoản SACKGRAM của bạn, thông tin nào bị xóa, thông tin nào được giữ lại và trong bao lâu. Nội dung dưới đây được trích nguyên văn từ các khoản tương ứng trong Điều 6 và Điều 7 của <a href="{privacy}">Chính sách quyền riêng tư</a> của chúng tôi.',
+            del_how='Xóa tài khoản hoặc yêu cầu xóa', del_deleted='Thông tin bị xóa ngay', del_kept='Thông tin được giữ lại sau khi xóa và thời hạn',
+            del_partial='Xóa một phần dữ liệu và giữ lại tài khoản',
+            del_desc='Cách xóa tài khoản SACKGRAM, trong ứng dụng hoặc không cần ứng dụng, và thông tin nào bị xóa hay được giữ lại. SACKGRAM do Sackgram Labs, Inc. phát triển.'),
  'zh': dict(home='首页', privacy='隐私', terms='条款', support='支持', company='公司',
             privacy_policy='隐私政策', terms_of_service='服务条款', delete_account='删除账号',
             contact='联系', languages='语言',
@@ -360,7 +383,7 @@ def write_page(lang, page, title, description, current, main_html, hero='', head
 HOME_NOTE = ('        <!-- Generated by tools/build_pages.py from tools/home/{lang}.json. The Korean\n'
              '             (/ko/) is the original: Sackgram-app docs/website/\n'
              '             SACKGRAM-소개문구-초안.docx, part 2, approved by Eric on 2026-10-05.\n'
-             '             Every other language is its translation; all twelve must say the\n'
+             '             Every other language is its translation; all fourteen must say the\n'
              '             same thing. Terms follow each language\'s app strings (ARB). -->\n')
 
 
@@ -462,7 +485,7 @@ PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sackgram.labs'
 # None: an iPhone sees "the iPhone version is in preparation" and no QR.
 # A URL (https://apps.apple.com/app/id…): an iPhone is sent there, the way an
 # Android phone is sent to Google Play, and the note becomes a link to it.
-# It also drives the twelve /i/ invite pages (build_invite): None shows "the
+# It also drives the fourteen /i/ invite pages (build_invite): None shows "the
 # App Store version is in preparation", a URL shows a "Download on the App
 # Store" button there — never a redirect, the invite page has to stay readable.
 # Rebuild after changing it (`python3 tools/build_pages.py /path/to/Sackgram-app`,
@@ -532,6 +555,16 @@ DL = {
             devices='На iPhone эта страница сама откроет App Store, а на телефоне Android — Google Play.',
             ios='Версия для iPhone готовится.', appstore='Загрузите в App Store',
             qr='Наведите камеру телефона, чтобы сразу скачать приложение.'),
+ 'th': dict(title='ดาวน์โหลด SACKGRAM', play='ดาวน์โหลดที่ Google Play',
+            android='บนโทรศัพท์ Android หน้านี้จะเปิด Google Play ให้โดยอัตโนมัติ',
+            devices='บน iPhone หน้านี้จะเปิด App Store และบนโทรศัพท์ Android จะเปิด Google Play ให้โดยอัตโนมัติ',
+            ios='เวอร์ชัน iPhone อยู่ระหว่างการเตรียมการ', appstore='ดาวน์โหลดได้ที่ App Store',
+            qr='สแกนด้วยกล้องโทรศัพท์เพื่อดาวน์โหลดได้ทันที'),
+ 'vi': dict(title='Tải SACKGRAM', play='Tải trên Google Play',
+            android='Trên điện thoại Android, trang này sẽ tự mở Google Play.',
+            devices='Trên iPhone, trang này sẽ tự mở App Store, còn trên điện thoại Android là Google Play.',
+            ios='Phiên bản iPhone đang được chuẩn bị.', appstore='Tải về trên App Store',
+            qr='Quét bằng camera điện thoại để tải ngay.'),
  'zh': dict(title='获取 SACKGRAM', play='在 Google Play 上获取',
             android='在 Android 手机上，本页面会自动打开 Google Play。',
             devices='在 iPhone 上，本页面会自动打开 App Store；在 Android 手机上，会自动打开 Google Play。',
@@ -635,7 +668,7 @@ def build_download(lang, channel=None):
                head_extra=download_csp(), tail_html=f'    <script>{DOWNLOAD_SCRIPT}</script>\n')
 
 
-# ---------- /i/ — the invite landing page (twelve languages since 2026-10-17) ----------
+# ---------- /i/ — the invite landing page (twelve languages since 2026-10-17, fourteen since 2026-11-17) ----------
 
 # Every link the app issues is https://sackgram.com/i/#c/TOKEN or #g/TOKEN, so
 # /i/ (English) is where everybody lands; /<lang>/i/ are the translations,
@@ -660,7 +693,7 @@ def invite_text(lang):
 
 
 def invite_script():
-    """One script, byte-identical on all twelve pages, so one CSP hash covers
+    """One script, byte-identical on all fourteen pages, so one CSP hash covers
     them. The language suggestions are written into it from tools/invite."""
     sugg = ','.join(f"{l}:{json.dumps(invite_text(l)['suggest'], ensure_ascii=False)}"
                     for l in LANGS if l != 'en')
@@ -834,7 +867,7 @@ def build_invite(lang, script):
     else:
         ios_store = f'<p class="store-ios">{t["ios_prep"]}</p>'
     suggest = ('        <!-- Filled and shown by the script on the English page only, when the\n'
-               "             browser's first preferred language is one of the other eleven. -->\n"
+               "             browser's first preferred language is one of the other thirteen. -->\n"
                '        <p id="lang-suggest" class="lang-suggest" hidden><a id="lang-suggest-link" href="./"></a></p>\n'
                if lang == 'en' else '')
     main = (

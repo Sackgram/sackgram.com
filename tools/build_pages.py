@@ -824,10 +824,14 @@ def invite_script():
     return;
   }
 
-  // Instagram and Facebook offer no documented way out, so the reader is told
-  // where their own menu is. x-safari-https:// is deliberately not used:
+  // Instagram, Facebook and Zalo offer no documented way out, so the reader is
+  // told where their own menu is. x-safari-https:// is deliberately not used:
   // reports conflict on whether it still works, and it is undocumented.
-  if (/\bInstagram\b|FBAN|FBAV|FB_IAB/.test(ua)) d.getElementById('inapp-hint').hidden = false;
+  // Zalo added 2026-11-18 (Eric): its in-app browser identifies itself as
+  // "Zalo iOS/<n>" and/or "ZaloTheme/<x>" (older builds "Zalo/<version>");
+  // no Zalo document describes an escape. Not device-tested — see README,
+  // "Zalo: what to test on a device".
+  if (/\bInstagram\b|FBAN|FBAV|FB_IAB|\bZalo/.test(ua)) d.getElementById('inapp-hint').hidden = false;
 })();"""
 
 
@@ -887,7 +891,7 @@ def build_invite(lang, script):
         f'            <p>{t["open_hint"].format(btn=t["btn"])}</p>\n'
         f'            <p><a id="open-app-link" class="open-app" href="./">{t["btn"]}</a></p>\n'
         '          </div>\n'
-        '          <!-- Shown by the script inside Instagram or Facebook on an iPhone. -->\n'
+        '          <!-- Shown by the script inside Instagram, Facebook or Zalo on an iPhone. -->\n'
         f'          <p id="inapp-hint" hidden>{t["inapp_hint"]}</p>\n'
         '          <!-- A plain fact a person can check against a link they were sent. It\n'
         '               must stay true for every link the app issues (personal and group\n'

@@ -136,6 +136,10 @@ h3 { margin: 1.6rem 0 0.4rem; font-size: 1.05rem; }
 main > .wrap > h2:first-child, main > .wrap > h1:first-child { margin-top: 0; }
 h1 { font-size: clamp(1.7rem, 5vw, 2.1rem); line-height: 1.25; margin: 0 0 0.5rem; }
 p, ul, ol { margin: 0 0 1rem; }
+/* A long link (the Privacy Policy's Prighter Trust Center URL) is one
+   unbreakable word: on a 320px phone it pushed the page 30px sideways.
+   `anywhere` breaks a link only when it would not fit on its own line. */
+main a { overflow-wrap: anywhere; }
 ul, ol { padding-inline-start: 1.35rem; }
 li { margin-bottom: 0.4rem; }
 strong { font-weight: 650; }

@@ -10,8 +10,8 @@ KakaoTalk's in-app browser, hands the link to KakaoTalk once so the system can
 open the app. **Since 2026-11-03 it does this on an iPhone too**: in KakaoTalk
 the same hand-off plus a button with the same address (device-tested: the app
 opened and went into the group); in LINE its documented
-`?openExternalBrowser=1`, with the token still after the `#`; in Instagram or
-Facebook a line saying where the external-browser menu is. An iPhone gets no
+`?openExternalBrowser=1`, with the token still after the `#`; in Instagram,
+Facebook or (since 2026-11-18) Zalo a line saying where the external-browser menu is. An iPhone gets no
 custom scheme (any app could claim one) and no `x-safari-https://`. It makes no request, and the page's Content-Security-Policy
 (`connect-src 'none'`, `script-src` pinned to that script's SHA-256) refuses
 one if it ever tried. **Since 2026-10-17 the page is generated** (twelve
@@ -348,6 +348,43 @@ never hand a language page to the app — the app parses `/i/` only. The
 plain `https://sackgram.com/i/#…`; only the browser fallback returns to the
 page in the reader's language. On an iPhone the hand-offs carry that same plain
 address, so the language pages are never handed to the app.
+
+#### Zalo: what to test on a device
+
+Added 2026-11-18 (Eric). Zalo, Vietnam's main messenger, opens links in its own
+in-app browser by default, and no Zalo or VNG document describes a way out of
+it, unlike KakaoTalk's `openExternal` and LINE's `openExternalBrowser=1`. The
+user agent carries `Zalo android/<n>` or `Zalo iOS/<n>` and often
+`ZaloTheme/<x> ZaloLanguage/<x>`; builds from 2020 used `Zalo/<version>`
+(ua-parser-js test data and logged samples; nothing from Zalo).
+
+What the page does today:
+- **Android:** the same *Open in SACKGRAM* button as every Android browser
+  (an `intent:` link pinned to `com.sackgram.labs`).
+- **iPhone:** the general "tap the ⋯ menu and choose to open it in an
+  external browser" line, the one Instagram and Facebook get. It names no
+  exact menu label, because none has been confirmed.
+
+**Not device-tested.** Eric decided on 2026-11-18 to test once there are
+Vietnamese users. When that happens, check these with Zalo on each phone,
+sending an invite link from one Zalo account to another:
+
+1. **Android, app installed:** tapping the link opens Zalo's browser on this
+   page, and *Open in SACKGRAM* opens the app on the invitation. If nothing
+   happens, Zalo is blocking `intent:` links.
+2. **Android, app not installed:** the same button leads to this page in the
+   reader's language (`browser_fallback_url`), not to an error.
+3. **iPhone, app installed:** the external-browser line is shown. Write
+   down the real menu path and label, in Vietnamese and English. After
+   following it, Safari shows this page; then check whether a SACKGRAM link
+   tapped in Messages opens the app.
+4. **Both phones:** confirm the user agent really contains `Zalo` (from the
+   page with a test build, or a server-free UA echo page). If it doesn't,
+   neither line appears and the detection needs changing.
+5. **Zalo setting "Mở bằng trình duyệt web"** (reported in a 2023 blog,
+   under Cá nhân → Cài đặt → Quyền riêng tư → Tiện ích): with it on, links
+   should open in the system browser, where App Links and Universal Links
+   work as they do anywhere else.
 
 #### Only `/i/` is intercepted by the app, not the whole site
 

@@ -17,7 +17,7 @@
          No analytics, no web fonts, no remote images: the person reading this
          is a stranger meeting SACKGRAM for the first time and has not agreed
          to anything yet. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-tRSi0EBKMSGO4H5USGTLNzPdmbF/uWXZ43DaHDisUCM='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'sha256-kErf0ZHsFYnbMKxVKptvGsN3X+i3z9MYEOv7E5kzor8='; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dieser Link öffnet sich in SACKGRAM</title>
@@ -91,7 +91,7 @@
             <p>Wenn sich diese Seite in einem Messenger geöffnet hat, tippen Sie auf <strong>In SACKGRAM öffnen</strong>.</p>
             <p><a id="open-app-link" class="open-app" href="./">In SACKGRAM öffnen</a></p>
           </div>
-          <!-- Shown by the script inside Instagram or Facebook on an iPhone. -->
+          <!-- Shown by the script inside Instagram, Facebook or Zalo on an iPhone. -->
           <p id="inapp-hint" hidden>Um diesen Link in SACKGRAM zu öffnen, tippen Sie auf das Menü <strong>⋯</strong> und wählen Sie das Öffnen in einem externen Browser.</p>
           <!-- A plain fact a person can check against a link they were sent. It
                must stay true for every link the app issues (personal and group
@@ -281,10 +281,14 @@
     return;
   }
 
-  // Instagram and Facebook offer no documented way out, so the reader is told
-  // where their own menu is. x-safari-https:// is deliberately not used:
+  // Instagram, Facebook and Zalo offer no documented way out, so the reader is
+  // told where their own menu is. x-safari-https:// is deliberately not used:
   // reports conflict on whether it still works, and it is undocumented.
-  if (/\bInstagram\b|FBAN|FBAV|FB_IAB/.test(ua)) d.getElementById('inapp-hint').hidden = false;
+  // Zalo added 2026-11-18 (Eric): its in-app browser identifies itself as
+  // "Zalo iOS/<n>" and/or "ZaloTheme/<x>" (older builds "Zalo/<version>");
+  // no Zalo document describes an escape. Not device-tested — see README,
+  // "Zalo: what to test on a device".
+  if (/\bInstagram\b|FBAN|FBAV|FB_IAB|\bZalo/.test(ua)) d.getElementById('inapp-hint').hidden = false;
 })();</script>
   </body>
 </html>

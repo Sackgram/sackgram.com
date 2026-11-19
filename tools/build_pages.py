@@ -399,8 +399,34 @@ def build_home(lang):
     if lang == 'en':
         # The English home sits at the root; the translations one level down.
         body = body.replace('href="../', 'href="')
-    main = HOME_NOTE.format(lang=lang) + '        ' + body.strip() + '\n'
+    main = HOME_NOTE.format(lang=lang) + intro_video(lang, d) + '        ' + body.strip() + '\n'
     write_page(lang, '', d['title'], d['description'], 'home', main, hero)
+
+
+# ADDED 2026-11-18 (Eric, plan A): the Everplace introduction video, first in
+# every language's home, played from this site (no YouTube or other embed, so
+# no third-party request and no tracking cookie). English audio with English
+# captions; the other thirteen say so in one line. No autoplay; preload
+# "metadata" fetches only the header until the reader presses play.
+# ⚠ video_notice says "coming December 2026": take that sentence out when
+# 1.0.5 ships (Sackgram-app docs/release/1.0.5-checklist.md).
+VIDEO_DIR = 'assets/video/'
+
+
+def intro_video(lang, d):
+    v = rel(page_path(lang, ''), '') + VIDEO_DIR
+    note = (f'          <p class="video-lang">{esc(d["video_lang_note"])}</p>\n'
+            if d.get('video_lang_note') else '')
+    return ('        <figure class="intro-video">\n'
+            f'          <video controls playsinline preload="metadata" width="1920" height="1080" lang="en"\n'
+            f'                 poster="{v}everplace-intro-poster.jpg">\n'
+            f'            <source src="{v}everplace-intro.mp4" type="video/mp4">\n'
+            f'            <track kind="captions" src="{v}everplace-intro.en.vtt" srclang="en" label="English">\n'
+            '          </video>\n'
+            '          <figcaption>\n' + note +
+            f'          <p>{esc(d["video_notice"])}</p>\n'
+            '          </figcaption>\n'
+            '        </figure>\n\n')
 
 
 def build_legal(app, lang, doc):

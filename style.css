@@ -216,3 +216,22 @@ h4 { margin: 1.3rem 0 0.4rem; font-size: 1rem; }
   body { font-size: 16px; }
   .hero { padding: 2.5rem 0; }
 }
+
+/* ---------- intro video (home) ---------- */
+/* ADDED 2026-11-18: the Everplace introduction, first in every home's main.
+   Played from this site; width:100% + height:auto keeps the 16:9 box inside
+   the column at any width (the width/height attributes only reserve the
+   ratio before the poster loads, so nothing jumps). */
+.intro-video { margin: 0 0 2.25rem; }
+.intro-video video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--brand-ink);
+  border-radius: 10px;
+}
+.intro-video figcaption { margin-top: 0.7rem; font-size: 0.95rem; color: var(--muted); }
+.intro-video figcaption p { margin: 0 0 0.35rem; }
+.intro-video .video-lang { font-size: 0.85rem; }

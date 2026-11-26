@@ -497,15 +497,38 @@ def add_list_to_english_only(path):
 
 # ---------- /download (link track PR 6, prepared 2026-10-07; merge on launch day) ----------
 
-# Channel paths add ONLY utm_source to the Play link, so Play Console's
-# acquisition report can count installs per channel. Nothing is stored or
-# measured on our side: these are static pages with no request of their own.
-# Add a channel by adding its name here and rebuilding.
+# A channel path tags the two STORE links and nothing else, so each store's
+# own report can count visits and installs per channel:
+#   Google Play: referrer=utm_source=<channel>[&utm_campaign=<campaign>]
+#     -> Play Console, store listing acquisition, UTM-tagged.
+#   App Store:   pt=<provider token>&ct=<channel>[-<campaign>]&mt=8
+#     -> App Store Connect, App Analytics, Campaigns.
+# Nothing is stored or measured on our side: these are static pages with no
+# request of their own (CSP connect-src 'none'), and the tag is the same for
+# everybody who opens the page (Eric 2026-11-26, "B 1안").
+# Add a channel by adding it here and rebuilding; the value is its
+# utm_campaign / ct suffix, or None for none.
 #
 # ⚠ THE QR CODE NEVER CARRIES ONE (2026-10-09, Eric): it points at the plain
-# https://sackgram.com/download on every page, channel pages included.
-DOWNLOAD_CHANNELS = ['kakao', 'instagram', 'youtube', 'x']
+# https://sackgram.com/download on every page, channel pages included. A
+# video's end-frame QR is a different thing: from 2026-11-26 new videos point
+# it at /download/shorts/ (the seven published shorts keep /download).
+DOWNLOAD_CHANNELS = {
+    'kakao': None,
+    'instagram': None,
+    'youtube': None,
+    'x': None,
+    'shorts': None,   # added 2026-11-26: the end-frame QR of new videos
+    'tiktok': None,   # added 2026-11-26
+}
 PLAY_URL = 'https://play.google.com/store/apps/details?id=com.sackgram.labs'
+
+# App Store Connect's provider token for campaign links (App Analytics ->
+# Campaigns -> campaign link generator). Not a secret: it is in every
+# campaign link Apple makes. ⚠ PLACEHOLDER until Eric supplies it — the
+# build refuses to write channel pages with it (see build_download).
+APP_STORE_PROVIDER_TOKEN = 'PROVIDER_TOKEN_PLACEHOLDER'
+APP_STORE_ID = '6822281667'
 
 # ⚠ THE ONE LINE TO CHANGE WHEN THE iPHONE APP IS IN THE APP STORE.
 # None: an iPhone sees "the iPhone version is in preparation" and no QR.
@@ -637,7 +660,7 @@ STORE_TRADEMARKS = (PLAY_TRADEMARK + ' Apple and the Apple logo are trademarks o
                     'registered in the U.S. and other countries. App Store is a service mark of Apple Inc.')
 
 
-def get_app_block(lang, cur_dir, play_href, ios_note=False):
+def get_app_block(lang, cur_dir, play_href, ios_note=False, appstore_href=None):
     """The QR + badge block on the home pages and /download. The QR is shown
     on a computer only (the stylesheet hides it on a phone, where the badges
     are the whole block). With APP_STORE_URL set, the App Store badge comes
@@ -649,7 +672,8 @@ def get_app_block(lang, cur_dir, play_href, ios_note=False):
     qr = QR_SVG.replace('<svg ', f'<svg role="img" aria-label="QR — sackgram.com/download" ', 1)
     if APP_STORE_URL:
         size = ' as-sm' if lang in PLAY_BADGE_PADDED else ''
-        appstore = (f'<a id="appstore-link" class="get-app-appstore{size}" href="{html.escape(APP_STORE_URL)}">'
+        appstore = (f'<a id="appstore-link" class="get-app-appstore{size}" '
+                    f'href="{html.escape(appstore_href or APP_STORE_URL)}">'
                     f'<img src="{root}assets/app-store/{lang}.svg" alt="{html.escape(t["appstore"])}"></a>')
         tm, ios_html = STORE_TRADEMARKS, ''
     else:
@@ -675,9 +699,30 @@ def download_csp():
             '    <meta name="referrer" content="no-referrer">\n')
 
 
+def play_channel_url(channel):
+    """The Play link for a channel page: the referrer is URL-encoded once,
+    the form Google's own Play URL builder produces."""
+    campaign = DOWNLOAD_CHANNELS[channel]
+    ref = f'utm_source%3D{channel}' + (f'%26utm_campaign%3D{campaign}' if campaign else '')
+    return f'{PLAY_URL}&referrer={ref}'
+
+
+def appstore_channel_url(channel):
+    """The App Store link for a channel page, in Apple's campaign-link form."""
+    if 'PLACEHOLDER' in APP_STORE_PROVIDER_TOKEN and os.environ.get('SG_ALLOW_PT_PLACEHOLDER') != '1':
+        sys.exit('APP_STORE_PROVIDER_TOKEN is still the placeholder; set it before building '
+                 'the channel pages (or SG_ALLOW_PT_PLACEHOLDER=1 for a draft build).')
+    campaign = DOWNLOAD_CHANNELS[channel]
+    ct = channel + (f'-{campaign}' if campaign else '')
+    assert len(ct) <= 40, ct  # Apple's limit for ct
+    return (f'https://apps.apple.com/app/apple-store/id{APP_STORE_ID}'
+            f'?pt={APP_STORE_PROVIDER_TOKEN}&ct={ct}&mt=8')
+
+
 def build_download(lang, channel=None):
     t = DL[lang]
-    url = PLAY_URL + (f'&referrer=utm_source%3D{channel}' if channel else '')
+    url = play_channel_url(channel) if channel else PLAY_URL
+    appstore = appstore_channel_url(channel) if channel and APP_STORE_URL else None
     page = 'download' + (f'/{channel}' if channel else '')
     # The note under the badges names both phones once APP_STORE_URL is set
     # (the script then sends an iPhone to the App Store too); until then it
@@ -685,10 +730,11 @@ def build_download(lang, channel=None):
     note_class, note_key = (('get-app-devices', 'devices') if APP_STORE_URL
                             else ('get-app-android', 'android'))
     main = ('        <!-- Generated by tools/build_pages.py (build_download). Link track PR 6:\n'
-            '             no request, no storage; a channel path only adds utm_source to the\n'
-            '             Play link, which Play Console counts. The QR code carries none. -->\n'
+            '             no request, no storage; a channel path only tags the two store links\n'
+            '             (Play utm_source, App Store ct), which the stores count. The QR code\n'
+            '             carries none. -->\n'
             f'        <h1>{esc(t["title"])}</h1>\n'
-            + get_app_block(lang, page_path(lang, page), url, ios_note=True) +
+            + get_app_block(lang, page_path(lang, page), url, ios_note=True, appstore_href=appstore) +
             f'        <p class="{note_class}">{esc(t[note_key])}</p>\n')
     write_page(lang, page, t['title'], t['title'], '', main,
                head_extra=download_csp(), tail_html=f'    <script>{DOWNLOAD_SCRIPT}</script>\n')

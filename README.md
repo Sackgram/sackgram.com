@@ -96,6 +96,10 @@ i/index.html          Invite landing -> /i   (see below) + /<lang>/i/. Generated
                       from tools/invite/<lang>.json; store links follow
                       APP_STORE_URL, like /download.
 download/index.html   Get the app -> /download (+ /<lang>/download/, channel paths)
+                      Channel paths (kakao, instagram, youtube, x, shorts,
+                      tiktok) tag only the store links: Play utm_source,
+                      App Store pt/ct. No request, no storage. New videos'
+                      end-frame QR: /download/shorts/ (2026-11-26).
                       Android -> Google Play, iPhone -> "in preparation" (or the
                       App Store once APP_STORE_URL is set in build_pages.py),
                       anything else -> QR + Play badge. Generated.
